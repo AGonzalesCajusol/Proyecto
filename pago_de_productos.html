@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos-globales.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/pago_de_productos.css">
+    <link rel="shortcut icon" href="img/logo_point_roo.png" type="image/x-icon">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/mostrar-menu-lateral.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/velocity-animate@2.0.3/velocity.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/pago-de-productos.js"></script>
+    <title>Pago de productos</title>
+</head>
+
+<body style="opacity: 0; transition: opacity 1s ease;">
+    <!-- Cabecera (copiar todo para todas las páginas) -->
+
+    <header id="contenedor-header" class="color-header">
+        <a href="index.html"><img id="logo_tienda" src="img/logo_point_roo.png" alt="logo de point roo"></a>
+        <button onclick="mostrarMenuLateral()" id="btn-menu">
+            <img id="img-menu" src="img/menu.png" alt="">
+        </button>
+        <input id="barra-busqueda" class="form-control me-5" type="search" placeholder="Buscar productos..."
+            aria-label="Search">
+        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion" target="_blank">
+            <img id="logo-inicio-sesion" src="img/logo-inicio-sesion.png" alt="inicio de sesion">
+            <b>Iniciar Sesión</b>
+        </button>
+        <a id="contenedor-carrito" href="carrito_de_compras.html" target="_blank">
+            <img id="carrito-de-compras" src="img/logo-carrito-de-compras.png" alt="">
+        </a>
+    </header>
+
+    <div class="barra_separadora">
+
+    </div>
+
+    <main>
+        <div id="cont-main-pago-prod">
+            <h4 style="margin-bottom: 40px;"><b>¡Estás a un paso de completar tu pedido!</b></h4>
+            <div id="cont-elegir-medio-pago">
+                <div id="cont-titulo-elige-medio-pago">
+                    <h5><b>Elige tu medio de pago</b></h5>
+                </div>
+                <div>
+                    <div id="cont-btns-medios-pago">
+                        <button class="btn-medio-pago" onclick="cambiarColor(this)"><img class="img-fluid"
+                                src="img/logo-visa.png" alt=""></button>
+                        <button class="btn-medio-pago" onclick="cambiarColor(this)"><img class="img-fluid"
+                                src="img/logo.yape.png" alt=""></button>
+                        <button class="btn-medio-pago" onclick="cambiarColor(this)"><img class="img-fluid"
+                                src="img/logo-plin.png" alt=""></button>
+                    </div>
+                </div>
+                <div id="cont-datos-bancarios">
+                    <h5 style="text-align: center;"><b>Ingresa tus datos bancarios</b></h5>
+                    <div id="cont-datos-tarjeta">
+                        <div id="cont-num-tarjeta">
+                            <h6><b>N°: </b></h6>
+                            <input oninput="checkInput(this, 'num2')" class="input-num-tarjeta" type="number" name="num1" id="num1" maxlength="4">
+                            <p>-</p>
+                            <input oninput="checkInput(this, 'num3')" class="input-num-tarjeta" type="number" name="num2" id="num2" maxlength="4">
+                            <p>-</p>
+                            <input oninput="checkInput(this, 'num4')" class="input-num-tarjeta" type="number" name="num3" id="num3" maxlength="4">
+                            <p>-</p>
+                            <input oninput="checkInput(this, 'fec1')" class="input-num-tarjeta" type="number" name="num4" id="num4" maxlength="4">
+                        </div>
+                        <div id="cont-fech-venc-tarjeta">
+                            <h6><b>Fecha venc.: </b></h6>
+                            <input oninput="checkInput(this, 'fec2')" class="input-fech-venc" type="number" name="fec1" id="fec1" maxlength="2">
+                            <p>-</p>
+                            <input oninput="checkInput(this, 'cvv')" class="input-fech-venc" type="number" name="fec2" id="fec2" maxlength="2">
+                        </div>
+                        <div id="cont-cvv-tarjeta">
+                            <h6><b>CVV: </b></h6>
+                            <input class="input-cvv" type="number" name="cvv" id="cvv" maxlength="3">
+                        </div>
+                    </div>
+                    <div id="cont-chckbox">
+                        <input type="checkbox" class="form-check-input" id="chckbox-guardar-tarjeta">
+                        <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1">Guardar esta tarjeta para
+                            futuras compras</label>
+                    </div>
+                    <button onclick="mostrarResumenPedido()" id="btn-continuar-pago">Continuar</button>
+                </div>
+            </div>
+
+            <!-- Segundo contenedor -->
+            <div id="contenedor-mostrar-hay-productos">
+                <div id="contenedor-carrito-de-compras"> <!--Contenedor del carrito en sí-->
+                    <div id="contenedor-mi-pedido"> <!-- color blanco -->
+                        <h4><b>Resumen de tu pedido</b></h4>
+                    </div>
+                    <div id="contenedor-cuerpo-carrito"> <!-- color amarillo -->
+                        <div id="contenedor-contenedor-cuerpo-carrito">
+                            <div id="contenedor-productos">
+                                <!-- <div class="card-producto">
+                                    <div class="cont-producto">
+                                        <img class="img-card-producto" src="img/item-2-calzado.png" alt="">
+                                        <div class="cont-descr-producto">
+                                            <h6 class="titulo-producto"><b>Zapatilla Nike Air Max Up Urbano Mujer</b></h6>
+                                            <h6><b>Talla: </b>43</h6>
+                                            <h6><b>Precio: </b> S/. 390.00</h6>
+                                            <h6><b>Cantidad: </b>1</h6>
+                                            <div><b>Subtotal producto: </b>S/. 390.00</div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <!-- <div class="subtotal-costo-envio-total">
+                                    <h6><b>Subtotal productos: </b></h6>
+                                    <h6>S/. 00.00</h6>
+                                </div>
+                                <div class="subtotal-costo-envio-total">
+                                    <h6><b>Costo de envío: </b></h6>
+                                    <h6>S/. 00.00</h6>
+                                </div>
+                                <div class="subtotal-costo-envio-total">
+                                    <h6><b>Total a pagar: </b></h6>
+                                    <h6>S/. 00.00</h6>
+                                </div> -->
+                            </div>
+                            <div id="contenedor-direccion-envio--tipo-de-entrega">
+                                <div id="contenedor-direccion-envio">
+                                    <!-- <h6><b>Dirección de entrega: </b>Dirección abc</h6> -->
+                                </div>
+                                <div id="contenedor-tarjeta">
+                                    <!-- <h6><b>Tarjeta: </b></h6>
+                                    <h6>VISA N° 1234 - 5678 - 9012 - 3456</h6> -->
+                                </div>
+                                <div id="cont-chckbox-yo-recibire">
+                                    <input type="checkbox" class="form-check-input" id="chckbox-recibire-yo"
+                                        onclick="manejarCheckbox(this)">
+                                    <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1"><i>Yo recibiré
+                                            el pedido</i></label>
+                                </div>
+                                <div id="cont-chckbox-recibira-otro">
+                                    <input type="checkbox" class="form-check-input" id="chckbox-recibira-otra-persona"
+                                        onclick="manejarCheckbox(this)">
+                                    <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1"><i>Lo recibirá
+                                            otra persona:</i></label>
+                                </div>
+                                <div style="margin-bottom: 20px;" id="cont-dni-receptor-pedido">
+                                    <h6><b>DNI del receptor del pedido:</b></h6>
+                                    <input id="input-dni-cliente-pago" class="inpt-dni-ape-nom" type="text">
+                                </div>
+                                <div id="cont-ape-nom-receptor-pedido">
+                                    <h6><b>Apellidos y nombres:</b></h6>
+                                    <input id="input-dni-nomApe-cliente" class="inpt-dni-ape-nom" type="text">
+                                </div>
+                            </div>
+                            <button onclick="abrirVentanaModalPagoConfirmado()" id="btn-confirmar-pago">Confirmar
+                                pago</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Segundo contenedor (fin) -->
+        </div>
+    </main>
+
+    <!-------------------------- Pie de página (copiar todo lo de abajo) ------------------>
+    <div class="barra_separadora">
+        <p></p>
+    </div>
+
+    <footer id="footer-general" class="color-footer">
+        <div id="footer-parte-1">
+            <div id="col-1">
+                <h6 id="h6-contactanos" class="titulos-footer-columnas"><b>Contáctanos</b></h6>
+                <h6 class="subt-col1">Whatsapp: +51 964 678 483</h6>
+                <h6 class="subt-col1">Correo electrónico: roxanaorrillo@hotmail.com</h6>
+                <a class="titulos-footer-columnas" href="acerca_de.html" target="_blank"><b>Acerca de Point Roo</b></a>
+                <a class="titulos-footer-columnas" href="preguntas_frecuentes.html" target="_blank"><b>Preguntas
+                        Frecuentes</b></a>
+                <a class="titulos-footer-columnas" href="ubicanos.html" target="_blank"><b>Ubícanos</b></a>
+            </div>
+            <div id="col-2">
+                <a id="enlace-libro-reclamaciones" href="libro_de_reclamaciones.html" target="_blank"><img
+                        src="img/libro_de_ reclamaciones_logo.png" alt=""></a>
+            </div>
+            <div id="col-3">
+                <h6 class="titulos-footer-columnas">Políticas y Términos</h6>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Políticas de Privacidad</a>
+                <a href="#">Políticas de Delivery</a>
+                <a href="#">Cambios o Devoluciones</a>
+            </div>
+            <div id="col-4">
+                <h6 id="h6-recibe-nuestras-ofertas" class="titulos-footer-columnas">Recibe nuestras ofertas y novedades
+                </h6>
+                <p>Ingresa tu e-mail:</p>
+                <div id="contenedor-ingresa-tu-email">
+                    <input class="form-control me-5" type="text" name="text-area-email" id="text-area-email">
+                    <button id="btn-suscribirme-footer">Suscribirme</button>
+                </div>
+            </div>
+        </div>
+        <hr id="barra-footer">
+        <div id="footer-parte-2">
+            <div style="display: flex; align-items: center;" id="contenedor-siguenos-iconos">
+                <h6>Síguenos:</h6>
+                <a href="https://facebook.com/PointRoo" target="_blank"><img class="icono-footer-parte-2" src="img/facebook.png" alt="icono facebook"></a>
+                <a href="https://www.instagram.com/pointroo27/" target="_blank"><img class="icono-footer-parte-2" src="img/instagram.png" alt="icono instagram"></a>
+                <a href="https://www.tiktok.com/@pointroo27" target="_blank"><img class="icono-footer-parte-2" src="img/tik-tok.png" alt="icono tik tok"></a>
+            </div>
+            <div style="display: flex; align-items: center;" id="contenedor-medios-de-pago-iconos">
+                <h6>Medios de pago:</h6>
+                <img class="icono-medios-pago-parte-2" src="img/visa.png" alt="icono visa">
+                <img class="icono-medios-pago-parte-2" src="img/yape.png" alt="icono yape">
+                <img class="icono-medios-pago-parte-2" src="img/plin.png" alt="icono plin">
+            </div>
+        </div>
+    </footer>
+    <div id="contenedor-informacion-desarrolladores">
+        <h6>Diseñado por: <b>Empresa Designs FY</b></h6>
+        <h6 id="info-fecha-creacion">Fecha de creación: <b>05/12/2023</b></h6>
+    </div>
+
+    <!-- Menú de barra lateral: -->
+
+    <div class="container-menu">
+        <div class="categorias-titulo">
+            <b>Categorías</b>
+            <button onclick="mostrarMenuLateral()" class="button-x"><b>Cerrar X</b></button>
+        </div>
+        <div class="cont-menu">
+            <nav>
+                <a href="moda_hombre.html" target="_blank">Moda Hombre</a>
+                <a href="moda_mujer.html" target="_blank">Moda Mujer</a>
+                <a href="moda-niños.html" target="_blank">Moda Niños</a>
+                <a href="calzado.html" target="_blank">Calzado</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Ventana modal de inicio de sesión (copiar) -->
+    <div id="ventana-modal-inicio-sesion">
+        <div id="cont-img-titulo-inicio-sesion">
+            <img id="img-inicio-sesion-ventana-modal" src="img/img-inicio-de-sesion-ventana-modal.png" alt="">
+            <h4 id="titulo-iniciar-sesion"><b>Iniciar Sesión</b></h4>
+        </div>
+        <h6 id="subt-ingresa-con-tu-email-contraseña">Ingresa con tu e-mail y contraseña:</h6>
+        <input class="form-control me-5" type="text" name="" placeholder="Correo electrónico..."
+            id="input-nombre-usuario-inicio-sesion">
+        <input class="form-control me-5" type="password" name="" placeholder="Contraseña..."
+            id="input-contraseña-inicio-sesion">
+        <button class="btns-ventana-modal-inicio-sesion" id="btn-olvide-mi-contraseña">Olvidé mi contraseña</button>
+        <div id="cont-btnVolver--btnIngresar">
+            <button onclick="cerrarVentanaModalInicioSesion()" class="btns-ventana-modal-inicio-sesion"
+                id="btn-volver-inicio-sesion">
+                < Volver</button>
+                    <button class="btns-ventana-modal-inicio-sesion" id="btn-ingresar-inicio-sesion">Ingresar ></button>
+        </div>
+        <div id="cont-noTienesCuenta-registrate">
+            <h6 id="lbl-no-tienes-cuenta">¿No tienes una cuenta?</h6>
+            <button class="btns-ventana-modal-inicio-sesion"
+                onclick="abrirPaginaRegistroDeUsuario()">Regístrate</button>
+        </div>
+    </div>
+    <!------------------------------------------------------>
+
+    <!-- Ventana modal Pago realizado -->
+    <div id="cont-pago-realizado">
+        <div id="cont-pago-realizado-titulo">
+            <h5 style="margin-top: auto;"><b>!Enhorabuena!</b></h5>
+            <button onclick="cerrarVentanaPagoRealizado()" id="btn-cerrar-ventana-pago-realizado">X</button>
+        </div>
+        <div id="cont-pago-realizado-contenido">
+            <h6 style="margin-top: 10px;">Tu pago ha sido procesado</h6>
+            <h6>Gracias por tu compra :)</h6>
+            <div id="cont-btns-pago-realizado">
+                <button id="btn-seguir-comprando-pagoProd" onclick="cerrarVentanaPagoRealizado()" class="btn-ventana-pago-realizado">Seguir comprando</button>
+                <button id="btn-ir-pagina-de-inicio" onclick="irPaginaDeInicio()" class="btn-ventana-pago-realizado">Ir a la página de inicio</button>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------->
+</body>
+
+</html>

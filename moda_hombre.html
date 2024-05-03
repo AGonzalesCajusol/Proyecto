@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos-globales.css">
+    <link rel="stylesheet" href="css/moda_hombre.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/carrito_de_compras.css">
+    <link rel="shortcut icon" href="img/logo_point_roo.png" type="image/x-icon">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/mostrar-menu-lateral.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/velocity-animate@2.0.3/velocity.min.js"></script>
+    <script src="js/calzado.js"></script>
+    <script src="js/ventana-carrito.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <title>Sección Moda Hombre</title>
+</head>
+
+<body class="body-catalogos">
+    <header id="contenedor-header" class="color-header">
+        <a href="index.html"><img id="logo_tienda" src="img/logo_point_roo.png" alt="logo de point roo"></a>
+        <button onclick="mostrarMenuLateral()" id="btn-menu">
+            <img id="img-menu" src="img/menu.png" alt="">
+        </button>
+        <input id="barra-busqueda" class="form-control me-5" type="search" placeholder="Buscar productos..."
+            aria-label="Search">
+        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion" target="_blank">
+            <img id="logo-inicio-sesion" src="img/logo-inicio-sesion.png" alt="inicio de sesion">
+            <b>Iniciar Sesión</b>
+        </button>
+        <a id="contenedor-carrito" href="carrito_de_compras.html" target="_blank">
+            <img id="carrito-de-compras" src="img/logo-carrito-de-compras.png" alt="">
+        </a>
+    </header>
+
+    <div class="barra_separadora">
+
+    </div>
+    <main style="margin-top: 12px;">
+        <h4 id="titulo-seccion-hombre">Sección Moda Hombre</h4>
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div id="contenedor-imagenes-carrusel-portadas" style="margin-bottom: 0px;" class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2500">
+                    <img src="img/portada-hombre.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="img/portada-hombre-2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="img/portada-hombre-3.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="img/portada-hombre-4.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="img/portada-hombre-5.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="img/portada-hombre-6.png" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <h3 id="titulo-productos-calzado">Nuestros Productos</h3>
+
+        <div id="contenedor-cards">
+            <div id="card-card-1" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Casaca Bambú Bomber H&M EcoStyle Manga Larga
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 139.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-1.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Casaca de Invierno Elegante y Funcional: ¡Tu Estilo y Comodidad en un Solo Producto!
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Denim Shirt Zara Bolsillos Relaxed Fit
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 171.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-2.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Camisa de corte relajado confeccionada en tejido denim. Cuello solapa y manga larga con puños abotonados.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Polo Tela Cáñamo Tommy Hilfiger Original  
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 239.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-3.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            La tela de cáñamo es conocida por su transpirabilidad natural, manteniéndote fresco/a y cómodo/a en climas cálidos.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Hoodie NYC Powerblend Graphic Champion
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 110.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-4.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Esta prenda no solo es una declaración de estilo, sino también un símbolo de confort y resistencia. 
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Camiseta GreenComfort H&M Estampado Relaxed Fit
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 89.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-5.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Camiseta Ecológica "GreenComfort" confeccionada con algodón orgánico de la más alta calidad.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Polo Tela Yute Bearcliff
+                        Manga Larga Estampado
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 69.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-6-hombre.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Estilo impactante en esta temporada de invienrno, conviértela en pieza clave de tu outfit solo en Point Roo.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Sudadera Franela Orgánico H&M Regular Fit
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 159.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-7.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Fabricada con franela de alta calidad, nuestra sudadera ofrece una suavidad excepcional y una sensación acogedora.  
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Hoodie Algodón Ecológico H&M Regular Fit 
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 189.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-8.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            La capucha agrega un toque adicional de estilo y te proporciona mayor cobertura cuando lo necesitas.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Camiseta de Baloncesto NIKE Wish Los Angeles Lakers
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 242.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-9.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Con el logo oficial de los Lakers y detalles auténticos, esta camiseta es una auténtica declaración de fanatismo.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Pantalón Algodón Orgánico Champion Original
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 185.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-10.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Este Pantalón de Algodón Orgánico ofrece calidad, estilo y sostenibilidad a un precio asequible.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Jersey Basketball NBA Nike  Boston Celtics
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 290.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-11.jpeg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Aleja el sudor de la piel y luego lo extrae de la tela para ayudar a acelerar la evaporación.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Hoodie Powerblend Champion Graphic 2WC
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 219.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/item-hombre-12.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Representa el espíritu vanguardista de Champion y destaca tu actitud inconfundible.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="barra_separadora">
+        <p></p>
+    </div>
+
+    <footer id="footer-general" class="color-footer">
+        <div id="footer-parte-1">
+            <div id="col-1">
+                <h6 id="h6-contactanos" class="titulos-footer-columnas"><b>Contáctanos</b></h6>
+                <h6 class="subt-col1">Whatsapp: +51 964 678 483</h6>
+                <h6 class="subt-col1">Correo electrónico: roxanaorrillo@hotmail.com</h6>
+                <a class="titulos-footer-columnas" href="acerca_de.html" target="_blank"><b>Acerca de Point Roo</b></a>
+                <a class="titulos-footer-columnas" href="preguntas_frecuentes.html" target="_blank"><b>Preguntas
+                        Frecuentes</b></a>
+                <a class="titulos-footer-columnas" href="ubicanos.html" target="_blank"><b>Ubícanos</b></a>
+            </div>
+            <div id="col-2">
+                <a id="enlace-libro-reclamaciones" href="libro_de_reclamaciones.html" target="_blank"><img
+                        src="img/libro_de_ reclamaciones_logo.png" alt=""></a>
+            </div>
+            <div id="col-3">
+                <h6 class="titulos-footer-columnas">Políticas y Términos</h6>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Políticas de Privacidad</a>
+                <a href="#">Políticas de Delivery</a>
+                <a href="#">Cambios o Devoluciones</a>
+            </div>
+            <div id="col-4">
+                <h6 id="h6-recibe-nuestras-ofertas" class="titulos-footer-columnas">Recibe nuestras ofertas y novedades
+                </h6>
+                <p>Ingresa tu e-mail:</p>
+                <div id="contenedor-ingresa-tu-email">
+                    <input class="form-control me-5" type="text" name="text-area-email" id="text-area-email">
+                    <button id="btn-suscribirme-footer">Suscribirme</button>
+                </div>
+            </div>
+        </div>
+        <hr id="barra-footer">
+        <div id="footer-parte-2">
+            <div style="display: flex; align-items: center;" id="contenedor-siguenos-iconos">
+                <h6>Síguenos:</h6>
+                <a href="https://facebook.com/PointRoo" target="_blank"><img class="icono-footer-parte-2" src="img/facebook.png" alt="icono facebook"></a>
+                <a href="https://www.instagram.com/pointroo27/" target="_blank"><img class="icono-footer-parte-2" src="img/instagram.png" alt="icono instagram"></a>
+                <a href="https://www.tiktok.com/@pointroo27" target="_blank"><img class="icono-footer-parte-2" src="img/tik-tok.png" alt="icono tik tok"></a>
+            </div>
+            <div style="display: flex; align-items: center;" id="contenedor-medios-de-pago-iconos">
+                <h6>Medios de pago:</h6>
+                <img class="icono-medios-pago-parte-2" src="img/visa.png" alt="icono visa">
+                <img class="icono-medios-pago-parte-2" src="img/yape.png" alt="icono yape">
+                <img class="icono-medios-pago-parte-2" src="img/plin.png" alt="icono plin">
+            </div>
+        </div>
+    </footer>
+    <div id="contenedor-informacion-desarrolladores">
+        <h6>Diseñado por: <b>Empresa Designs FY</b></h6>
+        <h6 id="info-fecha-creacion">Fecha de creación: <b>05/12/2023</b></h6>
+    </div>
+
+    <!-- Menú de barra lateral: -->
+
+    <div class="container-menu">
+        <div class="categorias-titulo">
+            <b>Categorías</b>
+            <button onclick="mostrarMenuLateral()" class="button-x"><b>Cerrar X</b></button>
+        </div>
+        <div class="cont-menu">
+            <nav>
+                <a href="moda_hombre.html" target="_blank">Moda Hombre</a>
+                <a href="moda_mujer.html" target="_blank">Moda Mujer</a>
+                <a href="moda-niños.html" target="_blank">Moda Niños</a>
+                <a href="calzado.html" target="_blank">Calzado</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Ventana Modal: Carrito de Compras -->
+
+    <div id="ventana-modal">
+        <div id="contenedor-elige-opciones">
+            <h6><b>Elige tus opciones:</b></h6>
+            <button onclick="cerrarVentanaCarrito()" id="btn-cerrar-carrito-vista-previa">X</button>
+        </div>
+        <div id="contenedor-contenido-carrito">
+            <div>
+                <div id="contenedor-imgcarrito-descripcioneleccion">
+                    <img id="imagen-carrito-vista-previa" src="" alt="">
+                    <div>
+                        <h6 id="valor-titulo-producto" style="text-align: justify;"></h6>
+                        <h6 id="valor-cantidad"></h6>
+                        <h6 id="valor-precio"></h6>
+                        <h6 id="valor-total"></h6>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id="contenedor-seleccion-talla">
+                <h6><b>Seleccione una talla:</b></h6>
+                <div id="contenedor-botonestalla-btnagregarcarrito">
+                    <div id="contenedor-botones-talla">
+                        <button class="btn-talla" onclick="cambiarColor(this)">S</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">M</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">L</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">XL</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">XXL</button>
+                    </div>
+                    <button onclick="agregarProductoAlCarrito()" id="btn-agregar-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Producto agregado al carrito -->
+
+    <div id="ventana-modal-2">
+        <div id="contenedor-producto-agregado">
+            <h6><b>Producto agregado exitosamente :)</b></h6>
+        </div>
+        <div id="contenedor-contenido-prdct-agregado">
+            <button onclick="cerrarVentanaModal2()" id="btn-seguir-comprando"><u>Seguir comprando</u></button>
+            <button onclick="irCarrito()" id="btn-ir-al-carrito"><u>Ir al carrito de compras</u></button>
+        </div>
+    </div>
+
+    <div id="ventana-modal-inicio-sesion">
+        <div id="cont-img-titulo-inicio-sesion">
+            <img id="img-inicio-sesion-ventana-modal" src="img/img-inicio-de-sesion-ventana-modal.png" alt="">
+            <h4 id="titulo-iniciar-sesion"><b>Iniciar Sesión</b></h4>
+        </div>
+        <h6 id="subt-ingresa-con-tu-email-contraseña">Ingresa con tu e-mail y contraseña:</h6>
+        <input class="form-control me-5" type="text" name="" placeholder="Correo electrónico..." id="input-nombre-usuario-inicio-sesion">
+        <input class="form-control me-5" type="password" name="" placeholder="Contraseña..." id="input-contraseña-inicio-sesion">
+        <button class="btns-ventana-modal-inicio-sesion" id="btn-olvide-mi-contraseña">Olvidé mi contraseña</button>
+        <div id="cont-btnVolver--btnIngresar">
+            <button onclick="cerrarVentanaModalInicioSesion()" class="btns-ventana-modal-inicio-sesion" id="btn-volver-inicio-sesion">< Volver</button>
+            <button class="btns-ventana-modal-inicio-sesion" id="btn-ingresar-inicio-sesion">Ingresar ></button>
+        </div>
+        <div id="cont-noTienesCuenta-registrate">
+            <h6 id="lbl-no-tienes-cuenta">¿No tienes una cuenta?</h6>
+            <button class="btns-ventana-modal-inicio-sesion" onclick="abrirPaginaRegistroDeUsuario()">Regístrate</button>
+        </div>
+    </div>
+</body>
+
+</html>

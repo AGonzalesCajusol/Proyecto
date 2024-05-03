@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos-globales.css">
+    <link rel="stylesheet" href="css/moda_mujer.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/carrito_de_compras.css">
+    <link rel="shortcut icon" href="img/logo_point_roo.png" type="image/x-icon">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/mostrar-menu-lateral.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/velocity-animate@2.0.3/velocity.min.js"></script>
+    <script src="js/calzado.js"></script>
+    <script src="js/ventana-carrito.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <title>Sección Moda Mujer</title>
+</head>
+
+<body class="body-catalogos">
+    <header id="contenedor-header" class="color-header">
+        <a href="index.html"><img id="logo_tienda" src="img/logo_point_roo.png" alt="logo de point roo"></a>
+        <button onclick="mostrarMenuLateral()" id="btn-menu">
+            <img id="img-menu" src="img/menu.png" alt="">
+        </button>
+        <input id="barra-busqueda" class="form-control me-5" type="search" placeholder="Buscar productos..."
+            aria-label="Search">
+        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion" target="_blank">
+            <img id="logo-inicio-sesion" src="img/logo-inicio-sesion.png" alt="inicio de sesion">
+            <b>Iniciar Sesión</b>
+        </button>
+        <a id="contenedor-carrito" href="carrito_de_compras.html" target="_blank">
+            <img id="carrito-de-compras" src="img/logo-carrito-de-compras.png" alt="">
+        </a>
+    </header>
+
+    <div class="barra_separadora">
+
+    </div>
+    <main style="margin-top: 12px;">
+        <h4 id="titulo-seccion-mujer">Sección Moda Mujer</h4>
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div id="contenedor-imagenes-carrusel-portadas" style="margin-bottom: 0px;" class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2500">
+                    <img src="img/imagen_portada_carrusel.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="img/imagen_portada_carrusel2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="img/imagen_portada_carrusel3.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <h3 id="titulo-productos-mujer">Nuestros Productos</h3>
+
+        <div id="contenedor-cards">
+            <div id="card-card-1" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Polera Dont call me Jennyfer
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 89.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/polera_dont_call_me.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Polera de alta calidad con diseño moderno, perfecta para un estilo casual para chica.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Camisa Dont call me Jennyfer
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 67.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/camisa_dont_call_me.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Camisa elegante de "Dont call me Jennyfer", ideal para ocasiones formales o para un toque
+                            sofisticado.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Chaqueta Adidas Primeblue
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 160.90</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/chaqueda_adidas.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Chaqueta deportiva confeccionada con material Primeblue, que utiliza plásticos reciclados.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Falda Short Zara
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 102.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/falda_short_zara.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Falda corta de Zara, con un diseño versátil que te brinda comodidad y estilo en cualquier
+                            momento.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Sudadera Crop con cierre
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 130.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/sudadera_crop_con_cierre.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Sudadera corta con cierre para un toque moderno y juvenil, perfecta para combinar.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Sudadera Nike
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 180.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/sudadera_nike.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Sudadera clásica de Nike, con el icónico logo, para un estilo deportivo y cómodo en tus
+                            actividades deportivas.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Jogger FILA pink
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 89.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/jogger_fila_pink.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Jogger de color rosa vibrante, confeccionado con materiales sostenibles para un estilo
+                            moderno.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Jogger CALVIN KLEIN
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 99.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/jogger_calvin_klein.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Jogger de la reconocida marca CALVIN KLEIN, brindando una máxima comodidad.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Minifalda a cuadros Bershka
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 80.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/minifalda_bershka.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Minifalda a cuadros de Bershka, una prenda versátil que puedes combinar de forma casual.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Hollister's Puffer Collection
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 185.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/hollister_puffer_collection.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Colección de abrigos acolchados de Hollister, con relleno aislante sostenible para
+                            mantenerte abrigado.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+
+                       Abrigo largo mujer Deminlab
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 150.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/abrigo_mujer.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Este abrigo largo de mujer de Deminlab es más que una prenda de vestir de manera elegante.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-card" class="card">
+                <div class="espacio-card-1">
+                    <div class="contenedor-titulo-card">
+                        Sueter Dama Hilo Cashmere
+                    </div>
+                </div>
+                <div class="espacio-card-2">
+                    <div class="contenedor-contenido-card">
+                        <div class="contenedor-precio">
+                            <h6>Precio</h6>
+                            <h6>S/. 120.00</h6>
+                        </div>
+                        <div class="contenedor-item">
+                            <img class="item" src="img/sueter_dama.jpg" alt="Imagen item 1">
+                        </div>
+                        <div class="contenedor-descripcion-item">
+                            Experimenta la exquisitez con nuestro suéter de dama tejido con hilo de cashmere.
+                        </div>
+                        <div class="contenedor-botones-item">
+                            <button class="btn-menos">
+                                <h6>-</h6>
+                            </button>
+                            <button class="btn-mas">
+                                <h6>+</h6>
+                            </button>
+                            <label class="cantidad-item" for="">1</label>
+                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="barra_separadora">
+        <p></p>
+    </div>
+
+    <footer id="footer-general" class="color-footer">
+        <div id="footer-parte-1">
+            <div id="col-1">
+                <h6 id="h6-contactanos" class="titulos-footer-columnas"><b>Contáctanos</b></h6>
+                <h6 class="subt-col1">Whatsapp: +51 964 678 483</h6>
+                <h6 class="subt-col1">Correo electrónico: roxanaorrillo@hotmail.com</h6>
+                <a class="titulos-footer-columnas" href="acerca_de.html" target="_blank"><b>Acerca de Point Roo</b></a>
+                <a class="titulos-footer-columnas" href="preguntas_frecuentes.html" target="_blank"><b>Preguntas
+                        Frecuentes</b></a>
+                <a class="titulos-footer-columnas" href="ubicanos.html" target="_blank"><b>Ubícanos</b></a>
+            </div>
+            <div id="col-2">
+                <a id="enlace-libro-reclamaciones" href="libro_de_reclamaciones.html" target="_blank"><img
+                        src="img/libro_de_ reclamaciones_logo.png" alt=""></a>
+            </div>
+            <div id="col-3">
+                <h6 class="titulos-footer-columnas">Políticas y Términos</h6>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Políticas de Privacidad</a>
+                <a href="#">Políticas de Delivery</a>
+                <a href="#">Cambios o Devoluciones</a>
+            </div>
+            <div id="col-4">
+                <h6 id="h6-recibe-nuestras-ofertas" class="titulos-footer-columnas">Recibe nuestras ofertas y novedades
+                </h6>
+                <p>Ingresa tu e-mail:</p>
+                <div id="contenedor-ingresa-tu-email">
+                    <input class="form-control me-5" type="text" name="text-area-email" id="text-area-email">
+                    <button id="btn-suscribirme-footer">Suscribirme</button>
+                </div>
+            </div>
+        </div>
+        <hr id="barra-footer">
+        <div id="footer-parte-2">
+            <div style="display: flex; align-items: center;" id="contenedor-siguenos-iconos">
+                <h6>Síguenos:</h6>
+                <a href="https://facebook.com/PointRoo" target="_blank"><img class="icono-footer-parte-2" src="img/facebook.png" alt="icono facebook"></a>
+                <a href="https://www.instagram.com/pointroo27/" target="_blank"><img class="icono-footer-parte-2" src="img/instagram.png" alt="icono instagram"></a>
+                <a href="https://www.tiktok.com/@pointroo27" target="_blank"><img class="icono-footer-parte-2" src="img/tik-tok.png" alt="icono tik tok"></a>
+            </div>
+            <div style="display: flex; align-items: center;" id="contenedor-medios-de-pago-iconos">
+                <h6>Medios de pago:</h6>
+                <img class="icono-medios-pago-parte-2" src="img/visa.png" alt="icono visa">
+                <img class="icono-medios-pago-parte-2" src="img/yape.png" alt="icono yape">
+                <img class="icono-medios-pago-parte-2" src="img/plin.png" alt="icono plin">
+            </div>
+        </div>
+    </footer>
+    <div id="contenedor-informacion-desarrolladores">
+        <h6>Diseñado por: <b>Empresa Designs FY</b></h6>
+        <h6 id="info-fecha-creacion">Fecha de creación: <b>05/12/2023</b></h6>
+    </div>
+
+    <!-- Menú de barra lateral: -->
+
+    <div class="container-menu">
+        <div class="categorias-titulo">
+            <b>Categorías</b>
+            <button onclick="mostrarMenuLateral()" class="button-x"><b>Cerrar X</b></button>
+        </div>
+        <div class="cont-menu">
+            <nav>
+                <a href="moda_hombre.html" target="_blank">Moda Hombre</a>
+                <a href="moda_mujer.html" target="_blank">Moda Mujer</a>
+                <a href="moda-niños.html" target="_blank">Moda Niños</a>
+                <a href="calzado.html" target="_blank">Calzado</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Ventana Modal: Carrito de Compras -->
+
+    <div id="ventana-modal">
+        <div id="contenedor-elige-opciones">
+            <h6><b>Elige tus opciones:</b></h6>
+            <button onclick="cerrarVentanaCarrito()" id="btn-cerrar-carrito-vista-previa">X</button>
+        </div>
+        <div id="contenedor-contenido-carrito">
+            <div>
+                <div id="contenedor-imgcarrito-descripcioneleccion">
+                    <img id="imagen-carrito-vista-previa" src="" alt="">
+                    <div>
+                        <h6 id="valor-titulo-producto" style="text-align: justify;"></h6>
+                        <h6 id="valor-cantidad"></h6>
+                        <h6 id="valor-precio"></h6>
+                        <h6 id="valor-total"></h6>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id="contenedor-seleccion-talla">
+                <h6><b>Seleccione una talla:</b></h6>
+                <div id="contenedor-botonestalla-btnagregarcarrito">
+                    <div id="contenedor-botones-talla">
+                        <button class="btn-talla" onclick="cambiarColor(this)">S</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">M</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">L</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">XL</button>
+                        <button class="btn-talla" onclick="cambiarColor(this)">XXL</button>
+                    </div>
+                    <button onclick="agregarProductoAlCarrito()" id="btn-agregar-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Producto agregado al carrito -->
+
+    <div id="ventana-modal-2">
+        <div id="contenedor-producto-agregado">
+            <h6><b>Producto agregado exitosamente :)</b></h6>
+        </div>
+        <div id="contenedor-contenido-prdct-agregado">
+            <button onclick="cerrarVentanaModal2()" id="btn-seguir-comprando"><u>Seguir comprando</u></button>
+            <button onclick="irCarrito()" id="btn-ir-al-carrito"><u>Ir al carrito de compras</u></button>
+        </div>
+    </div>
+
+    <div id="ventana-modal-inicio-sesion">
+        <div id="cont-img-titulo-inicio-sesion">
+            <img id="img-inicio-sesion-ventana-modal" src="img/img-inicio-de-sesion-ventana-modal.png" alt="">
+            <h4 id="titulo-iniciar-sesion"><b>Iniciar Sesión</b></h4>
+        </div>
+        <h6 id="subt-ingresa-con-tu-email-contraseña">Ingresa con tu e-mail y contraseña:</h6>
+        <input class="form-control me-5" type="text" name="" placeholder="Correo electrónico..."
+            id="input-nombre-usuario-inicio-sesion">
+        <input class="form-control me-5" type="password" name="" placeholder="Contraseña..."
+            id="input-contraseña-inicio-sesion">
+        <button class="btns-ventana-modal-inicio-sesion" id="btn-olvide-mi-contraseña">Olvidé mi contraseña</button>
+        <div id="cont-btnVolver--btnIngresar">
+            <button onclick="cerrarVentanaModalInicioSesion()" class="btns-ventana-modal-inicio-sesion"
+                id="btn-volver-inicio-sesion">
+                < Volver</button>
+                    <button class="btns-ventana-modal-inicio-sesion" id="btn-ingresar-inicio-sesion">Ingresar ></button>
+        </div>
+        <div id="cont-noTienesCuenta-registrate">
+            <h6 id="lbl-no-tienes-cuenta">¿No tienes una cuenta?</h6>
+            <button class="btns-ventana-modal-inicio-sesion"
+                onclick="abrirPaginaRegistroDeUsuario()">Regístrate</button>
+        </div>
+    </div>
+</body>
+
+</html>

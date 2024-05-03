@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos-globales.css">
+    <link rel="stylesheet" href="css/carrito_de_compras.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="img/logo_point_roo.png" type="image/x-icon">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/mostrar-menu-lateral.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/velocity-animate@2.0.3/velocity.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <title>Carrito de Compras</title>
+</head>
+
+<body>
+    <header id="contenedor-header" class="color-header">
+        <a href="index.html"><img id="logo_tienda" src="img/logo_point_roo.png" alt="logo de point roo"></a>
+        <button onclick="mostrarMenuLateral()" id="btn-menu">
+            <img id="img-menu" src="img/menu.png" alt="">
+        </button>
+        <input id="barra-busqueda" class="form-control me-5" type="search" placeholder="Buscar productos..."
+            aria-label="Search">
+        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion" target="_blank">
+            <img id="logo-inicio-sesion" src="img/logo-inicio-sesion.png" alt="inicio de sesion">
+            <b>Iniciar Sesión</b>
+        </button>
+        <a id="contenedor-carrito" href="carrito_de_compras.html" target="_blank">
+            <img id="carrito-de-compras" src="img/logo-carrito-de-compras.png" alt="">
+        </a>
+    </header>
+
+    <div class="barra_separadora">
+
+    </div>
+    <main style="margin-top: 20px;">
+
+        <h4 id="titulo-carrito-de-compras"><b>Carrito de Compras</b></h4>
+
+        <!-- Mostrar si hay productos agregados -->
+
+        <div id="contenedor-mostrar-hay-productos"> <!--Contenedor que se muestra o no (si es que hay productos)-->
+            <div id="contenedor-carrito-de-compras"> <!--Contenedor del carrito en sí-->
+                <div id="contenedor-mi-pedido"> <!-- color blanco -->
+                    <h4><b>Mi pedido</b></h4>
+                </div>
+                <div id="contenedor-cuerpo-carrito"> <!-- color amarillo -->
+                    <div id="contenedor-contenedor-cuerpo-carrito">
+                        <div id="contenedor-productos">
+                            <!-- <div class="card-producto">
+                                <div class="cont-producto">
+                                    <p class="identificador-producto">1</p>
+                                    <img class="img-card-producto" src="img/item-2-calzado.png" alt="">
+                                    <div class="cont-descr-producto">
+                                        <h6 class="titulo-producto"><b>Zapatilla Nike Air Max Up Urbano Mujer</b></h6>
+                                        <h6><b>Talla: </b>43</h6>
+                                        <h6><b>Precio: </b> S/. 390.00</h6>
+                                        <h6><b>Cantidad: </b>1</h6>
+                                        <div><b>Subtotal producto: </b>S/. 390.00</div>
+                                    </div>
+                                    <button id="btn-eliminar-producto" onclick="eliminarProductoDelCarrito()">Eliminar</button>
+                                </div>
+                            </div>
+                            <div class="cont-editar-pedido--tienes-n-productos">
+                                <label id="lbl-tienes-n-prod" for=""><i>Tienes <b><u>n productos</u></b></i></label>
+                            </div> -->
+                        </div>
+                        <div id="contenedor-direccion-envio--tipo-de-entrega">
+                            <div id="contenedor-direccion-envio">
+                                <h6><b><u>Ingresa tu dirección de envío</u></b></h6>
+                            </div>
+                            <div class="cont-cbo-box">
+                                <h6 class="dep"><b>Departamento:</b></h6>
+                                <select onchange="actualizarProvincias()" name="cbobox-departamento"
+                                    id="cbobox-departamento">
+                                    <option value=""></option>
+                                    <option value="lima">Lima</option>
+                                    <option value="lambayeque">Lambayeque</option>
+                                </select>
+                            </div>
+                            <div class="cont-cbo-box">
+                                <h6 class="prov"><b>Provincia:</b></h6>
+                                <select onchange="actualizarDistritos()" name="cbobox-provincia" id="cbobox-provincia">
+
+                                </select>
+                            </div>
+                            <div class="cont-cbo-box">
+                                <h6 class="dist"><b>Distrito:</b></h6>
+                                <select name="cbobox-distrito" id="cbobox-distrito">
+
+                                </select>
+                            </div>
+                            <div class="cont-input-text">
+                                <h6 class="dep"><b>Avenida/Calle/Jirón:</b></h6>
+                                <input class="form-control me-5" type="text" name="text-avenida-calle-jiron"
+                                    id="text-avenida-calle-jiron">
+                            </div>
+                            <div class="cont-input-text">
+                                <h6 class="dep"><b>Dpto/Interior/Piso/Lote/Bloque (opcional):</b></h6>
+                                <input class="form-control me-5" type="text" name="text-dpto-int..." id="text-dpto-int">
+                            </div>
+                            <label id="lbl-tipo-de-entrega" for="">Tipo de entrega: <b>A domicilio</b></label>
+                        </div>
+                        <button onclick="irPaginaPagoDeProductos()" id="btn-continuar-compra-carrito">Continuar con mi
+                            compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mostrar si no hay productos agregados -->
+
+        <div class="container" id="contenedor-mostrar-no-hay-productos">
+            <img src="img/img-carrito-de-compras-mostrar-no-hay-productos.png"
+                id="img-carrito-de-compras-mostrar-no-hay-productos" alt="">
+            <h4 id="titulo-no-has-agregado-productos"><b>Ups, aún no has agregado productos al carrito de compras :3</b>
+            </h4>
+        </div>
+    </main>
+    
+    <div class="barra_separadora">
+        <p></p>
+    </div>
+
+    <footer id="footer-general" class="color-footer">
+        <div id="footer-parte-1">
+            <div id="col-1">
+                <h6 id="h6-contactanos" class="titulos-footer-columnas"><b>Contáctanos</b></h6>
+                <h6 class="subt-col1">Whatsapp: +51 964 678 483</h6>
+                <h6 class="subt-col1">Correo electrónico: roxanaorrillo@hotmail.com</h6>
+                <a class="titulos-footer-columnas" href="acerca_de.html" target="_blank"><b>Acerca de Point Roo</b></a>
+                <a class="titulos-footer-columnas" href="preguntas_frecuentes.html" target="_blank"><b>Preguntas
+                        Frecuentes</b></a>
+                <a class="titulos-footer-columnas" href="ubicanos.html" target="_blank"><b>Ubícanos</b></a>
+            </div>
+            <div id="col-2">
+                <a id="enlace-libro-reclamaciones" href="libro_de_reclamaciones.html" target="_blank"><img
+                        src="img/libro_de_ reclamaciones_logo.png" alt=""></a>
+            </div>
+            <div id="col-3">
+                <h6 class="titulos-footer-columnas">Políticas y Términos</h6>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Políticas de Privacidad</a>
+                <a href="#">Políticas de Delivery</a>
+                <a href="#">Cambios o Devoluciones</a>
+            </div>
+            <div id="col-4">
+                <h6 id="h6-recibe-nuestras-ofertas" class="titulos-footer-columnas">Recibe nuestras ofertas y novedades
+                </h6>
+                <p>Ingresa tu e-mail:</p>
+                <div id="contenedor-ingresa-tu-email">
+                    <input class="form-control me-5" type="text" name="text-area-email" id="text-area-email">
+                    <button id="btn-suscribirme-footer">Suscribirme</button>
+                </div>
+            </div>
+        </div>
+        <hr id="barra-footer">
+        <div id="footer-parte-2">
+            <div style="display: flex; align-items: center;" id="contenedor-siguenos-iconos">
+                <h6>Síguenos:</h6>
+                <a href="https://facebook.com/PointRoo" target="_blank"><img class="icono-footer-parte-2" src="img/facebook.png" alt="icono facebook"></a>
+                <a href="https://www.instagram.com/pointroo27/" target="_blank"><img class="icono-footer-parte-2" src="img/instagram.png" alt="icono instagram"></a>
+                <a href="https://www.tiktok.com/@pointroo27" target="_blank"><img class="icono-footer-parte-2" src="img/tik-tok.png" alt="icono tik tok"></a>
+            </div>
+            <div style="display: flex; align-items: center;" id="contenedor-medios-de-pago-iconos">
+                <h6>Medios de pago:</h6>
+                <img class="icono-medios-pago-parte-2" src="img/visa.png" alt="icono visa">
+                <img class="icono-medios-pago-parte-2" src="img/yape.png" alt="icono yape">
+                <img class="icono-medios-pago-parte-2" src="img/plin.png" alt="icono plin">
+            </div>
+        </div>
+    </footer>
+    <div id="contenedor-informacion-desarrolladores">
+        <h6>Diseñado por: <b>Empresa Designs FY</b></h6>
+        <h6 id="info-fecha-creacion">Fecha de creación: <b>05/12/2023</b></h6>
+    </div>
+
+    <!-- Menú de barra lateral: -->
+
+    <div class="container-menu">
+        <div class="categorias-titulo">
+            <b>Categorías</b>
+            <button onclick="mostrarMenuLateral()" class="button-x"><b>Cerrar X</b></button>
+        </div>
+        <div class="cont-menu">
+            <nav>
+                <a href="moda_hombre.html" target="_blank">Moda Hombre</a>
+                <a href="moda_mujer.html" target="_blank">Moda Mujer</a>
+                <a href="moda-niños.html" target="_blank">Moda Niños</a>
+                <a href="calzado.html" target="_blank">Calzado</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="ventana-modal-inicio-sesion">
+        <div id="cont-img-titulo-inicio-sesion">
+            <img id="img-inicio-sesion-ventana-modal" src="img/img-inicio-de-sesion-ventana-modal.png" alt="">
+            <h4 id="titulo-iniciar-sesion"><b>Iniciar Sesión</b></h4>
+        </div>
+        <h6 id="subt-ingresa-con-tu-email-contraseña">Ingresa con tu e-mail y contraseña:</h6>
+        <input class="form-control me-5" type="text" name="" placeholder="Correo electrónico..."
+            id="input-nombre-usuario-inicio-sesion">
+        <input class="form-control me-5" type="password" name="" placeholder="Contraseña..."
+            id="input-contraseña-inicio-sesion">
+        <button class="btns-ventana-modal-inicio-sesion" id="btn-olvide-mi-contraseña">Olvidé mi contraseña</button>
+        <div id="cont-btnVolver--btnIngresar">
+            <button onclick="cerrarVentanaModalInicioSesion()" class="btns-ventana-modal-inicio-sesion"
+                id="btn-volver-inicio-sesion">
+                < Volver</button>
+                    <button class="btns-ventana-modal-inicio-sesion" id="btn-ingresar-inicio-sesion">Ingresar ></button>
+        </div>
+        <div id="cont-noTienesCuenta-registrate">
+            <h6 id="lbl-no-tienes-cuenta">¿No tienes una cuenta?</h6>
+            <button class="btns-ventana-modal-inicio-sesion"
+                onclick="abrirPaginaRegistroDeUsuario()">Regístrate</button>
+        </div>
+    </div>
+
+    <script src="js/carrito-de-compras.js"></script>
+</body>
+
+</html>
