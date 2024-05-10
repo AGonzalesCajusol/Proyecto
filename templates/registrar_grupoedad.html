@@ -1,0 +1,27 @@
+{% extends 'maestra.html' %}
+
+{% block titulo %} Registrar Grupo de Edad {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Agregar Grupo de Edad</h3>
+                <form action="{{ url_for('insertar_grupo_edad') }}" method="post">
+                    <div class="mb-3">
+                        <label for="grupo_edad" class="form-label">Grupo de Edad:</label>
+                        <input required type="text" class="form-control" id="grupo_edad" name="grupo_edad" placeholder="Ingrese el nombre del grupo de edad">
+                    </div>
+                    <!-- No se muestra la descripción del grupo de edad -->
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('grupo_edad') }}" class="btn btn-danger mt-2 me-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

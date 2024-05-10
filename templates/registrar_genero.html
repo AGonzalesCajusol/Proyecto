@@ -1,0 +1,28 @@
+
+{% extends 'maestra.html' %}
+
+{% block titulo %} Registrar Género {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Agregar Género</h3>
+                <form action="{{ url_for('insertar_genero') }}" method="post">
+                    <div class="mb-3">
+                        <label for="genero" class="form-label">Género:</label>
+                        <input required type="text" class="form-control" id="genero" name="genero" placeholder="Ingrese el nombre del género">
+                    </div>
+                    <!-- No se muestra la descripción del género -->
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('genero') }}" class="btn btn-danger mt-2 me-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

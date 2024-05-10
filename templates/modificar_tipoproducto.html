@@ -1,0 +1,27 @@
+{% extends 'maestra.html' %}
+{% block titulo %} Modificar Tipo de Producto {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Modificar Tipo de Producto</h3>
+                <form action="/actualizar_tipoproducto" method="post">
+                    <input type="hidden" name="id" value="{{ tipo_producto[0] }}">
+                    <label for="tipo" class="mb-3">Tipo:</label>
+                    <input required type="text" class="form-control" placeholder="Tipo" name="tipo" id="tipo" value="{{ tipo_producto[1] }}">
+                    <label for="descripcion" class="mb-3">Descripción:</label>
+                    <textarea class="form-control" placeholder="Descripción" name="descripcion" id="descripcion" rows="3">{{ tipo_producto[2] }}</textarea>
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('tipo_producto') }}" class="btn btn-danger mt-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

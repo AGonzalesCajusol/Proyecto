@@ -1,0 +1,132 @@
+{% extends 'maestra.html' %}
+
+{% block titulo %} Modificar Producto {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="mb-4 mt-4">Modificar Producto</h3>
+                <form action="/actualizar_producto" method="post">
+                    <input type="hidden" name="id" value="{{ pr[0] }}">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input required type="text" class="form-control" id="nombre" name="nombre" value="{{ pr[1] }}"  placeholder="Ingrese el nombre del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio:</label>
+                        <input required type="number" step="0.01" class="form-control" id="precio" name="precio" value="{{ pr[2] }}"   placeholder="Ingrese el precio del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado:</label>
+                        <select class="form-select" id="estado" name="estado">
+                            {% if pr[3] == "A" %}
+                            <option  selected>Activo</option>
+                            <option >Inactivo</option>
+                            {% else %}
+                            <option >Activo</option>
+                            <option  selected>Inactivo</option>
+                            {% endif %}       
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock:</label>
+                        <input required type="number" class="form-control" id="stock" name="stock" value="{{ pr[4] }}" placeholder="Ingrese la cantidad en stock">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion"   placeholder="Ingrese una descripción del producto">{{ pr[5] }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descuento" class="form-label">Descuento:</label>
+                        <input type="number" step="0.01" class="form-control" id="descuento" value="{{ pr[6] }}" name="descuento" placeholder="Ingrese el descuento del producto">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tipo_producto" class="form-label">Tipo Producto</label>
+                        <select class="form-select" id="tipo_producto" name="tipo_producto">
+                            {% for pro in tipo_productos  %}
+                                {% if pro[0] == pr[7] %}
+                                <option selected> {{ pro[0] }} </option>
+                                {% else %}
+                                <option> {{ pro[0] }} </option>
+                                {% endif %}
+                            
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="genero" class="form-label">Genero</label>
+                        <select class="form-select" id="genero" name="genero">
+                            {% for genero in generos  %}
+                                {% if genero[0] == pr[8] %}
+                                <option selected> {{ genero[0] }} </option>
+                                {% else %}
+                                <option> {{ genero[0] }} </option>
+                                {% endif %}
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Marca</label>
+                        <select class="form-select" id="marca" name="marca">
+                            {% for marca in marcas  %}
+                                {% if marca[0] == pr[9] %}
+                                <option selected> {{ marca[0] }} </option>
+                                {% else %}
+                                <option> {{ marca[0] }} </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Categoría</label>
+                        <select class="form-select" id="categoria" name="categoria">
+                            {% for categoria  in categorias  %}     
+                                {% if categoria[0] == pr[10] %}
+                                <option selected> {{ categoria[0] }} </option>
+                                {% else %}
+                                <option> {{ categoria[0] }} </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="grupoedad" class="form-label">Grupo edad</label>
+                        <select class="form-select" id="grupoedad" name="grupoedad">
+                            {% for grupoedad  in grupo_edad  %}
+                                {% if grupoedad[0] == pr[11] %}
+                                <option selected> {{ grupoedad[0] }} </option>
+                                {% else %}
+                                <option> {{ grupoedad[0] }} </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="presentacion" class="form-label">Presentacion</label>
+                        <select class="form-select" id="presentacion" name="presentacion">
+                            {% for pre  in presentacion  %}
+                                {% if  pre[0] == pr[12]  and pre[1] == pr[13] %}
+                                <option selected>{{ pre[0]}} - {{ pre[1] }}</option>
+                                {% else %}
+                                <option > {{ pre[0]}} - {{ pre[1] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Agrega aquí los campos para los ID de tipo_producto, genero, marca, categoria, grupo_edad y presentacion -->
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{url_for('producto')}}" class="btn btn-danger mt-2 me-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

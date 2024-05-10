@@ -1,43 +1,74 @@
 from bd import obtener_conexion
 
-def insertar_marca(nombre):
+def nombre_marcas():
+    conexion = obtener_conexion()
+    marcas = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT marca FROM marca")
+        marcas= cursor.fetchall()
+    conexion.close()
+    return marcas
+
+def id_marca_por_nombre(nombre):
+    conexion = obtener_conexion()
+    id_marca = None
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT id FROM marca WHERE marca = %s", (nombre,))
+        resultado = cursor.fetchone()
+        if resultado:
+            id_marca = resultado[0]
+    conexion.close()
+    return id_marca
+
+def obtener_nombre_marca_por_id(id_marca):
+    conexion = obtener_conexion()
+    nombre_marca = None
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT marca FROM marca WHERE id = %s", (id_marca,))
+        resultado = cursor.fetchone()
+        if resultado:
+            nombre_marca = resultado[0]
+    conexion.close()
+    return nombre_marca
+
+
+def insertar_marca(marca):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO marca(nombre) VALUES (%s)",
-                       (codigo, nombre))
+        cursor.execute('Insert into marca(marca) values (%s)', (marca))
     conexion.commit()
     conexion.close()
 
-def obtener_disqueras():
+def obtener_marcas():
     conexion = obtener_conexion()
-    disqueras = []
+    marcas = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT id, codigo, nombre FROM disqueras")
-        disqueras = cursor.fetchall()
+        cursor.execute("SELECT id ,marca FROM marca")
+        marcas= cursor.fetchall()
     conexion.close()
-    return disqueras
+    return marcas
 
-def eliminar_disquera(id):
+def eliminar_marca(id):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
-        cursor.execute("DELETE FROM disqueras WHERE id = %s", (id,))
+        cursor.execute("DELETE FROM marca WHERE id = %s", (id,))
     conexion.commit()
     conexion.close()
 
-def obtener_disquera_por_id(id):
+def obtener_marca_por_id(id):
     conexion = obtener_conexion()
-    disquera = None
+    marca = None
     with conexion.cursor() as cursor:
         cursor.execute(
-            "SELECT id, codigo, nombre FROM disqueras WHERE id = %s", (id,))
-        disquera = cursor.fetchone()
+            "SELECT id, marca FROM marca WHERE id= %s", (id,))
+        marca = cursor.fetchone()
     conexion.close()
-    return disquera
+    return marca
 
-def actualizar_disquera(codigo, nombre, id):
+def actualizar_marca(codigo, marca):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
-        cursor.execute("UPDATE disqueras SET codigo = %s, nombre = %s WHERE id = %s",
-                       (codigo, nombre, id))
+        cursor.execute("UPDATE marca SET marca = %s  WHERE id = %s",
+                       (marca, codigo))
     conexion.commit()
     conexion.close()

@@ -1,0 +1,100 @@
+{% extends 'maestra.html' %}
+
+{% block titulo %} Registrar Producto {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="mb-4 mt-4">Agregar Producto</h3>
+                <form action="/insertar_producto" method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio:</label>
+                        <input required type="number" step="0.01" class="form-control" id="precio" name="precio" placeholder="Ingrese el precio del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado:</label>
+                        <select class="form-select" id="estado" name="estado">
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock:</label>
+                        <input required type="number" class="form-control" id="stock" name="stock" placeholder="Ingrese la cantidad en stock">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese una descripción del producto"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descuento" class="form-label">Descuento:</label>
+                        <input type="number" step="0.01" class="form-control" id="descuento" name="descuento" placeholder="Ingrese el descuento del producto">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tipo_producto" class="form-label">Tipo Producto</label>
+                        <select class="form-select" id="tipo_producto" name="tipo_producto">
+                            {% for pro in tipo_productos  %}
+                            <option> {{ pro[0] }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="genero" class="form-label">Genero</label>
+                        <select class="form-select" id="genero" name="genero">
+                            {% for genero in generos  %}
+                            <option> {{ genero[0] }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Marca</label>
+                        <select class="form-select" id="marca" name="marca">
+                            {% for marca in marcas  %}
+                            <option> {{ marca[0] }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Categoría</label>
+                        <select class="form-select" id="categoria" name="categoria">
+                            {% for categoria  in categorias  %}
+                            <option> {{ categoria[0] }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="grupoedad" class="form-label">Grupo edad</label>
+                        <select class="form-select" id="grupoedad" name="grupoedad">
+                            {% for grupoedad  in grupo_edad  %}
+                            <option> {{ grupoedad[0] }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="presentacion" class="form-label">Presentacion</label>
+                        <select class="form-select" id="presentacion" name="presentacion">
+                            {% for pr  in presentacion  %}
+                            <option > {{ pr[0]}} - {{ pr[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Agrega aquí los campos para los ID de tipo_producto, genero, marca, categoria, grupo_edad y presentacion -->
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{url_for('producto')}}" class="btn btn-danger mt-2 me-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'maestra.html' %}
+
+{% block titulo %} Productos {% endblock %}
+
+{% block tabla %}
+<div class="col-lg-11 col-md-10 ms-2 mt-4 me-2">
+    <a href="{{ url_for('registrarproducto') }}" class="btn btn-primary mb-3">Nuevo</a>
+    <hr>
+    <table class="table table-bordered table-hover text-center table-responsive">
+        <thead class="table-secondary">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>S/ Precio Normal</th>
+                <th>S/Precio con descuento</th>
+                <th>Estado</th>
+                <th>Stock</th>
+                <th>Descripción</th>
+                <th>Descuento</th>
+                <th>Tipo de Producto</th>
+                <th>Género</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+                <th>Grupo de Edad</th>
+                <th>Presentación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto[0] }}</td>
+                <td>{{ producto[1] }}</td>
+                <td>{{ producto[2] }}</td>
+                <td>{{ producto[2] | float - producto[2] | float * producto[6] | float }}</td>
+                {% if producto[3] == "A" %}
+                <td>Activo</td>
+                {% else %}
+                <td>Inactivo</td>
+                {% endif %}
+                <td>{{ producto[4] }}</td>
+                <td>{{ producto[5] }}</td>
+                <td>{{ producto[6] }}</td>
+                <td>{{ producto[7] }}</td>
+                <td>{{ producto[8] }}</td>
+                <td>{{ producto[9] }}</td>
+                <td>{{ producto[10] }}</td>
+                <td>{{ producto[11] }}</td>
+                <td>{{ producto[12] }} - {{ producto[13] }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <form action="{{ url_for('modificar_producto', id=producto[0]) }}" method="post">
+                            <input type="hidden" name="id" value="{{ producto[0] }}">
+                            <button type="submit" class="btn btn-warning me-4 text-white">Modificar</button>
+                        </form>
+                        <a href="" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

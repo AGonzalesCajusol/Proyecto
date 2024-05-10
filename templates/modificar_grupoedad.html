@@ -1,0 +1,27 @@
+{% extends 'maestra.html' %}
+
+{% block titulo %} Modificar Grupo de Edad {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Modificar Grupo de Edad</h3>
+                <form action="{{ url_for('actualizar_grupo_edad') }}" method="post">
+                    <input type="hidden" name="id" value="{{ grupo_edad[0] }}">
+                    <div class="mb-3">
+                        <label for="grupo_edad" class="form-label">Nuevo Grupo de Edad:</label>
+                        <input required type="text" class="form-control" id="grupo_edad" name="grupo_edad" placeholder="Ingrese el nombre del grupo de edad" value="{{ grupo_edad[1] }}">
+                    </div>
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('grupo_edad') }}" class="btn btn-danger mt-2 me-2">Cancelar</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

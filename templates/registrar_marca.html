@@ -1,0 +1,27 @@
+{% extends 'maestra.html' %}
+{% block titulo %}  Agregar Alumno  {% endblock %}
+
+{% block  body %} 
+<section class="section ">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Agregar Marca</h3>
+                <form action="/insertarmarca" method="post">
+                    <label for="marca" class="mb-3">Marca:</label>
+                    <input required type="text" class="form-control" placeholder="Marca" name="marca" id="marca">
+                    <hr>
+                    <div class="text-end">
+                        <a href=" {{url_for('marca')}} " class="btn btn-danger mt-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+ 

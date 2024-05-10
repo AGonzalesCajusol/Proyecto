@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<!---->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/estilos-globales.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="shortcut icon" href="img/logo_point_roo.png" type="image/x-icon">
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/mostrar-menu-lateral.js"></script>
-    <link rel="stylesheet" href="css/acerca_de.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos-globales.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo_point_roo.png') }}" type="image/x-icon">
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mostrar-menu-lateral.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/acerca_de.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/velocity-animate@2.0.3/velocity.min.js"></script>
     <title>Acerca de Point Roo</title>
 </head>
@@ -21,18 +19,18 @@
     <!-- Cabecera (copiar todo para todas las páginas) -->
 
     <header id="contenedor-header" class="color-header">
-        <a href="index.html"><img id="logo_tienda" src="img/logo_point_roo.png" alt="logo de point roo"></a>
+        <a href="{{ url_for('index') }}"><img id="logo_tienda" src="{{ url_for('static', filename='img/logo_point_roo.png') }}" alt="logo de point roo"></a>
         <button onclick="mostrarMenuLateral()" id="btn-menu">
-            <img id="img-menu" src="img/menu.png" alt="">
+            <img id="img-menu" src="{{ url_for('static', filename='img/menu.png') }}" alt="">
         </button>
         <input id="barra-busqueda" class="form-control me-5" type="search" placeholder="Buscar productos..."
             aria-label="Search">
-        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion" target="_blank">
-            <img id="logo-inicio-sesion" src="img/logo-inicio-sesion.png" alt="inicio de sesion">
+        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion">
+            <img id="logo-inicio-sesion" src="{{ url_for('static', filename='img/logo-inicio-sesion.png') }}" alt="inicio de sesion">
             <b>Iniciar Sesión</b>
         </button>
-        <a id="contenedor-carrito" href="carrito_de_compras.html" target="_blank">
-            <img id="carrito-de-compras" src="img/logo-carrito-de-compras.png" alt="">
+        <a id="contenedor-carrito" href="{{ url_for('carrito_de_compras') }}">
+            <img id="carrito-de-compras" src="{{ url_for('static', filename='img/logo-carrito-de-compras.png') }}" alt="">
         </a>
     </header>
 
@@ -47,7 +45,7 @@
     <section id="contenedor-section">
         <h4 id="titulo-acerca">Acerca de Point Roo</h4>
         <div id="contenedor-fila-1-acerca-de">
-            <img id="img-polo-acerca-de" src="img/polo-acercade.png" alt="polo">
+            <img id="img-polo-acerca-de" src="{{ url_for('static', filename='img/polo-acercade.png') }}" alt="polo">
             <div class="cont-subtitulo-parrafo" id="contenedor-necesitamos-moda-sin-contaminacion">
                 <h5 style="text-align: center; margin-bottom: 20px;">¡Necesitamos una moda sin contaminación!</h5>
                 <p style="text-align: justify;">Comprometemos a utilizar materiales sostenibles en nuestra línea de
@@ -60,7 +58,7 @@
                     y prolongar la
                     vida útil de la ropa.</p>
             </div>
-            <img id="img-plantita-acerca-de" src="img/tierra-acercade.png" alt="tierra">
+            <img id="img-plantita-acerca-de" src="{{ url_for('static', filename='img/tierra-acercade.png') }}" alt="tierra">
         </div>
 
         <div id="contenedor-fila-2-acerca-de">
@@ -71,7 +69,7 @@
                         nuestros clientes pequeños y grandes; y estar a la vanguardia de las tendencias de la moda,
                         accesorios y maquillaje.</p>
                 </div>
-                <img id="img-mision" class="mision" src="img/misión.png" alt="">
+                <img id="img-mision" class="mision" src="{{ url_for('static', filename='img/misión.png') }}" alt="">
             </div>
             <div id="contenedor-vision-img-vision">
                 <div class="cont-subtitulo-parrafo" id="contenedor-vision">
@@ -79,7 +77,7 @@
                     <p style="text-align: justify;">Ser una empresa importadora líder y reconocida en la venta de ropa y calzado, logrando extendernos y crear cadenas de tiendas a nivel nacional e internacional; a su vez, fidelizando, ampliando la cartera de clientes de la tienda y/o la boutique y ofreciendo servicios postventa para los clientes.
                     </p>
                 </div>
-                <img id="img-vision" class="vision" src="img/vision.png" alt="">
+                <img id="img-vision" class="vision" src="{{ url_for('static', filename='img/vision.png') }}" alt="">
             </div>
         </div>
     </section>
@@ -97,14 +95,14 @@
                 <h6 id="h6-contactanos" class="titulos-footer-columnas"><b>Contáctanos</b></h6>
                 <h6 class="subt-col1">Whatsapp: +51 964 678 483</h6>
                 <h6 class="subt-col1">Correo electrónico: roxanaorrillo@hotmail.com</h6>
-                <a class="titulos-footer-columnas" href="acerca_de.html" target="_blank"><b>Acerca de Point Roo</b></a>
-                <a class="titulos-footer-columnas" href="preguntas_frecuentes.html" target="_blank"><b>Preguntas
+                <a class="titulos-footer-columnas" href="{{ url_for('acerca_de') }}"><b>Acerca de Point Roo</b></a>
+                <a class="titulos-footer-columnas" href="{{ url_for('preguntas_frecuentes') }}"><b>Preguntas
                         Frecuentes</b></a>
-                <a class="titulos-footer-columnas" href="ubicanos.html" target="_blank"><b>Ubícanos</b></a>
+                <a class="titulos-footer-columnas" href="{{ url_for('ubicanos') }}"><b>Ubícanos</b></a>
             </div>
             <div id="col-2">
-                <a id="enlace-libro-reclamaciones" href="libro_de_reclamaciones.html" target="_blank"><img
-                        src="img/libro_de_ reclamaciones_logo.png" alt=""></a>
+                <a id="enlace-libro-reclamaciones" href="{{ url_for('libro_de_reclamaciones') }}"><img
+                        src="{{ url_for('static', filename='img/libro_de_ reclamaciones_logo.png') }}" alt=""></a>
             </div>
             <div id="col-3">
                 <h6 class="titulos-footer-columnas">Políticas y Términos</h6>
@@ -127,15 +125,15 @@
         <div id="footer-parte-2">
             <div style="display: flex; align-items: center;" id="contenedor-siguenos-iconos">
                 <h6>Síguenos:</h6>
-                <a href="https://facebook.com/PointRoo" target="_blank"><img class="icono-footer-parte-2" src="img/facebook.png" alt="icono facebook"></a>
-                <a href="https://www.instagram.com/pointroo27/" target="_blank"><img class="icono-footer-parte-2" src="img/instagram.png" alt="icono instagram"></a>
-                <a href="https://www.tiktok.com/@pointroo27" target="_blank"><img class="icono-footer-parte-2" src="img/tik-tok.png" alt="icono tik tok"></a>
+                <a href="https://facebook.com/PointRoo"><img class="icono-footer-parte-2" src="{{ url_for('static', filename='img/facebook.png') }}" alt="icono facebook"></a>
+                <a href="https://www.instagram.com/pointroo27/"><img class="icono-footer-parte-2" src="{{ url_for('static', filename='img/instagram.png') }}" alt="icono instagram"></a>
+                <a href="https://www.tiktok.com/@pointroo27"><img class="icono-footer-parte-2" src="{{ url_for('static', filename='img/tik-tok.png') }}" alt="icono tik tok"></a>
             </div>
             <div style="display: flex; align-items: center;" id="contenedor-medios-de-pago-iconos">
                 <h6>Medios de pago:</h6>
-                <img class="icono-medios-pago-parte-2" src="img/visa.png" alt="icono visa">
-                <img class="icono-medios-pago-parte-2" src="img/yape.png" alt="icono yape">
-                <img class="icono-medios-pago-parte-2" src="img/plin.png" alt="icono plin">
+                <img class="icono-medios-pago-parte-2" src="{{ url_for('static', filename='img/visa.png') }}" alt="icono visa">
+                <img class="icono-medios-pago-parte-2" src="{{ url_for('static', filename='img/yape.png') }}" alt="icono yape">
+                <img class="icono-medios-pago-parte-2" src="{{ url_for('static', filename='img/plin.png') }}" alt="icono plin">
             </div>
         </div>
     </footer>
@@ -153,10 +151,10 @@
         </div>
         <div class="cont-menu">
             <nav>
-                <a href="moda_hombre.html" target="_blank">Moda Hombre</a>
-                <a href="moda_mujer.html" target="_blank">Moda Mujer</a>
-                <a href="moda-niños.html" target="_blank">Moda Niños</a>
-                <a href="calzado.html" target="_blank">Calzado</a>
+                <a href="{{ url_for('moda_hombre') }}">Moda Hombre</a>
+                <a href="{{ url_for('moda_mujer') }}">Moda Mujer</a>
+                <a href="{{ url_for('moda_niños') }}">Moda Niños</a>
+                <a href="{{ url_for('calzado') }}">Calzado</a>
             </nav>
         </div>
     </div>
@@ -164,7 +162,7 @@
     <!-- Ventana modal de inicio de sesión (copiar) -->
     <div id="ventana-modal-inicio-sesion">
         <div id="cont-img-titulo-inicio-sesion">
-            <img id="img-inicio-sesion-ventana-modal" src="img/img-inicio-de-sesion-ventana-modal.png" alt="">
+            <img id="img-inicio-sesion-ventana-modal" src="{{ url_for('static', filename='img/img-inicio-de-sesion-ventana-modal.png') }}" alt="">
             <h4 id="titulo-iniciar-sesion"><b>Iniciar Sesión</b></h4>
         </div>
         <h6 id="subt-ingresa-con-tu-email-contraseña">Ingresa con tu e-mail y contraseña:</h6>
