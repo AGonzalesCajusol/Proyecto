@@ -1,15 +1,32 @@
-from flask import Flask, render_template, request, redirect, url_for
-import controlador_marca, controlador_tipoproducto, controlador_categoria, controlador_presentacion, controlador_grupoedad, controlador_genero, controlador_producto
+from flask import Flask, render_template, request, redirect, url_for, flash
+import controlador_marca, controlador_tipoproducto, controlador_categoria, controlador_presentacion, controlador_grupoedad, controlador_genero, controlador_producto, controlador_usuario
+
 
 app = Flask(__name__)
+app.secret_key = 'secret'
 
+#ruta para admi
+@app.route('/')
+@app.route('/usuario')
+def usuario():
+    return render_template('usuario_admin.html')
+
+@app.route('/validarusuario', methods=['POST'])
+def validarusuario():
+    usuario = request.form['usuario']
+    password = request.form['password']
+    resullt = controlador_usuario.nombres_tipoproducto(usuario,password)
+    if resullt:
+        return redirect(url_for('ini'))
+    else:
+        flash('Datos incorrectos', 'success')
+        return redirect(url_for('usuario'))
+    
 
 #------rutas de tienda
 
 
 
-
-@app.route('/')
 @app.route('/inicio')
 def index():
     return render_template('/templates/index.html')
@@ -68,7 +85,7 @@ def ubicanos():
 
 @app.route('/ini')
 def ini():
-    return  render_template('marca.html')
+    return  render_template('maestra.html')
 
 # --------marca--------------
 @app.route('/marca')
