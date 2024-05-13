@@ -403,6 +403,7 @@ def api_obtenercategorias():
         rpt["codigo"] = 1
         rpt["mensaje"]= "Procesamiento correcto"
         rpt["datos"] = lista_c
+        hola = "hola"
     except:
         rpt["codigo"]= 0
         rpt["mensaje"] = "Ocurrio un error"
