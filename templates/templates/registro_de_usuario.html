@@ -1,213 +1,78 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "templates/maestra.html" %}
+{% block enlaces  %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/registro_de_usuario.css') }}">
+<script src="{{ url_for('static', filename='js/registro-de-usuario.js') }}"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos-globales.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/registro_de_usuario.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo_point_roo.png') }}" type="image/x-icon">
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/mostrar-menu-lateral.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/velocity-animate@2.0.3/velocity.min.js"></script>
-    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/registro-de-usuario.js') }}"></script>
-    <title>Registro de Usuario</title>
-</head>
-
-<body>
-
-    <header id="contenedor-header" class="color-header">
-        <a href="index.html"><img id="logo_tienda" src="{{ url_for('static', filename='img/logo_point_roo.png') }}" alt="logo de point roo"></a>
-        <button onclick="mostrarMenuLateral()" id="btn-menu">
-            <img id="img-menu" src="{{ url_for('static', filename='img/menu.png') }}" alt="">
-        </button>
-        <input id="barra-busqueda" class="form-control me-5" type="search" placeholder="Buscar productos..."
-            aria-label="Search">
-        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion" target="_blank">
-            <img id="logo-inicio-sesion" src="{{ url_for('static', filename='img/logo-inicio-sesion.png') }}" alt="inicio de sesion">
-            <b>Iniciar Sesión</b>
-        </button>
-        <a id="contenedor-carrito" href="carrito_de_compras.html" target="_blank">
-            <img id="carrito-de-compras" src="{{ url_for('static', filename='img/logo-carrito-de-compras.png') }}" alt="">
-        </a>
-    </header>
-    <div class="barra_separadora"></div>
-
-    <section>
-        <div id="contenedor-contenido-registro">
-            <div id="contenedor-titulo-subtitulo-registro">
-                <h3 id="titulo-no-estas-registrado">¿No estás registrado?</h3>
-
-            </div>
-            <p id="subtitulo">Regístrate y disfruta de una experiencia de compra mas rápida.</p>
-            <div id="contenedor-fila-2">
-                <div id="contenedor-beneficios">
-                    <img id="img-registro" src="{{ url_for('static', filename='img/inicioSesio.jpg.png') }}" class="img-fluid" alt="...">
-                    <h3 id="tilu.h3" style="text-align: center; margin-top: 20px; font-weight: bold;">Beneficios de
-                        tener
-                        una cuenta</h3>
-                    <div id="contenedor-beneficios-estrellas">
-                        <div class="contenedor-icono-estrella-beneficio">
-                            <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
-                            <p class="titulo-beneficio">Tener acceso exclusivo</p>
-                        </div>
-                        <div class="contenedor-icono-estrella-beneficio">
-                            <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
-                            <p class="titulo-beneficio">Comprar en un click</p>
-                        </div>
-                        <div class="contenedor-icono-estrella-beneficio">
-                            <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
-                            <p class="titulo-beneficio">Revisar tu historial de compras.</p>
-                        </div>
-                        <div class="contenedor-icono-estrella-beneficio">
-                            <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
-                            <p class="titulo-beneficio">Guardar y actualizar tus datos o direcciones.</p>
-                        </div>
+{% endblock %}
+{% block titulo %}  Registro de Usuario  {% endblock %}
+{% block contenido %}
+<section>
+    <div id="contenedor-contenido-registro">
+        <div id="contenedor-titulo-subtitulo-registro">
+            <h3 id="titulo-no-estas-registrado">¿No estás registrado?</h3>
+        </div>
+        <p id="subtitulo">Regístrate y disfruta de una experiencia de compra más rápida.</p>
+        <div id="contenedor-fila-2">
+            <div id="contenedor-beneficios">
+                <img id="img-registro" src="{{ url_for('static', filename='img/inicioSesio.jpg.png') }}" class="img-fluid" alt="...">
+                <h3 id="tilu.h3" style="text-align: center; margin-top: 20px; font-weight: bold;">Beneficios de tener una cuenta</h3>
+                <div id="contenedor-beneficios-estrellas">
+                    <div class="contenedor-icono-estrella-beneficio">
+                        <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
+                        <p class="titulo-beneficio">Tener acceso exclusivo</p>
+                    </div>
+                    <div class="contenedor-icono-estrella-beneficio">
+                        <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
+                        <p class="titulo-beneficio">Comprar en un clic</p>
+                    </div>
+                    <div class="contenedor-icono-estrella-beneficio">
+                        <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
+                        <p class="titulo-beneficio">Revisar tu historial de compras</p>
+                    </div>
+                    <div class="contenedor-icono-estrella-beneficio">
+                        <img class="icon-star" src="{{ url_for('static', filename='img/icon-estre.png') }}" alt="">
+                        <p class="titulo-beneficio">Guardar y actualizar tus datos o direcciones</p>
                     </div>
                 </div>
-                <div id="contenedor-formulario-registro">
-                    <h4 id="titulo-complete-formulario">Complete el siguiente formulario</h4>
-                    <form id="formulario">
-                        <div class="cont-lbl-input">
-                            <label for="nombre"><b>Nombres:</b></label>
-                            <input class="form-control me-5" type="text" id="nombres" name="nombre" required><br><br>
-                        </div>
-                        <div class="cont-lbl-input">
-                            <label for="nombre"><b>Apellidos:</b></label>
-                            <input class="form-control me-5" type="text" id="apellidos" name="apellidos"
-                                required><br><br>
-                        </div>
-                        <div class="cont-lbl-input">
-                            <label for="nombre"><b>DNI:</b></label>
-                            <input class="form-control me-5" type="text" id="dni" name="dni" required><br><br>
-                        </div>
-                        <div class="cont-lbl-input">
-                            <label for="email"><b>E-mail:</b></label>
-                            <input class="form-control me-5" type="email" id="email" name="email"><br><br>
-                        </div>
-                        <div class="cont-lbl-input">
-                            <label for="nombre"><b>Contraseña:</b></label>
-                            <input class="form-control me-5" type="password" id="contraseña" name="contraseña"
-                                required><br><br>
-                        </div>
-                        <div id="contenedor-check" class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1">He leído y acepto los
-                                términos y condiciciones</label>
-                        </div>
-                    </form>
+            </div>
+            <div id="contenedor-formulario-registro">
+                <h4 id="titulo-complete-formulario">Complete el siguiente formulario</h4>
+                <form id="formulario" action="registrarusuario" method="post">
+                    <input type="text" value="2" name="tipo" hidden>
+                    <div class="cont-lbl-input">
+                        <label for="nombre"><b>Nombres:</b></label>
+                        <input class="form-control me-5" type="text" id="nombres" name="nombre" required><br><br>
+                    </div>
+                    <div class="cont-lbl-input">
+                        <label for="apellidos"><b>Apellidos:</b></label>
+                        <input class="form-control me-5" type="text" id="apellidos" name="apellidos" required><br><br>
+                    </div>
+                    <div class="cont-lbl-input">
+                        <label for="dni"><b>DNI:</b></label>
+                        <input class="form-control me-5" type="number" id="dni" name="dni"  minlength="8" maxlength="8"   required><br><br>
+                    </div>
+                    <div class="cont-lbl-input">
+                        <label for="telefono"><b>Telefono:</b></label>
+                        <input class="form-control me-5" type="number" id="email" name="telefono" minlength="9" maxlength="9"   required><br><br>
+                    </div>
+                    <div class="cont-lbl-input">
+                        <label for="email"><b>E-mail:</b></label>
+                        <input class="form-control me-5" type="email" id="email" name="email"><br><br>
+                    </div>
+                    <div class="cont-lbl-input">
+                        <label for="contraseña"><b>Contraseña:</b></label>
+                        <input class="form-control me-5" type="password" id="contraseña" name="contraseña" minlength="5"  required><br><br>
+                    </div>
+                    <div id="contenedor-check" class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                        <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1">He leído y acepto los términos y condiciones</label>
+                    </div>
                     <button id="btn-registrarme-registro" type="submit" class="btn btn-primary">Registrarme</button>
-                </div>
+                </form>
             </div>
-
-        </div>
-    </section>
-
-
-    <!-- pie de pagina -->
-
-    <div class="barra_separadora">
-        <p></p>
-    </div>
-
-    <footer id="footer-general" class="color-footer">
-        <div id="footer-parte-1">
-            <div id="col-1">
-                <h6 id="h6-contactanos" class="titulos-footer-columnas"><b>Contáctanos</b></h6>
-                <h6 class="subt-col1">Whatsapp: +51 964 678 483</h6>
-                <h6 class="subt-col1">Correo electrónico: roxanaorrillo@hotmail.com</h6>
-                <a class="titulos-footer-columnas" href="acerca_de.html" target="_blank"><b>Acerca de Point Roo</b></a>
-                <a class="titulos-footer-columnas" href="preguntas_frecuentes.html" target="_blank"><b>Preguntas
-                        Frecuentes</b></a>
-                <a class="titulos-footer-columnas" href="ubicanos.html" target="_blank"><b>Ubícanos</b></a>
-            </div>
-            <div id="col-2">
-                <a id="enlace-libro-reclamaciones" href="libro_de_reclamaciones.html" target="_blank"><img
-                        src="{{ url_for('static', filename='img/libro_de_ reclamaciones_logo.png') }}" alt=""></a>
-            </div>
-            <div id="col-3">
-                <h6 class="titulos-footer-columnas">Políticas y Términos</h6>
-                <a href="#">Términos y Condiciones</a>
-                <a href="#">Políticas de Privacidad</a>
-                <a href="#">Políticas de Delivery</a>
-                <a href="#">Cambios o Devoluciones</a>
-            </div>
-            <div id="col-4">
-                <h6 id="h6-recibe-nuestras-ofertas" class="titulos-footer-columnas">Recibe nuestras ofertas y novedades
-                </h6>
-                <p>Ingresa tu e-mail:</p>
-                <div id="contenedor-ingresa-tu-email">
-                    <input class="form-control me-5" type="text" name="text-area-email" id="text-area-email">
-                    <button id="btn-suscribirme-footer">Suscribirme</button>
-                </div>
-            </div>
-        </div>
-        <hr id="barra-footer">
-        <div id="footer-parte-2">
-            <div style="display: flex; align-items: center;" id="contenedor-siguenos-iconos">
-                <h6>Síguenos:</h6>
-                <a href="https://facebook.com/PointRoo" target="_blank"><img class="icono-footer-parte-2"
-                        src="{{ url_for('static', filename='img/facebook.png') }}" alt="icono facebook"></a>
-                <a href="https://www.instagram.com/pointroo27/" target="_blank"><img class="icono-footer-parte-2"
-                        src="{{ url_for('static', filename='img/instagram.png') }}" alt="icono instagram"></a>
-                <a href="https://www.tiktok.com/@pointroo27" target="_blank"><img class="icono-footer-parte-2"
-                        src="{{ url_for('static', filename='img/tik-tok.png') }}" alt="icono tik tok"></a>
-            </div>
-            <div style="display: flex; align-items: center;" id="contenedor-medios-de-pago-iconos">
-                <h6>Medios de pago:</h6>
-                <img class="icono-medios-pago-parte-2" src="{{ url_for('static', filename='img/visa.png') }}" alt="icono visa">
-                <img class="icono-medios-pago-parte-2" src="{{ url_for('static', filename='img/yape.png') }}" alt="icono yape">
-                <img class="icono-medios-pago-parte-2" src="{{ url_for('static', filename='img/plin.png') }}" alt="icono plin">
-            </div>
-        </div>
-    </footer>
-    <div id="contenedor-informacion-desarrolladores">
-        <h6>Diseñado por: <b>Empresa Designs FY</b></h6>
-        <h6 id="info-fecha-creacion">Fecha de creación: <b>05/12/2023</b></h6>
-    </div>
-
-    <!-- Menú de barra lateral: -->
-
-    <div class="container-menu">
-        <div class="categorias-titulo">
-            <b>Categorías</b>
-            <button onclick="mostrarMenuLateral()" class="button-x"><b>Cerrar X</b></button>
-        </div>
-        <div class="cont-menu">
-            <nav>
-                <a href="moda_hombre.html" target="_blank">Moda Hombre</a>
-                <a href="moda_mujer.html" target="_blank">Moda Mujer</a>
-                <a href="moda-niños.html" target="_blank">Moda Niños</a>
-                <a href="calzado.html" target="_blank">Calzado</a>
-            </nav>
         </div>
     </div>
+</section>
 
-    <div id="ventana-modal-inicio-sesion">
-        <div id="cont-img-titulo-inicio-sesion">
-            <img id="img-inicio-sesion-ventana-modal" src="{{ url_for('static', filename='img/img-inicio-de-sesion-ventana-modal.png') }}" alt="">
-            <h4 id="titulo-iniciar-sesion"><b>Iniciar Sesión</b></h4>
-        </div>
-        <h6 id="subt-ingresa-con-tu-email-contraseña">Ingresa con tu e-mail y contraseña:</h6>
-        <input class="form-control me-5" type="text" name="" placeholder="Correo electrónico..."
-            id="input-nombre-usuario-inicio-sesion">
-        <input class="form-control me-5" type="password" name="" placeholder="Contraseña..."
-            id="input-contraseña-inicio-sesion">
-        <button class="btns-ventana-modal-inicio-sesion" id="btn-olvide-mi-contraseña">Olvidé mi contraseña</button>
-        <div id="cont-btnVolver--btnIngresar">
-            <button onclick="cerrarVentanaModalInicioSesion()" class="btns-ventana-modal-inicio-sesion"
-                id="btn-volver-inicio-sesion">
-                < Volver</button>
-                    <button class="btns-ventana-modal-inicio-sesion" id="btn-ingresar-inicio-sesion">Ingresar ></button>
-        </div>
-        <div id="cont-noTienesCuenta-registrate">
-            <h6 id="lbl-no-tienes-cuenta">¿No tienes una cuenta?</h6>
-            <button class="btns-ventana-modal-inicio-sesion"
-                onclick="abrirPaginaRegistroDeUsuario()">Regístrate</button>
-        </div>
-    </div>
-</body>
 
-</html>
+{% endblock %}

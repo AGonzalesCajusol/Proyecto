@@ -25,11 +25,10 @@ def validarusuario():
 
 #------rutas de tienda
 
-
-
 @app.route('/inicio')
 def index():
     return render_template('/templates/index.html')
+
 
 @app.route('/acerca_de')
 def acerca_de():
@@ -77,6 +76,20 @@ def ubicanos():
 
 
 
+@app.route('/registrarusuario', methods=['POST'])
+def registrarusuario():
+    tipo = request.form["tipo"]
+    nombre = request.form["nombre"]
+    apellidos = request.form["apellidos"]
+    dni = request.form["dni"]
+    telefono = request.form["telefono"]
+    email = request.form["email"]
+    contraseña = request.form["contraseña"]
+    usuario = ''
+    estado = "Activo"
+    controlador_usuario.insertar_usuario(dni, apellidos, nombre, telefono, email, usuario, contraseña, estado, tipo)
+
+    return redirect('/ini')
 
 
 #-------------------------

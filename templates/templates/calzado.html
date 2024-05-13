@@ -1,41 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "templates/maestra.html" %}
+{% block enlaces  %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/calzado.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/carrito_de_compras.css') }}">
+<script src="{{ url_for('static', filename='js/calzado.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ventana-carrito.js') }}"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/estilos-globales.css">
-    <link rel="stylesheet" href="css/calzado.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/carrito_de_compras.css">
-    <link rel="shortcut icon" href="img/logo_point_roo.png" type="image/x-icon">
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/mostrar-menu-lateral.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/velocity-animate@2.0.3/velocity.min.js"></script>
-    <script src="js/calzado.js"></script>
-    <script src="js/ventana-carrito.js"></script>
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <title>Sección Calzado</title>
-</head>
-
-<body class="body-catalogos">
-    <header id="contenedor-header" class="color-header">
-        <a href="index.html"><img id="logo_tienda" src="img/logo_point_roo.png" alt="logo de point roo"></a>
-        <button onclick="mostrarMenuLateral()" id="btn-menu">
-            <img id="img-menu" src="img/menu.png" alt="">
-        </button>
-        <input id="barra-busqueda" class="form-control me-5" type="search" placeholder="Buscar productos..."
-            aria-label="Search">
-        <button onclick="abrirVentanaModalInicioDeSesion()" id="btn-iniciar-sesion" target="_blank">
-            <img id="logo-inicio-sesion" src="img/logo-inicio-sesion.png" alt="inicio de sesion">
-            <b>Iniciar Sesión</b>
-        </button>
-        <a id="contenedor-carrito" href="carrito_de_compras.html" target="_blank">
-            <img id="carrito-de-compras" src="img/logo-carrito-de-compras.png" alt="">
-        </a>
-    </header>
-
-    <div class="barra_separadora">
+{% endblock %}
+{% block titulo %}  Sección Calzado  {% endblock %}
+{% block contenido %}
 
     </div>
     <main style="margin-top: 12px;">
@@ -578,30 +550,11 @@
         </div>
         <div id="contenedor-contenido-prdct-agregado">
             <button onclick="cerrarVentanaModal2()" id="btn-seguir-comprando"><u>Seguir comprando</u></button>
-            <button onclick="irCarrito()" id="btn-ir-al-carrito"><u>Ir al carrito de compras</u></button>
+            <a href="{{ url_for('carrito_de_compras') }}" d="btn-ir-al-carrito">
+                Ir al carrito de compras
+            </a>
+            
         </div>
     </div>
 
-    <!-- Ventana modal de inicio de sesión (copiar) -->
-    <div id="ventana-modal-inicio-sesion">
-        <div id="cont-img-titulo-inicio-sesion">
-            <img id="img-inicio-sesion-ventana-modal" src="img/img-inicio-de-sesion-ventana-modal.png" alt="">
-            <h4 id="titulo-iniciar-sesion"><b>Iniciar Sesión</b></h4>
-        </div>
-        <h6 id="subt-ingresa-con-tu-email-contraseña">Ingresa con tu e-mail y contraseña:</h6>
-        <input class="form-control me-5" type="text" name="" placeholder="Correo electrónico..." id="input-nombre-usuario-inicio-sesion">
-        <input class="form-control me-5" type="password" name="" placeholder="Contraseña..." id="input-contraseña-inicio-sesion">
-        <button class="btns-ventana-modal-inicio-sesion" id="btn-olvide-mi-contraseña">Olvidé mi contraseña</button>
-        <div id="cont-btnVolver--btnIngresar">
-            <button onclick="cerrarVentanaModalInicioSesion()" class="btns-ventana-modal-inicio-sesion" id="btn-volver-inicio-sesion">< Volver</button>
-            <button class="btns-ventana-modal-inicio-sesion" id="btn-ingresar-inicio-sesion">Ingresar ></button>
-        </div>
-        <div id="cont-noTienesCuenta-registrate">
-            <h6 id="lbl-no-tienes-cuenta">¿No tienes una cuenta?</h6>
-            <button class="btns-ventana-modal-inicio-sesion" onclick="abrirPaginaRegistroDeUsuario()">Regístrate</button>
-        </div>
-    </div>
-    <!------------------------------------------------------>
-</body>
-
-</html>
+{% endblock %}

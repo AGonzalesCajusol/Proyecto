@@ -22,6 +22,16 @@ header,footer{
     color: white;
 }
 
+.global {
+    background: #917C04 !important;
+    color: white !important;
+}
+
+#colortexto {
+    color: #917C04  !important;
+}
+
+
 .barra_separadora{
     background-color: #fff8d4;
     width: 100%;
