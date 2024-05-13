@@ -22,6 +22,10 @@ def validarusuario():
         flash('Datos incorrectos', 'success')
         return redirect(url_for('usuario'))
     
+@app.route('/transaccion_pedido')
+def usuarios():
+        nombres = request.form['nombres']
+        return redirect(url_for('usuario'))
 
 #------rutas de tienda
 
@@ -37,6 +41,11 @@ def acerca_de():
 @app.route('/calzado')
 def calzado():
     return render_template('/templates/calzado.html')
+
+@app.route('/calzado2')
+def calzado2():
+    datos_calzado = controlador_producto.obtener_productos()
+    return render_template('/templates/calzado2.html', datos_calzado=datos_calzado)
 
 @app.route('/carrito_de_compras')
 def carrito_de_compras():

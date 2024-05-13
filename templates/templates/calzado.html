@@ -15,22 +15,25 @@
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div id="contenedor-imagenes-carrusel-portadas" style="margin-bottom: 0px;" class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="2500">
-                    <img src="img/portada-calzado.png" class="d-block w-100" alt="...">
+                    <img src="{{ url_for('static', filename='img/portada-calzado.png') }}" class="d-block w-100" alt="...">
+
                 </div>
                 <div class="carousel-item" data-bs-interval="2500">
-                    <img src="img/portada-calzado-2.png" class="d-block w-100" alt="...">
+                    <img src="{{ url_for('static', filename='img/portada-calzado-2.png') }}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="2500">
-                    <img src="img/portada-calzado-3.png" class="d-block w-100" alt="...">
+                    <img src="{{ url_for('static', filename='img/portada-calzado-3.png') }}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="2500">
-                    <img src="img/portada-calzado-4.png" class="d-block w-100" alt="...">
+                    <img src="{{ url_for('static', filename='img/portada-calzado-4.png') }}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="2500">
-                    <img src="img/portada-calzado-5.png" class="d-block w-100" alt="...">
+                    <img src="{{ url_for('static', filename='img/portada-calzado-5.png') }}" class="d-block w-100" alt="...">
+
                 </div>
                 <div class="carousel-item" data-bs-interval="2500">
-                    <img src="img/portada-calzado-6.png" class="d-block w-100" alt="...">
+                    <img src="{{ url_for('static', filename='img/portada-calzado-6.png') }}" class="d-block w-100" alt="...">
+
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
@@ -80,6 +83,7 @@
                     </div>
                 </div>
             </div>
+            
             <div id="card-card" class="card">
                 <div class="espacio-card-1">
                     <div class="contenedor-titulo-card">
@@ -430,79 +434,6 @@
     <div class="barra_separadora">
         <p></p>
     </div>
-    
-    <footer id="footer-general" class="color-footer">
-        <div id="footer-parte-1">
-            <div id="col-1">
-                <h6 id="h6-contactanos" class="titulos-footer-columnas"><b>Contáctanos</b></h6>
-                <h6 class="subt-col1">Whatsapp: +51 964 678 483</h6>
-                <h6 class="subt-col1">Correo electrónico: roxanaorrillo@hotmail.com</h6>
-                <a class="titulos-footer-columnas" href="acerca_de.html" target="_blank"><b>Acerca de Point Roo</b></a>
-                <a class="titulos-footer-columnas" href="preguntas_frecuentes.html" target="_blank"><b>Preguntas
-                        Frecuentes</b></a>
-                <a class="titulos-footer-columnas" href="ubicanos.html" target="_blank"><b>Ubícanos</b></a>
-            </div>
-            <div id="col-2">
-                <a id="enlace-libro-reclamaciones" href="libro_de_reclamaciones.html" target="_blank"><img
-                        src="img/libro_de_ reclamaciones_logo.png" alt=""></a>
-            </div>
-            <div id="col-3">
-                <h6 class="titulos-footer-columnas">Políticas y Términos</h6>
-                <a href="#">Términos y Condiciones</a>
-                <a href="#">Políticas de Privacidad</a>
-                <a href="#">Políticas de Delivery</a>
-                <a href="#">Cambios o Devoluciones</a>
-            </div>
-            <div id="col-4">
-                <h6 id="h6-recibe-nuestras-ofertas" class="titulos-footer-columnas">Recibe nuestras ofertas y novedades
-                </h6>
-                <p>Ingresa tu e-mail:</p>
-                <div id="contenedor-ingresa-tu-email">
-                    <input class="form-control me-5" type="text" name="text-area-email" id="text-area-email">
-                    <button id="btn-suscribirme-footer">Suscribirme</button>
-                </div>
-            </div>
-        </div>
-        <hr id="barra-footer">
-        <div id="footer-parte-2">
-            <div style="display: flex; align-items: center;" id="contenedor-siguenos-iconos">
-                <h6>Síguenos:</h6>
-                <a href="https://facebook.com/PointRoo" target="_blank"><img class="icono-footer-parte-2" src="img/facebook.png" alt="icono facebook"></a>
-                <a href="https://www.instagram.com/pointroo27/" target="_blank"><img class="icono-footer-parte-2" src="img/instagram.png" alt="icono instagram"></a>
-                <a href="https://www.tiktok.com/@pointroo27" target="_blank"><img class="icono-footer-parte-2" src="img/tik-tok.png" alt="icono tik tok"></a>
-            </div>
-            <div style="display: flex; align-items: center;" id="contenedor-medios-de-pago-iconos">
-                <h6>Medios de pago:</h6>
-                <img class="icono-medios-pago-parte-2" src="img/visa.png" alt="icono visa">
-                <img class="icono-medios-pago-parte-2" src="img/yape.png" alt="icono yape">
-                <img class="icono-medios-pago-parte-2" src="img/plin.png" alt="icono plin">
-            </div>
-        </div>
-    </footer>
-    <div id="contenedor-informacion-desarrolladores">
-        <h6>Diseñado por: <b>Empresa Designs FY</b></h6>
-        <h6 id="info-fecha-creacion">Fecha de creación: <b>05/12/2023</b></h6>
-    </div>
-
-    <!-- Menú de barra lateral: -->
-
-    <div class="container-menu">
-        <div class="categorias-titulo">
-            <b>Categorías</b>
-            <button onclick="mostrarMenuLateral()" class="button-x"><b>Cerrar X</b></button>
-        </div>
-        <div class="cont-menu">
-            <nav>
-                <a href="moda_hombre.html" target="_blank">Moda Hombre</a>
-                <a href="moda_mujer.html" target="_blank">Moda Mujer</a>
-                <a href="moda-niños.html" target="_blank">Moda Niños</a>
-                <a href="calzado.html" target="_blank">Calzado</a>
-            </nav>
-        </div>
-    </div>
-
-    <!-- Ventana Modal: Carrito de Compras -->
-
     <div id="ventana-modal">
         <div id="contenedor-elige-opciones">
             <h6><b>Elige tus opciones:</b></h6>

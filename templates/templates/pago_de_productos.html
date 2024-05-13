@@ -5,14 +5,6 @@
 {% endblock %}
 {% block titulo %}  Pago de productos  {% endblock %}
 {% block contenido %}
-
-<body style="opacity: 0; transition: opacity 1s ease;">
-    <!-- Cabecera (copiar todo para todas las páginas) -->
-
-    <div class="barra_separadora">
-
-    </div>
-
     <main>
         <div id="cont-main-pago-prod">
             <h4 style="margin-bottom: 40px;"><b>¡Estás a un paso de completar tu pedido!</b></h4>
@@ -74,30 +66,6 @@
 
                         <div id="contenedor-contenedor-cuerpo-carrito">
                             <div id="contenedor-productos">
-                                <!-- <div class="card-producto">
-                                    <div class="cont-producto">
-                                        <img class="img-card-producto" src="img/item-2-calzado.png" alt="">
-                                        <div class="cont-descr-producto">
-                                            <h6 class="titulo-producto"><b>Zapatilla Nike Air Max Up Urbano Mujer</b></h6>
-                                            <h6><b>Talla: </b>43</h6>
-                                            <h6><b>Precio: </b> S/. 390.00</h6>
-                                            <h6><b>Cantidad: </b>1</h6>
-                                            <div><b>Subtotal producto: </b>S/. 390.00</div>
-                                        </div>
-                                    </div>
-                                </div>-->
-                                <!-- <div class="subtotal-costo-envio-total">
-                                    <h6><b>Subtotal productos: </b></h6>
-                                    <h6>S/. 00.00</h6>
-                                </div>
-                                <div class="subtotal-costo-envio-total">
-                                    <h6><b>Costo de envío: </b></h6>
-                                    <h6>S/. 00.00</h6>
-                                </div>
-                                <div class="subtotal-costo-envio-total">
-                                    <h6><b>Total a pagar: </b></h6>
-                                    <h6>S/. 00.00</h6>
-                                </div> -->
                             </div>
                             <div id="contenedor-direccion-envio--tipo-de-entrega">
                                 <div id="contenedor-direccion-envio">
@@ -119,17 +87,21 @@
                                     <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1"><i>Lo recibirá
                                             otra persona:</i></label>
                                 </div>
+                            <form action="/transaccion_pedido">
+                                <input type="hidden" id="datosLocalStorageInput" name="datosLocalStorage">
                                 <div style="margin-bottom: 20px;" id="cont-dni-receptor-pedido">
-                                    <h6><b>DNI del receptor del pedido:</b></h6>
+                                    <h6><b name="dni">DNI del receptor del pedido:</b></h6>
                                     <input id="input-dni-cliente-pago" class="inpt-dni-ape-nom" type="text">
                                 </div>
                                 <div id="cont-ape-nom-receptor-pedido">
-                                    <h6><b>Apellidos y nombres:</b></h6>
+                                    <h6><b name="nombres">Apellidos y nombres:</b></h6>
                                     <input id="input-dni-nomApe-cliente" class="inpt-dni-ape-nom" type="text">
                                 </div>
                             </div>
                             <button onclick="abrirVentanaModalPagoConfirmado()" id="btn-confirmar-pago">Confirmar
                                 pago</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -137,9 +109,6 @@
             <!-- Segundo contenedor (fin) -->
         </div>
     </main>
-    <!------------------------------------------------------>
-
-    <!-- Ventana modal Pago realizado -->
     <div id="cont-pago-realizado">
         <div id="cont-pago-realizado-titulo">
             <h5 style="margin-top: auto;"><b>!Enhorabuena!</b></h5>

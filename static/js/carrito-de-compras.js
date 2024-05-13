@@ -28,50 +28,55 @@ function mostrarDivNoHayProductos() {
 
 
 function cargarProductos() {
-    //Obtengo el div al que le insertaré el producto
+    // Obtener el div contenedor de productos
     var divContenedorProductos = document.getElementById("contenedor-productos");
 
-    //Variable para almacenar el contenido HTML del div al que le insertaré los productos
+    // Inicializar la cadena de registro
     var registro = '';
 
-    //Recorro el local storage para obtener todos los productos agregados
-    for (i = 0; i < localStorage.length; i++) {
-        //Obtengo el producto almacenado en el local sotrage
+    // Recorrer el local storage para obtener todos los productos agregados
+    for (var i = 0; i < localStorage.length; i++) {
         var clave = localStorage.key(i);
 
-        if (clave !== "direccionCliente"){
+        if (clave !== "direccionCliente") {
             var itemClave = localStorage.getItem(clave);
-        var objetoProductoJSON = JSON.parse(itemClave);
 
-        //Obtengo los datos del producto
-        var tituloProd = objetoProductoJSON.nombre;
-        var tallaProd = objetoProductoJSON.talla;
-        var rutaImagenProd = objetoProductoJSON.rutaImagen;
-        var cantidadProd = objetoProductoJSON.cantidad;
-        var precioProd = parseFloat(objetoProductoJSON.precio);
-        var subtotalProd = parseFloat(objetoProductoJSON.subtotal);
+            try {
+                // Intentar analizar la cadena JSON
+                var objetoProductoJSON = JSON.parse(itemClave);
 
-        registro += '<div class="card-producto"><div class="cont-producto"><p class="identificador-producto">'+ clave +'</p><img class="img-card-producto" src="' + rutaImagenProd + '" alt=""><div class="cont-descr-producto"><h6 class="titulo-producto"><b>' + tituloProd + '</b></h6><h6><b>Talla: </b>' + tallaProd + '</h6><h6><b>Precio: </b>S/. ' + precioProd + '</h6><h6><b>Cantidad: </b>' + cantidadProd + '</h6><div><b>Subtotal producto: </b>S/. ' + subtotalProd + '</div></div><button id="btn-eliminar-producto" onclick="eliminarProductoDelCarrito()">Eliminar</button></div></div>';
+                // Obtener los datos del producto
+                var tituloProd = objetoProductoJSON.nombre;
+                var tallaProd = objetoProductoJSON.talla;
+                var rutaImagenProd = objetoProductoJSON.rutaImagen;
+                var cantidadProd = objetoProductoJSON.cantidad;
+                var precioProd = parseFloat(objetoProductoJSON.precio);
+                var subtotalProd = parseFloat(objetoProductoJSON.subtotal);
+
+                // Construir la representación HTML del producto
+                registro += '<div class="card-producto"><div class="cont-producto"><p class="identificador-producto">' + clave + '</p><img class="img-card-producto" src="' + rutaImagenProd + '" alt=""><div class="cont-descr-producto"><h6 class="titulo-producto"><b>' + tituloProd + '</b></h6><h6><b>Talla: </b>' + tallaProd + '</h6><h6><b>Precio: </b>S/. ' + precioProd + '</h6><h6><b>Cantidad: </b>' + cantidadProd + '</h6><div><b>Subtotal producto: </b>S/. ' + subtotalProd + '</div></div><button id="btn-eliminar-producto" onclick="eliminarProductoDelCarrito()">Eliminar</button></div></div>';
+            } catch (error) {
+                // Manejar el error de JSON no válido
+            }
         }
     }
-    
-    var cantidadProductos=0;
 
-    for (let i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        if (key !== "direccionCliente") {
-            cantidadProductos++;
-        }
-    }
-
-    if (cantidadProductos>1) {
-        divContenedorProductos.innerHTML = registro + '<div class="cont-editar-pedido--tienes-n-productos"><label id="lbl-tienes-n-prod" for=""><i>Tienes <b><u>' + cantidadProductos + ' productos</u></b></i></label></div>';
-    } else {
-        divContenedorProductos.innerHTML = registro + '<div class="cont-editar-pedido--tienes-n-productos"><label id="lbl-tienes-n-prod" for=""><i>Tienes <b><u>' + cantidadProductos + ' producto</u></b></i></label></div>';
-    }
-
-    
+    // Mostrar los productos en el contenedor
+    divContenedorProductos.innerHTML = registro;
 }
+
+function guardardi (){
+    console.log("hello")
+    // Obtener los valores que deseas almacenar
+    var direccion = document.getElementById("text-avenida-calle-jiron").value;
+    var referencia = document.getElementById("text-dpto-int").value;
+
+    // Almacenar los valores en localStorage
+    localStorage.setItem("direccion", direccion);
+    localStorage.setItem("referencia", referencia);
+
+}
+
 
 //Función para eliminar un producto del carrito de compras
 function eliminarProductoDelCarrito() {

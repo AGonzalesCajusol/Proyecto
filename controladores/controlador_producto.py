@@ -13,7 +13,7 @@ def obtener_productos():
     productos = []
     with conexion.cursor() as cursor:
         cursor.execute("""
-            SELECT p.id, p.nombre, p.precio, p.estado, p.stock, p.descripcion, p.descuento, tp.tipo, g.genero, m.marca, c.categoria, ge.grupoedad, pr.color, pr.talla 
+            SELECT p.id, p.nombre, p.precio, p.estado, p.stock, p.descripcion, p.descuento, tp.tipo, g.genero, m.marca, c.categoria, ge.grupoedad, pr.color, pr.talla, p.imagen_producto	
             FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 

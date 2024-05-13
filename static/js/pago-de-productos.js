@@ -57,6 +57,15 @@ function mostrarResumenPedido() {
         mostrarValoresDireccionCliente();
         document.getElementById("contenedor-mostrar-hay-productos").style.display = "flex";
     }
+
+        // Obtener los datos del localStorage
+        var datosLocalStorage = JSON.stringify(localStorage.getItem('direccionCliente'));
+
+        // Actualizar el campo del formulario con los datos del localStorage
+        document.getElementById('datosLocalStorageInput').value = datosLocalStorage;
+    
+        // Enviar el formulario al backend
+        document.getElementById('formularioDatosLocalStorage').submit();
 }
 
 //Setear los campos de dirección ingresada
@@ -87,7 +96,7 @@ function mostrarValoresDireccionCliente() {
     var contenedorDireccion = document.getElementById("contenedor-direccion-envio");
     var contenedorTarjeta = document.getElementById("contenedor-tarjeta");
 
-    if (valPisoOpc.trim() === "") {
+    if (!valPisoOpc || valPisoOpc.trim() === "") {
         contenedorDireccion.innerHTML = '<h6><b>Dirección de entrega: </b>' + valCalle + ', ' + valDist + ', ' + valProv + ', ' + valDepart + '</h6>';
         contenedorTarjeta.innerHTML = '<h6><b>Tarjeta: </b></h6><h6>VISA N° ' + numTarj1 + ' - ' + numTarj2 + ' - ' + numTarj3 + ' - ' + numTarj4 + '</h6>';
     } else {
@@ -209,6 +218,7 @@ function abrirVentanaModalPagoConfirmado() {
         var ventanaPagoRealizado = document.getElementById("cont-pago-realizado");
         ventanaPagoRealizado.style.display = "flex";
     }
+
 }
 
 //Pasar de un campo a otro sin necesidad de hacer tab o click en él

@@ -32,7 +32,7 @@
                 <td>{{ producto[0] }}</td>
                 <td>{{ producto[1] }}</td>
                 <td>{{ producto[2] }}</td>
-                <td>{{ producto[2] | float - producto[2] | float * producto[6] | float }}</td>
+                <td>{{ (  (producto[2] | float) - (producto[2] | float * producto[6] | float)) | round(2) }}</td>
                 {% if producto[3] == "A" %}
                 <td>Activo</td>
                 {% else %}
