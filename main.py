@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-import controlador_marca, controlador_tipoproducto, controlador_categoria, controlador_presentacion, controlador_grupoedad, controlador_genero, controlador_producto, controlador_usuario
-
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+import controladores.controlador_marca as controlador_marca, controladores.controlador_tipoproducto as controlador_tipoproducto, controladores.controlador_categoria as controlador_categoria, controladores.controlador_presentacion as controlador_presentacion, controladores.controlador_grupoedad as controlador_grupoedad, controladores.controlador_genero as controlador_genero, controladores.controlador_producto as controlador_producto, controladores.controlador_usuario as controlador_usuario
+from clases import clase_categoria as clscat
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -390,6 +390,24 @@ def actualizar_producto():
     controlador_producto.actualizar_producto(id_producto, nombre, precio, estado, stock, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion)
     return redirect(url_for('producto'))
 
+@app.route('/apis_obtener_categorias')
+def api_obtenercategorias():
+    lista_categoria = controlador_categoria.obtener_categorias()
+    rpt = dict()
+    lista_c = []
+    try:
+        for categoria in lista_categoria:
+            objCategoria =clscat.clsCategoria(categoria[0],categoria[1])
+            lista_c.append(objCategoria.diccategoria)
+
+        rpt["codigo"] = 1
+        rpt["mensaje"]= "Procesamiento correcto"
+        rpt["datos"] = lista_c
+    except:
+        rpt["codigo"]= 0
+        rpt["mensaje"] = "Ocurrio un error"
+        rpt["datos"] = list()
+    return jsonify(rpt)
 
 
 if __name__ ==  '__main__':
