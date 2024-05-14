@@ -4,7 +4,7 @@ def nombre_categorias():
     conexion = obtener_conexion()
     categorias = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT categoria FROM categoria")
+        cursor.execute("SELECT categoria FROM categoria order by categoria asc")
         categorias = cursor.fetchall()
     conexion.close()
     return categorias

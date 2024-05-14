@@ -4,7 +4,7 @@ def nombres_tipoproducto():
     conexion = obtener_conexion()
     tipos_productos = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT  tipo FROM tipo_producto")
+        cursor.execute("SELECT  tipo FROM tipo_producto order by tipo asc")
         tipos_productos= cursor.fetchall()
     conexion.close()
     return tipos_productos

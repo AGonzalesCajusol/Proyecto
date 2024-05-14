@@ -4,7 +4,7 @@ def nombre_presentaciones():
     conexion = obtener_conexion()
     presentaciones = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT color, talla FROM presentacion")
+        cursor.execute("SELECT color, talla FROM presentacion order by color asc")
         presentaciones = cursor.fetchall()
     conexion.close()
     return presentaciones

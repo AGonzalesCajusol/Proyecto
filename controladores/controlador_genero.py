@@ -4,7 +4,7 @@ def nombre_generos():
     conexion = obtener_conexion()
     generos = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT genero FROM genero")
+        cursor.execute("SELECT genero FROM genero order by genero asc")
         generos = cursor.fetchall()
     conexion.close()
     return generos

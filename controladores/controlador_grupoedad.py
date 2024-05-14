@@ -4,7 +4,7 @@ def nombres_grupo_edad():
     conexion = obtener_conexion()
     grupos_edad = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT grupoedad FROM grupo_edad")
+        cursor.execute("SELECT grupoedad FROM grupo_edad order by grupoedad asc")
         grupos_edad = cursor.fetchall()
     conexion.close()
     return grupos_edad

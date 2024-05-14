@@ -404,6 +404,18 @@ def actualizar_producto():
     nombre = request.form['nombre']
     precio = request.form['precio']
     estado = request.form['estado']
+    imagen_pr1 = request.form.get('imagen_producto')
+    imagen_pr2 = request.files['imagen_producto2']
+
+    if (imagen_pr2.filename != ""):
+        #Imgresamos imagen
+        ruta = "/static/img"
+        n_ruta = os.path.join(ruta,imagen_pr2.filename)
+        imagen_pr2.save(n_ruta)
+        enlace_imagen = imagen_pr2.filename
+    else:
+        enlace_imagen = imagen_pr1
+
     if estado == "Activo":
         estado = 'A'
     else:
@@ -423,7 +435,7 @@ def actualizar_producto():
     id_grupo_edad = controlador_grupoedad.id_grupo_edad_por_nombre(grupoedad)
     presentacion = request.form['presentacion']
     id_presentacion = controlador_presentacion.id_presentacion_por_nombre(presentacion)
-    controlador_producto.actualizar_producto(id_producto, nombre, precio, estado, stock, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion)
+    controlador_producto.actualizar_producto(id_producto, nombre, precio, estado, stock, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion,enlace_imagen)
     return redirect(url_for('producto'))
 
 @app.route('/apis_obtener_categorias')

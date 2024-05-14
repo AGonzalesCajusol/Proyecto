@@ -4,7 +4,7 @@ def nombre_marcas():
     conexion = obtener_conexion()
     marcas = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT marca FROM marca")
+        cursor.execute("SELECT marca FROM marca order by marca asc")
         marcas= cursor.fetchall()
     conexion.close()
     return marcas
