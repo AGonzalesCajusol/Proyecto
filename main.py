@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 import controladores.controlador_marca as controlador_marca, controladores.controlador_tipoproducto as controlador_tipoproducto, controladores.controlador_categoria as controlador_categoria, controladores.controlador_presentacion as controlador_presentacion, controladores.controlador_grupoedad as controlador_grupoedad, controladores.controlador_genero as controlador_genero, controladores.controlador_producto as controlador_producto, controladores.controlador_usuario as controlador_usuario
 from clases import clase_categoria as clscat
+import os
 
 app = Flask(__name__)
 app.secret_key = 'secret'
 
 #ruta para admi
-@app.route('/')
+
 @app.route('/usuario')
 def usuario():
     return render_template('usuario_admin.html')
@@ -28,6 +29,7 @@ def usuarios():
         return redirect(url_for('usuario'))
 
 #------rutas de tienda
+
 
 @app.route('/inicio')
 def index():
@@ -288,7 +290,7 @@ def actualizar_grupo_edad():
     return redirect(url_for('grupo_edad'))
 
 #----Genero
-
+@app.route('/')
 @app.route('/genero')
 def genero():
     generos = controlador_genero.obtener_generos()
@@ -365,7 +367,19 @@ def insertar_producto():
     id_grupo_edad = controlador_grupoedad.id_grupo_edad_por_nombre(grupoedad)
     presentacion = request.form['presentacion']
     id_presentacion = controlador_presentacion.id_presentacion_por_nombre(presentacion)
-    controlador_producto.insertar_producto(nombre,precio,estado,stock,descripcion,descuento,id_tipopr,id_genero,id_marca,id_categoria,id_grupo_edad,id_presentacion)
+    enlace_imagen = request.files['imagen_producto']
+    
+    ruta_imagenes = "/static/img"
+    
+    if not os.path.exists(ruta_imagenes):
+        os.makedirs(ruta_imagenes)
+    
+    # Guardar la imagen en el servidor
+      # Puedes generar un nombre único para cada imagen si lo deseas
+    ruta_completa = os.path.join(ruta_imagenes, enlace_imagen.filename)
+    enlace_imagen.save(ruta_completa)
+
+    controlador_producto.insertar_producto(nombre, precio, estado, stock, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, enlace_imagen.filename)
     return redirect(url_for('producto'))
 
 @app.route('/modificar_producto', methods=['POST'])

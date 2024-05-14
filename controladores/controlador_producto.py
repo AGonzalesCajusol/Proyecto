@@ -1,11 +1,12 @@
 from bd import obtener_conexion
 
-def insertar_producto(nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion):
+def insertar_producto(nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, nombre_imagen):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
-        cursor.execute('INSERT INTO producto (nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion))
+        cursor.execute('INSERT INTO producto (nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, imagen_producto) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, nombre_imagen))
     conexion.commit()
     conexion.close()
+
 
 
 def obtener_productos():
@@ -13,7 +14,7 @@ def obtener_productos():
     productos = []
     with conexion.cursor() as cursor:
         cursor.execute("""
-            SELECT p.id, p.nombre, p.precio, p.estado, p.stock, p.descripcion, p.descuento, tp.tipo, g.genero, m.marca, c.categoria, ge.grupoedad, pr.color, pr.talla, p.imagen_producto	
+            SELECT p.id, p.nombre, p.precio, p.estado, p.stock, p.descripcion, p.descuento, tp.tipo, g.genero, m.marca, c.categoria, ge.grupoedad, pr.color, pr.talla, p.imagen_producto
             FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 
@@ -32,7 +33,7 @@ def obtener_producto_por_id(id_producto):
     with conexion.cursor() as cursor:
         cursor.execute("""
             SELECT p.id, p.nombre, p.precio, p.estado, p.stock, p.descripcion, p.descuento, 
-                   tp.tipo, g.genero, m.marca, c.categoria, ge.grupoedad, pr.color, pr.talla 
+            tp.tipo, g.genero, m.marca, c.categoria, ge.grupoedad, pr.color, pr.talla, p.imagen_producto
             FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 
@@ -42,10 +43,9 @@ def obtener_producto_por_id(id_producto):
             INNER JOIN presentacion pr ON p.id_presentacion = pr.id
             WHERE p.id = %s
         """, (id_producto,))
-        producto = cursor.fetchone()
+    producto = cursor.fetchone()
     conexion.close()
     return producto
-
 
 def eliminar_producto(id):
     conexion = obtener_conexion()
@@ -55,7 +55,7 @@ def eliminar_producto(id):
     conexion.close()
 
 
-def actualizar_producto(id, nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion):
+def actualizar_producto(id, nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion,enlace_imagen):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
         cursor.execute("UPDATE producto SET nombre = %s, precio = %s, estado = %s, stock = %s, descripcion = %s, descuento = %s, id_tipo_producto = %s, id_genero = %s, id_marca = %s, id_categoria = %s, id_grupo_edad = %s, id_presentacion = %s WHERE id = %s",

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h3 class="mb-4 mt-4">Agregar Producto</h3>
-                <form action="/insertar_producto" method="post">
+                <form action="/insertar_producto" method="post"  enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
                         <input required type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto">
@@ -95,7 +95,7 @@
                     <hr>
                     <div class="text-end">
                         <a href="{{url_for('producto')}}" class="btn btn-danger mt-2 me-2">Volver</a>
-                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button> 
                     </div>
                 </form>
             </div>

@@ -23,6 +23,7 @@
                 <th>Categoría</th>
                 <th>Grupo de Edad</th>
                 <th>Presentación</th>
+                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -48,6 +49,9 @@
                 <td>{{ producto[11] }}</td>
                 <td>{{ producto[12] }} - {{ producto[13] }}</td>
                 <td>
+                    <img class="img-item" src="{{ url_for('static', filename='img/' + producto[14]) }}" alt="Imagen item 1" style="width: 100px;">
+                </td>
+                <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <form action="{{ url_for('modificar_producto', id=producto[0]) }}" method="post">
                             <input type="hidden" name="id" value="{{ producto[0] }}">
@@ -56,6 +60,7 @@
                         <a href="" class="btn btn-danger">Eliminar</a>
                     </div>
                 </td>
+
             </tr>
             {% endfor %}
         </tbody>
