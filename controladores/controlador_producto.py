@@ -1,12 +1,14 @@
 from bd import obtener_conexion
 
-def insertar_producto(nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, nombre_imagen):
+def insertar_producto(nombre, precio, estado, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, nombre_imagen):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
-        cursor.execute('INSERT INTO producto (nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, imagen_producto) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (nombre, precio, estado, stock, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, nombre_imagen))
+        cursor.execute('''
+            INSERT INTO producto (nombre, precio, estado, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, enlace_imagen) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ''', (nombre, precio, estado, descripcion, descuento, id_tipo_producto, id_genero, id_marca, id_categoria, id_grupo_edad, nombre_imagen))
     conexion.commit()
     conexion.close()
-
 
 
 def obtener_productos():
@@ -14,20 +16,16 @@ def obtener_productos():
     productos = []
     with conexion.cursor() as cursor:
         cursor.execute("""
-        SELECT 
-            p.id, p.nombre, p.precio, p.estado, p.stock, p.descripcion, p.descuento, 
-            tp.tipo AS tipo_producto, g.genero, m.marca, c.categoria, ge.grupoedad, 
-            pr.color, pr.talla, p.imagen_producto
-        FROM 
-            producto p 
+            SELECT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
+                p.descripcion, p.estado, tp.tipo AS tipo_producto, g.genero, m.marca, c.categoria, ge.grupoedad, 
+                p.enlace_imagen
+            FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 
             INNER JOIN categoria c ON p.id_categoria = c.id 
             INNER JOIN genero g ON p.id_genero = g.id 
             INNER JOIN grupo_edad ge ON p.id_grupo_edad = ge.id 
-            INNER JOIN presentacion pr ON p.id_presentacion = pr.id 
-        ORDER BY 
-            p.id ASC
+            ORDER BY p.id ASC;
         """)
         productos = cursor.fetchall()
     conexion.close()

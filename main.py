@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
-import controladores.controlador_marca as controlador_marca, controladores.controlador_tipoproducto as controlador_tipoproducto, controladores.controlador_categoria as controlador_categoria, controladores.controlador_presentacion as controlador_presentacion, controladores.controlador_grupoedad as controlador_grupoedad, controladores.controlador_genero as controlador_genero, controladores.controlador_producto as controlador_producto, controladores.controlador_usuario as controlador_usuario
 from clases import clase_categoria as clscat
+from controladores import controlador_categoria,controlador_detallepedido,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario
 import os
 
 app = Flask(__name__)
@@ -296,6 +296,12 @@ def genero():
     generos = controlador_genero.obtener_generos()
     return render_template('genero.html', generos=generos)
 
+
+@app.route('/detalle_producto')
+def detalle_producto():
+    
+    return render_template('detalle_producto.html')
+
 @app.route('/registrargenero')
 def registrargenero():
     return render_template('registrar_genero.html')
@@ -340,8 +346,10 @@ def registrarproducto():
         'categorias': controlador_categoria.nombre_categorias(),
         'grupo_edad': controlador_grupoedad.nombres_grupo_edad(),
         'presentacion': controlador_presentacion.nombre_presentaciones()
+
     }
     return render_template('registrar_producto.html', **datos )
+
 
 @app.route('/insertar_producto', methods=['POST'])
 def insertar_producto():
@@ -351,13 +359,12 @@ def insertar_producto():
     if estado == "Activo":
         estado = 'A'
     else:
-        estado  = 'I'
-    stock = request.form['stock']
+        estado = 'I'
     descripcion = request.form['descripcion']
     descuento = request.form['descuento']
     tipo_producto = request.form['tipo_producto']
     id_tipopr = controlador_tipoproducto.obtener_id_por_nombre(tipo_producto)  
-    genero =request.form['genero']
+    genero = request.form['genero']
     id_genero = controlador_genero.id_genero_por_nombre(genero)
     marca = request.form['marca']
     id_marca = controlador_marca.id_marca_por_nombre(marca)
@@ -365,22 +372,28 @@ def insertar_producto():
     id_categoria = controlador_categoria.id_categoria_por_nombre(categoria)
     grupoedad = request.form['grupoedad']
     id_grupo_edad = controlador_grupoedad.id_grupo_edad_por_nombre(grupoedad)
-    presentacion = request.form['presentacion']
-    id_presentacion = controlador_presentacion.id_presentacion_por_nombre(presentacion)
-    enlace_imagen = request.files['imagen_producto']
-    
-    ruta_imagenes = "/static/img"
-    
-    if not os.path.exists(ruta_imagenes):
-        os.makedirs(ruta_imagenes)
-    
-    # Guardar la imagen en el servidor
-      # Puedes generar un nombre único para cada imagen si lo deseas
-    ruta_completa = os.path.join(ruta_imagenes, enlace_imagen.filename)
-    enlace_imagen.save(ruta_completa)
+    try:
+        imagen_producto = request.files['imagen_producto']
+        ruta_imagenes = "/static/img"
 
-    controlador_producto.insertar_producto(nombre, precio, estado, stock, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion, enlace_imagen.filename)
-    return redirect(url_for('producto'))
+        # Verifica si el archivo de imagen existe y si la carpeta de destino existe
+        if imagen_producto and not os.path.exists(ruta_imagenes):
+            os.makedirs(ruta_imagenes)
+
+            # Guarda la imagen en el servidor
+            ruta_completa = os.path.join(ruta_imagenes, secure_filename(imagen_producto.filename))
+            imagen_producto.save(ruta_completa)
+
+            # Inserta los datos del producto en la base de datos
+            controlador_producto.insertar_producto(nombre, precio, estado, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, imagen_producto.filename)
+
+            # Redirige al usuario a la página correspondiente
+            return redirect(url_for('producto'))
+        else:
+            return "No se recibió ningún archivo de imagen o la carpeta de destino no existe."
+    except Exception as e:
+        return "Error al procesar la imagen: " + str(e)
+
 
 @app.route('/modificar_producto', methods=['POST'])
 def modificar_producto():
