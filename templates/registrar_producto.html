@@ -29,7 +29,7 @@
 
                     <div class="mb-3">
                         <label for="tipo_producto" class="form-label">Tipo Producto</label>
-                        <select class="form-select" id="tipo_producto" name="tipo_producto">
+                        <select class="form-select" id="tipo_producto" name="tipo_producto" required>
                             {% for pro in tipo_productos  %}
                             <option> {{ pro[0] }} </option>
                             {% endfor %}
@@ -38,7 +38,7 @@
 
                     <div class="mb-3">
                         <label for="genero" class="form-label">Genero</label>
-                        <select class="form-select" id="genero" name="genero">
+                        <select class="form-select" id="genero" name="genero" required>
                             {% for genero in generos  %}
                             <option> {{ genero[0] }} </option>
                             {% endfor %}
@@ -46,22 +46,22 @@
                     </div>
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca</label>
-                        <select class="form-select" id="marca" name="marca">
+                        <select class="form-select" id="marca" name="marca" required>
                             {% for marca in marcas  %}
-                            <option> {{ marca[0] }} </option>
+                            <option> {{ marca[0]}} </option>
                             {% endfor %}
-                        </select>
+                        </select>                        
                     </div>
                     <div class="mb-3">
                         <label for="categoria" class="form-label">Categoría</label>
-                        <select class="form-select" id="categoria" name="categoria">
+                        <select class="form-select" id="categoria" name="categoria" required>
                             {% for categoria  in categorias  %}
                             <option> {{ categoria[0] }} </option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="grupoedad" class="form-label">Grupo edad</label>
+                        <label for="grupoedad" class="form-label">Grupo edad</label required>
                         <select class="form-select" id="grupoedad" name="grupoedad">
                             {% for grupoedad  in grupo_edad  %}
                             <option> {{ grupoedad[0] }} </option>
@@ -69,7 +69,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="estado" class="form-label">Estado:</label>
+                        <label for="estado" class="form-label">Estado:</label required>
                         <select class="form-select" id="estado" name="estado">
                             <option value="Activo">Activo</option>
                             <option value="Inactivo">Inactivo</option>

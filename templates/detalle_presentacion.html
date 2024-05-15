@@ -5,7 +5,7 @@
 
 {% block tabla %}
 <div class="col-lg-6  col-md-7 ms-5 mt-4 me-4">
-    <a href="{{ url_for('registrargenero') }}" class="btn btn-primary ">Nuevo</a>
+    <a href="{{ url_for('registrar_detallepresentacion') }}" class="btn btn-primary ">Nuevo</a>
     <hr>
     <table class="table table-bordered table-hover text-center table-responsive ">
         <thead class="table-secondary">
@@ -18,17 +18,20 @@
             </tr>
         </thead>
         <tbody>
-            {% for genero in generos %}
+            {% for dpr in dprs %}
             <tr>
-                <td>{{ genero[0] }}</td>
-                <td>{{ genero[1] }}</td>
+                <td>{{ dpr[0] }}</td>
+                <td><img class="img-item" src="{{ url_for('static', filename='img/' + dpr[1]) }}" alt="Imagen item 1" style="width: 100px;"></td>
+                <td>{{ dpr[2] }} - {{ dpr[3] }}</td>
+                <td>{{ dpr[4] }}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
-                        <form action="{{ url_for('modificar_genero') }}"  method="post">
-                            <input type="hidden" name="id" value="{{ genero[0] }}">
+                        <form action="/modificar_detallepresentacion"  method="post">
+                            <input type="hidden" name="idpre" value="{{ dpr[5] }}">
+                            <input type="hidden" name="idpro" value="{{ dpr[6] }}">
                             <button type="submit" class="btn btn-warning me-4 text-white ">Modificar</button>
                         </form>
-                        <a href="{{ url_for('eliminar_genero', id=genero[0]) }}" class="btn btn-danger">Eliminar</a>
+                       <a href="" class="btn btn-danger">Eliminar</a> 
                     </div>
                 </td>
             </tr>

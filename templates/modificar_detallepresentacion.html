@@ -1,0 +1,40 @@
+{% extends 'maestra.html' %}
+{% block titulo %} Modificar Presentación {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Modificar Detalle Presentación</h3>
+                <form action="{{ url_for('actualizar_detallepresentacion') }}" method="post">
+                    <input type="hidden" name="id_pre" hidden value="{{ pr[1] }}">
+                    <input type="hidden" name="id_pro" hidden value="{{ pr[2] }}">
+                    <div class="mb-3">
+                        <label for="producto" class="form-label">Producto</label>
+                        <select class="form-select" id="producto" name="producto" required disabled>
+                            <option value="{{ productos[0] }}">{{ productos[1] }}</option>
+                        </select>    
+                    </div>
+                    <div class="mb-3">
+                        <label for="presentacion" class="form-label">presentacion</label>
+                        <select class="form-select" id="presentacion" name="presentacion" required disabled>
+                            <option value="{{ presentaciones[0] }}">{{ presentaciones[1] }} - {{ presentaciones[2] }}</option>
+                        </select>    
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock:</label>
+                        <input required type="number" value="{{ pr[0] }}"  class="form-control" id="stock" name="stock" placeholder="Ingrese el Stock del producto">
+                    </div>
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('detallepresentacion') }}" class="btn btn-danger mt-2 me-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

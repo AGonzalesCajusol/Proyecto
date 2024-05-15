@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from clases import clase_categoria as clscat
-from controladores import controlador_categoria,controlador_detallepedido,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario
-import os
+from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario
+import os, random
+
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -297,10 +298,10 @@ def genero():
     return render_template('genero.html', generos=generos)
 
 
-@app.route('/detalle_producto')
-def detalle_producto():
-    
-    return render_template('detalle_producto.html')
+@app.route('/detallepresentacion')
+def detallepresentacion():
+    dprs = controlador_detallepresentacion.listar_detalleproducto()
+    return render_template('detalle_presentacion.html', dprs=dprs )
 
 @app.route('/registrargenero')
 def registrargenero():
@@ -345,8 +346,6 @@ def registrarproducto():
         'marcas': controlador_marca.nombre_marcas(),
         'categorias': controlador_categoria.nombre_categorias(),
         'grupo_edad': controlador_grupoedad.nombres_grupo_edad(),
-        'presentacion': controlador_presentacion.nombre_presentaciones()
-
     }
     return render_template('registrar_producto.html', **datos )
 
@@ -372,44 +371,78 @@ def insertar_producto():
     id_categoria = controlador_categoria.id_categoria_por_nombre(categoria)
     grupoedad = request.form['grupoedad']
     id_grupo_edad = controlador_grupoedad.id_grupo_edad_por_nombre(grupoedad)
+
+    imagen_producto = request.files['imagen_producto']
+
+    ruta_carpeta = "./static/img"
+    if not os.path.exists(ruta_carpeta):
+        os.makedirs(ruta_carpeta)
+
+    nombre_imagen = imagen_producto.filename
+    ruta_anidada = os.path.join(ruta_carpeta, nombre_imagen)  
+
+    imagen_producto.save(ruta_anidada)
+    controlador_producto.insertar_producto(nombre, precio, estado, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, nombre_imagen)
+    
+    return redirect(url_for('producto'))
+    
+@app.route('/registrar_detallepresentacion')
+def registrar_detallepresentacion():
+    productos = controlador_producto.produ()
+    presentaciones = controlador_presentacion.obtener_presentaciones()
+    return render_template("registrar_detallepresentacion.html", productos = productos, presentaciones=presentaciones)
+
+@app.route('/eliminar_producto/<int:id>')
+def eliminar_producto(id):
+    controlador_producto.eliminar_producto(id)
+    return redirect(url_for('producto'))
+
+
+@app.route('/insertar_detallepresentacion', methods=['POST'])
+def insertar_detallepresentacion():
+    # Obtener los datos del formulario
+    producto_id = request.form['producto']
+    presentacion_id = request.form['presentacion']
+    stock = request.form['stock']
+    #Recuerda poner los mensajes de validacion
     try:
-        imagen_producto = request.files['imagen_producto']
-        ruta_imagenes = "/static/img"
-
-        # Verifica si el archivo de imagen existe y si la carpeta de destino existe
-        if imagen_producto and not os.path.exists(ruta_imagenes):
-            os.makedirs(ruta_imagenes)
-
-            # Guarda la imagen en el servidor
-            ruta_completa = os.path.join(ruta_imagenes, secure_filename(imagen_producto.filename))
-            imagen_producto.save(ruta_completa)
-
-            # Inserta los datos del producto en la base de datos
-            controlador_producto.insertar_producto(nombre, precio, estado, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, imagen_producto.filename)
-
-            # Redirige al usuario a la página correspondiente
-            return redirect(url_for('producto'))
-        else:
-            return "No se recibió ningún archivo de imagen o la carpeta de destino no existe."
-    except Exception as e:
-        return "Error al procesar la imagen: " + str(e)
-
+         controlador_detallepresentacion.insertar_detalle(producto_id, presentacion_id, stock) 
+    except:
+        return redirect(url_for('registrar_detallepresentacion'))
+    return redirect(url_for('registrar_detallepresentacion'))
 
 @app.route('/modificar_producto', methods=['POST'])
 def modificar_producto():
-    id = request.form['id']
+    id = request.form['id_pr']
     datos = {
         'tipo_productos' : controlador_tipoproducto.nombres_tipoproducto(),
         'generos': controlador_genero.nombre_generos(),
         'marcas': controlador_marca.nombre_marcas(),
         'categorias': controlador_categoria.nombre_categorias(),
         'grupo_edad': controlador_grupoedad.nombres_grupo_edad(),
-        'presentacion': controlador_presentacion.nombre_presentaciones()
     }
     pr = list(controlador_producto.obtener_producto_por_id(id))
-    print(pr)
     return render_template('modifiar_producto.html', **datos, pr=pr)
 
+@app.route('/modificar_detallepresentacion', methods=['POST'])
+def modificar_detallepresentacion():
+    idpre = request.form['idpre']
+    idpro = request.form['idpro']   
+    datos = {
+        'productos' : controlador_producto.obtener_producto_por_id(idpro),
+        'presentaciones': controlador_presentacion.obtener_presentacion_por_id(idpre),
+    }
+    pr = list(controlador_detallepresentacion.obtener_dp(idpre,idpro))
+    return render_template('modificar_detallepresentacion.html', **datos, pr=pr)
+
+
+@app.route('/actualizar_detallepresentacion', methods=['POST'])
+def actualizar_detallepresentacion():
+    idpre = request.form['id_pre']
+    idpro = request.form['id_pro']  
+    stock = request.form['stock']
+    controlador_detallepresentacion.actualizar_detallepre(idpre,idpro,stock)
+    return redirect(url_for('detallepresentacion'))
 
 @app.route('/actualizar_producto', methods=['POST'])
 def actualizar_producto():
@@ -419,7 +452,6 @@ def actualizar_producto():
     estado = request.form['estado']
     imagen_pr1 = request.form.get('imagen_producto')
     imagen_pr2 = request.files['imagen_producto2']
-
     if (imagen_pr2.filename != ""):
         #Imgresamos imagen
         ruta = "/static/img"
@@ -427,13 +459,12 @@ def actualizar_producto():
         imagen_pr2.save(n_ruta)
         enlace_imagen = imagen_pr2.filename
     else:
-        enlace_imagen = imagen_pr1
-
+        enlace_imagen = imagen_pr1     
     if estado == "Activo":
         estado = 'A'
     else:
         estado = 'I'
-    stock = request.form['stock']
+
     descripcion = request.form['descripcion']
     descuento = request.form['descuento']
     tipo_producto = request.form['tipo_producto']
@@ -446,9 +477,7 @@ def actualizar_producto():
     id_categoria = controlador_categoria.id_categoria_por_nombre(categoria)
     grupoedad = request.form['grupoedad']
     id_grupo_edad = controlador_grupoedad.id_grupo_edad_por_nombre(grupoedad)
-    presentacion = request.form['presentacion']
-    id_presentacion = controlador_presentacion.id_presentacion_por_nombre(presentacion)
-    controlador_producto.actualizar_producto(id_producto, nombre, precio, estado, stock, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, id_presentacion,enlace_imagen)
+    controlador_producto.actualizar_producto(id_producto, nombre, precio, estado, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, enlace_imagen)
     return redirect(url_for('producto'))
 
 @app.route('/apis_obtener_categorias')

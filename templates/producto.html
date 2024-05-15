@@ -49,11 +49,11 @@
                 </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Acciones">
-                        <form action="{{ url_for('modificar_producto', id=producto[0]) }}" method="post">
-                            <input type="hidden" name="id" value="{{ producto[0] }}">
+                        <form action="{{ url_for('modificar_producto') }}" method="post">
+                            <input type="hidden" name="id_pr" value="{{ producto[0] }}">
                             <button type="submit" class="btn btn-warning me-4 text-white">Modificar</button>
                         </form>
-                        <a href="" class="btn btn-danger">Eliminar</a>
+                        <a href="{{ url_for('eliminar_producto',id=producto[0]) }}" class="btn btn-danger">Eliminar</a>
                     </div>
                 </td>
 
