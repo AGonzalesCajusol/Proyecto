@@ -41,14 +41,11 @@ def index():
 def acerca_de():
     return render_template('/templates/acerca_de.html')
 
+
 @app.route('/calzado')
 def calzado():
-    return render_template('/templates/calzado.html')
-
-@app.route('/calzado2')
-def calzado2():
-    datos_calzado = controlador_producto.obtener_productos()
-    return render_template('/templates/calzado2.html', datos_calzado=datos_calzado)
+    datos_calzado = controlador_producto.obtener_calzados()
+    return render_template('/templates/calzado.html', datos_calzado=datos_calzado)
 
 @app.route('/carrito_de_compras')
 def carrito_de_compras():
@@ -60,15 +57,18 @@ def libro_de_reclamaciones():
 
 @app.route('/moda_hombre')
 def moda_hombre():
-    return render_template('/templates/moda_hombre.html')
+    datos_hm = controlador_producto.obtener_modahombre()
+    return render_template('/templates/moda_hombre.html',datos_hm=datos_hm)
 
 @app.route('/moda_mujer')
 def moda_mujer():
-    return render_template('/templates/moda_mujer.html')
+    datos_mj = controlador_producto.obtener_modamujer()
+    return render_template('/templates/moda_mujer.html', datos_mj=datos_mj)
 
 @app.route('/moda_niños')
 def moda_niños():
-    return render_template('/templates/moda_niños.html')
+    datos_hm = controlador_producto.obtener_ropaniños()
+    return render_template('/templates/moda_niños.html',datos_hm=datos_hm)
 
 @app.route('/pago_de_productos')
 def pago_de_productos():

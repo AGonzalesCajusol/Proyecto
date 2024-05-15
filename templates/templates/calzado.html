@@ -1,491 +1,166 @@
 {% extends "templates/maestra.html" %}
-{% block enlaces  %}
+{% block enlaces %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/calzado.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/carrito_de_compras.css') }}">
 <script src="{{ url_for('static', filename='js/calzado.js') }}"></script>
 <script src="{{ url_for('static', filename='js/ventana-carrito.js') }}"></script>
 
 {% endblock %}
-{% block titulo %}  Sección Calzado  {% endblock %}
+{% block titulo %} Sección Calzado {% endblock %}
 {% block contenido %}
 
+<main style="margin-top: 12px;">
+    <h4 id="titulo-seccion-calzado">Sección Calzado</h4>
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div id="contenedor-imagenes-carrusel-portadas" style="margin-bottom: 0px;" class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="2500">
+                <img src="{{ url_for('static', filename='img/portada-calzado.png') }}" class="d-block w-100" alt="...">
+
+            </div>
+            <div class="carousel-item" data-bs-interval="2500">
+                <img src="{{ url_for('static', filename='img/portada-calzado-2.png') }}" class="d-block w-100"
+                    alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2500">
+                <img src="{{ url_for('static', filename='img/portada-calzado-3.png') }}" class="d-block w-100"
+                    alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2500">
+                <img src="{{ url_for('static', filename='img/portada-calzado-4.png') }}" class="d-block w-100"
+                    alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2500">
+                <img src="{{ url_for('static', filename='img/portada-calzado-5.png') }}" class="d-block w-100"
+                    alt="...">
+
+            </div>
+            <div class="carousel-item" data-bs-interval="2500">
+                <img src="{{ url_for('static', filename='img/portada-calzado-6.png') }}" class="d-block w-100"
+                    alt="...">
+
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <main style="margin-top: 12px;">
-        <h4 id="titulo-seccion-calzado">Sección Calzado</h4>
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-            <div id="contenedor-imagenes-carrusel-portadas" style="margin-bottom: 0px;" class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="2500">
-                    <img src="{{ url_for('static', filename='img/portada-calzado.png') }}" class="d-block w-100" alt="...">
 
-                </div>
-                <div class="carousel-item" data-bs-interval="2500">
-                    <img src="{{ url_for('static', filename='img/portada-calzado-2.png') }}" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item" data-bs-interval="2500">
-                    <img src="{{ url_for('static', filename='img/portada-calzado-3.png') }}" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item" data-bs-interval="2500">
-                    <img src="{{ url_for('static', filename='img/portada-calzado-4.png') }}" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item" data-bs-interval="2500">
-                    <img src="{{ url_for('static', filename='img/portada-calzado-5.png') }}" class="d-block w-100" alt="...">
+    <h3 id="titulo-productos-calzado">Nuestros Productos</h3>
 
-                </div>
-                <div class="carousel-item" data-bs-interval="2500">
-                    <img src="{{ url_for('static', filename='img/portada-calzado-6.png') }}" class="d-block w-100" alt="...">
+    <!-- Lógica -->
 
+    <div id="contenedor-cards">
+        {% for cat in datos_calzado %}
+        <div id="card-card" class="card">
+            <div class="espacio-card-1">
+                <div class="contenedor-titulo-card">
+                    {{ cat[1] }}
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+            <div class="espacio-card-2">
+                <div class="contenedor-contenido-card">
+                    <div class="contenedor-precio">
+                        {% if cat[2] == cat[4]  %}
+                        <h6 class="text-danger text-end">S/. {{ cat[2] }}</h6>
+                        {% else %}
+                        <h6><s class="text-secondary">S/. {{ cat[2] }}</s></h6>
+                        <h6 class="text-danger">S/. {{ cat[4] }}</h6>
+                        {% endif %}
+                    </div>
+                    
 
-        <h3 id="titulo-productos-calzado">Nuestros Productos</h3>
-
-        <div id="contenedor-cards">
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatilla NIKE Blazer Low Platform Next Nature
+                    <div class="contenedor-item">
+                        <img class="item" src="{{ url_for('static', filename='img/' + cat[12]) }}" alt="Imagen item 1">
                     </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 540.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-1-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Viste con elegancia con la prenda básica del clóset que siempre está a la altura de la
-                            ocasión.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
+                    <div class="contenedor-descripcion-item">
+                        {{ cat[5] }}
                     </div>
-                </div>
-            </div>
-            
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatilla Nike Air Max Up Urbano Mujer
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 390.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-2-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Viste con estilo con estas zapatillas cómodas y muy a la moda, una combinación de relación
-                            precio-calidad.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Sandalias Call It Spring Casuales para Mujer
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 150.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-3-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Sandalias femeninas y elegantes con diseño moderno y cómoda suela. Diseñadas para ti.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Botas para Caballero Timberland Proresistor6 Wp
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 500.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-4-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Botas de caballero: Cuero duradero, estilo clásico. Comodidad para todas las ocasiones, de
-                            informal a formal.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatillas de Basket Jordan Reaxion "Black/Red/White”
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 370.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-5-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Estilo impactante, rendimiento excepcional. Diseñadas para dominar la cancha con elegancia.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatilla Puma Smash Blanca - Modelo Smash
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 280.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-6-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Empeine de cuero suave, mayor resistencia. Suela de goma duradera y con agarre.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatillas Adidas Stan Smith CF Originals
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 310.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-7-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Estilo atemporal con cierre de velcro, con comodidad y versatilidad en cada paso.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatillas para Hombre Nike Air Max 270 React
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 420.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-8-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Estilo vanguardista, máxima comodidad con tecnología React. Un paso adelante en moda y
-                            rendimiento.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatillas para Mujer Balenciaga
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 270.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-9-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Elegancia vanguardista, diseño atrevido y comodidad inigualable. Un toque de lujo en cada
-                            paso.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Sandalias ADIDAS Adilette Aqua Swim para Hombre
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 90.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-10-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Ideales para el verano. Luce estas sandalias en una ocasión de playa, especiales para ti.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapatillas VANS Old Skool Platform - BLACK/WHITE
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 360.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-11-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Combinan el diseño clásico con banda lateral con una capellada de gamuza y lona resistente.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-card" class="card">
-                <div class="espacio-card-1">
-                    <div class="contenedor-titulo-card">
-                        Zapato De Vestir para Caballero - Calimod 5VEM001
-                    </div>
-                </div>
-                <div class="espacio-card-2">
-                    <div class="contenedor-contenido-card">
-                        <div class="contenedor-precio">
-                            <h6>Precio</h6>
-                            <h6>S/. 280.00</h6>
-                        </div>
-                        <div class="contenedor-item">
-                            <img class="item" src="img/item-12-calzado.png" alt="Imagen item 1">
-                        </div>
-                        <div class="contenedor-descripcion-item">
-                            Zapato de vestir elegante y estilizado, permite tener un look más elegante sin perder la comodidad.
-                        </div>
-                        <div class="contenedor-botones-item">
-                            <button class="btn-menos">
-                                <h6>-</h6>
-                            </button>
-                            <button class="btn-mas">
-                                <h6>+</h6>
-                            </button>
-                            <label class="cantidad-item" for="">1</label>
-                            <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
-                        </div>
+                    <div class="contenedor-botones-item">
+                        <button class="btn-menos">
+                            <h6>-</h6>
+                        </button>
+                        <button class="btn-mas">
+                            <h6>+</h6>
+                        </button>
+                        <label class="cantidad-item" for="">1</label>
+                        <button onclick="abrirVentanaCarrito(this)" class="btn-agregar-item">Agregar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-    <div class="barra_separadora">
-        <p></p>
+        {% endfor %}
+
+
     </div>
-    <div id="ventana-modal">
-        <div id="contenedor-elige-opciones">
-            <h6><b>Elige tus opciones:</b></h6>
-            <button onclick="cerrarVentanaCarrito()" id="btn-cerrar-carrito-vista-previa">X</button>
-        </div>
-        <div id="contenedor-contenido-carrito">
-            <div>
-                <div id="contenedor-imgcarrito-descripcioneleccion">
-                    <img id="imagen-carrito-vista-previa" src="" alt="">
-                    <div>
-                        <h6 id="valor-titulo-producto" style="text-align: justify;"></h6>
-                        <h6 id="valor-cantidad"></h6>
-                        <h6 id="valor-precio"></h6>
-                        <h6 id="valor-total"></h6>
-                    </div>
+    <!-- Lógica -->
+
+</main>
+
+<div class="barra_separadora">
+    <p></p>
+</div>
+
+<!-- Ventana Modal: Carrito de Compras -->
+<div id="ventana-modal">
+    <div id="contenedor-elige-opciones">
+        <h6><b>Elige tus opciones:</b></h6>
+        <button onclick="cerrarVentanaCarrito()" id="btn-cerrar-carrito-vista-previa">X</button>
+    </div>
+    <div id="contenedor-contenido-carrito">
+        <div>
+            <div id="contenedor-imgcarrito-descripcioneleccion">
+                <img id="imagen-carrito-vista-previa" src="" alt="">
+                <div>
+                    <h6 id="valor-titulo-producto" style="text-align: justify;"></h6>
+                    <h6 id="valor-cantidad"></h6>
+                    <h6 id="valor-precio"></h6>
+                    <h6 id="valor-total"></h6>
                 </div>
             </div>
-            <hr>
-            <div id="contenedor-seleccion-talla">
-                <h6><b>Seleccione una talla:</b></h6>
-                <div id="contenedor-botonestalla-btnagregarcarrito">
-                    <div id="contenedor-botones-talla">
-                        <button class="btn-talla" onclick="cambiarColor(this)">35</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">36</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">37</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">38</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">39</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">40</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">41</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">42</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">43</button>
-                        <button class="btn-talla" onclick="cambiarColor(this)">44</button>
-                    </div>
-                    <button onclick="agregarProductoAlCarrito()" id="btn-agregar-carrito">Agregar al carrito</button>
+        </div>
+        <hr>
+        <div id="contenedor-seleccion-talla">
+            <h6><b>Seleccione una talla:</b></h6>
+            <div id="contenedor-botonestalla-btnagregarcarrito">
+                <div id="contenedor-botones-talla">
+                    <button class="btn-talla" onclick="cambiarColor(this)">35</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">36</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">37</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">38</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">39</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">40</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">41</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">42</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">43</button>
+                    <button class="btn-talla" onclick="cambiarColor(this)">44</button>
                 </div>
+                <button onclick="agregarProductoAlCarrito()" id="btn-agregar-carrito">Agregar al carrito</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Producto agregado al carrito -->
 
-    <div id="ventana-modal-2">
-        <div id="contenedor-producto-agregado">
-            <h6><b>Producto agregado exitosamente :)</b></h6>
-        </div>
-        <div id="contenedor-contenido-prdct-agregado">
-            <button onclick="cerrarVentanaModal2()" id="btn-seguir-comprando"><u>Seguir comprando</u></button>
-            <a href="{{ url_for('carrito_de_compras') }}" d="btn-ir-al-carrito">
-                Ir al carrito de compras
-            </a>
-            
-        </div>
+<!-- Producto agregado al carrito -->
+
+<div id="ventana-modal-2">
+    <div id="contenedor-producto-agregado">
+        <h6><b>Producto agregado exitosamente :)</b></h6>
     </div>
+    <div id="contenedor-contenido-prdct-agregado">
+        <button onclick="cerrarVentanaModal2()" id="btn-seguir-comprando"><u>Seguir comprando</u></button>
+        <a href="{{ url_for('carrito_de_compras') }}" d="btn-ir-al-carrito">
+            Ir al carrito de compras
+        </a>
+
+    </div>
+</div>
 
 {% endblock %}

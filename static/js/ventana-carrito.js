@@ -99,7 +99,7 @@ document.getElementById("ventana-modal-2").addEventListener("animationend", func
 });
 
 function irCarrito() {
-    var nuevaVentana = window.open('carrito_de_compras.html','_self');
+    var nuevaVentana = window.open('carrito_de_compras','_self');
 }
 
 /* //Variable global

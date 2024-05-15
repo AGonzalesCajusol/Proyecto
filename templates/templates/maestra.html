@@ -120,7 +120,7 @@
 
     <!-- Menú de barra lateral: -->
 
-    <div class="container-menu">
+    <div class="position-fixed container-menu ">
         <div class="categorias-titulo">
             <b>Categorías</b>
             <button onclick="mostrarMenuLateral()" class="button-x"><b>Cerrar X</b></button>
@@ -128,13 +128,10 @@
         <div class="cont-menu">
             <nav>
                 <a href="{{ url_for('calzado') }}">Calzado</a>
-                <a href="{{ url_for('calzado2') }}">Calzado2</a>
                 <a href="{{ url_for('moda_hombre') }}">Moda Hombre</a>
                 <a href="{{ url_for('moda_mujer') }}">Moda Mujer</a>
                 <a href="{{ url_for('moda_niños') }}">Moda Niños</a>
-                
-            </nav>
-            
+            </nav>    
         </div>
     </div>
 <!-- Botón para abrir el modal -->  
