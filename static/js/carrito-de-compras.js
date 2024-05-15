@@ -88,7 +88,7 @@ function eliminarProductoDelCarrito() {
     // Actualiza la interfaz de usuario
     var indicadorHayProductos = Object.keys(localStorage).filter(clave => !isNaN(clave)).length;
     if (indicadorHayProductos === 0) {
-        window.open("carrito_de_compras.html","_self");
+        window.open("carrito_de_compras","_self");
     } else {
         cargarProductos();
     }
