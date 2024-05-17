@@ -104,11 +104,13 @@ header,footer{
     height: 100vh;
     position: relative;
     transition: all 500ms ease;
+    z-index: 1050;
 }
 
 .categorias-titulo{
     color: white;
     background-color: #1d1d1b;
+
 }
 
 .cont-menu nav a,.categorias-titulo{
