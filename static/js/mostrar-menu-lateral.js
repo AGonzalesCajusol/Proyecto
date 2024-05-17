@@ -1,14 +1,18 @@
 function mostrarMenuLateral() {
     var containerMenu = document.querySelector('.container-menu');
+    var body = document.body;
 
-    if ((containerMenu.style.visibility === 'hidden') && (containerMenu.style.transform === 'translateX(-100%)')){
-        containerMenu.style.visibility = 'visible';
-        containerMenu.style.transform = 'translateX(0%)';
-    } else {
+    if (containerMenu.style.visibility === 'visible' && containerMenu.style.transform === 'translateX(0%)') {
         containerMenu.style.visibility = 'hidden';
         containerMenu.style.transform = 'translateX(-100%)';
+        body.classList.remove('menu-open');
+    } else {
+        containerMenu.style.visibility = 'visible';
+        containerMenu.style.transform = 'translateX(0%)';
+        body.classList.add('menu-open');
     }
 }
+
 
 function abrirVentanaModalInicioDeSesion() {
     var ventanaIncioSesion = document.getElementById("ventana-modal-inicio-sesion");

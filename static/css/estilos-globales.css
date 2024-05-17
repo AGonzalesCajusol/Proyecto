@@ -85,17 +85,20 @@ header,footer{
     transition: all 500ms ease;
 }
 
-.container-menu{
+.container-menu {
     position: fixed;
     background-color: #ffffff;
     width: 250px;
     height: 100vh;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     transition: all 500ms ease;
     opacity: 1;
     visibility: hidden;
     transform: translateX(-100%);
+    z-index: 1000; /* Ensure the sidebar is on top */
 }
+
 
 .cont-menu{
     width: 100%;
@@ -155,6 +158,16 @@ header,footer{
     animation-duration: 320ms;
     animation-fill-mode: forwards;
 }
+
+body.menu-open {
+    pointer-events: none; /* Disable interactions */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+body.menu-open .container-menu {
+    pointer-events: all; /* Allow interactions with the sidebar */
+}
+
 
 /* Animación de difuminado al abrir la ventana modal del carrito de compras */
 @keyframes animacion-difuminado-catalogo {
