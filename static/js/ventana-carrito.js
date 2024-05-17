@@ -113,16 +113,21 @@ function agregarProductoAlCarrito() {
 
         var valorTalla = botonSeleccionado.textContent;
 
+
         var titulo = document.getElementById('valor-titulo-producto').textContent;
         var rutaImagen = document.getElementById('imagen-carrito-vista-previa').getAttribute('src');
         var cantidad = parseInt(document.getElementById('valor-cantidad').textContent.replace('Cantidad: ', ''));
-        var precio = document.getElementById('valor-precio').textContent;
-        precio = parseFloat(precio.match(/\d+/)).toFixed(2);
-        var total = document.getElementById('valor-total').textContent;
-        total = parseFloat(total.match(/\d+/)).toFixed(2);
-
+        
+        var precioTexto = document.getElementById('valor-precio').textContent;
+        var precio = precioTexto.valueOf();
+        console.log("El precio es:", precio);
+        
+        var totalTexto = document.getElementById('valor-total').textContent;
+        var total = totalTexto.valueOf();
+        console.log("El total es:", total);
+        
         var key = parseInt(obtenerValorUnico());
-
+        
         var datos = {
             nombre: titulo,
             talla: valorTalla,
@@ -131,7 +136,9 @@ function agregarProductoAlCarrito() {
             precio: precio,
             subtotal: total
         };
-
+        
+        console.log(datos);
+        
         localStorage.setItem(key, JSON.stringify(datos));
 
         cerrarVentanaCarrito();
