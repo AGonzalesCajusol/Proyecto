@@ -1,0 +1,45 @@
+{% extends 'maestra.html' %} 
+{% block titulo %} Presentaciones {% endblock %}
+
+
+{% block tabla %} 
+<div class="col-lg-4 col-md-7 ms-5 mt-4 me-4">
+    <a href="{{ url_for('registrar_presentacion') }}">
+    <button class="btn btn-primary">Nuevo</button>
+    </a>
+    <hr>
+    <table class="table table-bordered table-hover text-center table-responsive">
+        <thead class="table-secondary">
+            <tr>
+                <th>ID</th>
+                <th>Documento</th>
+                <th>Ape_Paterno</th>
+                <th>Ape_Materno</th>
+                <th>Nombres</th>
+                <th>Telefono</th>
+                <th>Correo</th>
+                <th>Usuario</th>
+                <th>estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for presentacion in presentaciones %}
+            <tr>
+                <td>{{ presentacion[0] }}</td>
+                <td>{{ presentacion[1] }}</td>
+                <td>{{ presentacion[2] }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <form action="{{ url_for('modificar_presentacion') }}" method="post">
+                            <input type="hidden" name="id" value="{{ presentacion[0] }}">
+                            <button type="submit" class="btn btn-warning me-4 text-white">Modificar</button>
+                        </form>
+                        <a href="{{ url_for('eliminar_presentacion', id=presentacion[0]) }}" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
