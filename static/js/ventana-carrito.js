@@ -29,17 +29,20 @@ function abrirVentanaCarrito(boton) {
 
     var cardReferente = boton.closest('.card');
 
+    // var ids =   cardReferente.querySelector('.contenedor-id-card')
     var titulos = cardReferente.querySelector('.contenedor-titulo-card');
     var cantidades = cardReferente.querySelector('.cantidad-item');
     var precios = cardReferente.querySelector('.contenedor-precio h6:last-child');
     var imagen = cardReferente.querySelector('.item');
 
+    // var id = ids.textContent.trim();
     var titulo = titulos.textContent.trim();
     var cantidad = cantidades.textContent.trim();
     var precio = precios.textContent.trim().replace('S/. ', '');
     var totalProducto = (cantidad * precio).toFixed(2);
     var rutaImagen = imagen.getAttribute('src');
 
+    // document.getElementById('valor-id-producto').textContent = id;
     document.getElementById('valor-titulo-producto').textContent = titulo;
     document.getElementById('valor-precio').innerHTML = '<b>Precio: </b> S/. ' + precio;
     document.getElementById('valor-cantidad').innerHTML = '<b>Cantidad: </b>' + cantidad;
@@ -113,22 +116,22 @@ function agregarProductoAlCarrito() {
 
         var valorTalla = botonSeleccionado.textContent;
 
-
+        // var elid = document.getElementById('valor-id-producto').textContent;
         var titulo = document.getElementById('valor-titulo-producto').textContent;
         var rutaImagen = document.getElementById('imagen-carrito-vista-previa').getAttribute('src');
         var cantidad = parseInt(document.getElementById('valor-cantidad').textContent.replace('Cantidad: ', ''));
         
-        var precioTexto = document.getElementById('valor-precio').textContent;
-        var precio = precioTexto.valueOf();
-        console.log("El precio es:", precio);
-        
-        var totalTexto = document.getElementById('valor-total').textContent;
-        var total = totalTexto.valueOf();
-        console.log("El total es:", total);
+        var precio = document.getElementById('valor-precio').textContent;
+        var precio = parseFloat(precio.match(/\d+\.\d+/)[0]).toFixed(2);
+
+        var total = document.getElementById('valor-total').textContent;
+        total =parseFloat(total.match(/\d+\.\d+/)[0]).toFixed(2);
+  
         
         var key = parseInt(obtenerValorUnico());
         
-        var datos = {
+        var datos = {   
+            // id: elid,
             nombre: titulo,
             talla: valorTalla,
             rutaImagen: rutaImagen,
