@@ -54,7 +54,7 @@ def obtener_distrito():
     conexion = obtener_conexion()
     distritoes = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT id, distrito, id_provincia FROM distrito")
+        cursor.execute("SELECT d.id, d.distrito, pr.provincia FROM distrito d inner join provincia pr on d.id_provincia = pr.id")
         distritoes = cursor.fetchall()
     conexion.close()
     return distritoes

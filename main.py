@@ -529,6 +529,7 @@ def provincia():
 def registrar_provincia():
     departamentos = controlador_departamento.obtener_departamentos()
     return render_template('registrar_provincia.html', departamentos=departamentos)
+
 #.--------------------------------------------------------------------------------------
 #.--------------------------------------------------------------------------------------
 #.--------------------------------------------------------------------------------------
@@ -569,7 +570,8 @@ def distrito():
 
 @app.route('/registrar_distrito')
 def registrar_distrito():
-    return render_template('registrar_distrito.html')
+    provincias = controlador_provincia.obtener_provincia()
+    return render_template('registrar_distrito.html', provincias = provincias)
 
 @app.route('/insertar_distrito', methods=['POST'])
 def insertar_distrito():
