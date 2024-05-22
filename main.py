@@ -591,7 +591,12 @@ def actualizar_distrito():
     controlador_distrito.actualizar_distrito(id, distrito, provincia)
     return redirect(url_for('distrito'))
 
-
+## ---rutas para retornar provincias
+@app.route('/retornar_provincias/<string:departamento>', methods=['POST'])
+def retornar_provincias(departamento):
+    id_departamento = controlador_departamento.id_departamento_por_nombre(departamento)
+    provincias = controlador_provincia.
+    return  redirect(url_for('distrito'))
 
 
 
