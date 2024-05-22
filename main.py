@@ -591,6 +591,10 @@ def actualizar_distrito():
     controlador_distrito.actualizar_distrito(id, distrito, provincia)
     return redirect(url_for('distrito'))
 
+
+
+
+
 @app.route('/apis_obtener_categorias')
 def api_obtenercategorias():
     lista_categoria = controlador_categoria.obtener_categorias()
