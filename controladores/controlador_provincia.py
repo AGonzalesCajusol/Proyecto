@@ -67,7 +67,10 @@ def obtener_provincia():
     conexion = obtener_conexion()
     provinciaes = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT id, provincia, id_departamento FROM provincia")
+        cursor.execute('''
+                       SELECT pr.id, pr.provincia, de.departamento FROM provincia pr inner join departamento de
+                        on pr.id_departamento = de.id         
+                       ''' )
         provinciaes = cursor.fetchall()
     conexion.close()
     return provinciaes
