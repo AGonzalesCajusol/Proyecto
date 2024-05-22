@@ -23,15 +23,12 @@ def nombre_provinciasxdepartamento(id_departamento):
 
 def id_provincia_por_nombre(nombre):
     conexion = obtener_conexion()
-    provincia, departamento = nombre.split(' - ')
-    id_provincia = None
+    provincias = []
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT id FROM provincia WHERE provincia = %s AND id_departamento = %s", (provincia, departamento))
-        resultado = cursor.fetchone()
-        if resultado:
-            id_provincia = resultado[0]
+        cursor.execute("select distrito.distrito from provincia inner join distrito on distrito.id_provincia = provincia.id where provincia.provincia = %s", (nombre) )
+        provincias= cursor.fetchall()
     conexion.close()
-    return id_provincia
+    return provincias
 
 def nombre_departamento_provincia_por_id(id_provincia):
     conexion = obtener_conexion()

@@ -136,62 +136,42 @@ function guardarDatosCliente() {
 }
 
 
-//Agregar provincias dependiendo el departamento seleccionado
-function actualizarProvincias() {
-    var departamentoSeleccionado = document.getElementById("cbobox-departamento").value;
-
-    var comboProvincias = document.getElementById("cbobox-provincia");
-
-    comboProvincias.innerHTML = '';
-
-    if (departamentoSeleccionado === "lambayeque") {
-        agregarOpcionProvincias(comboProvincias, "chiclayo", "Chiclayo");
-    } else if (departamentoSeleccionado === "lima") {
-        agregarOpcionProvincias(comboProvincias, "lima", "Lima");
-    }
-    actualizarDistritos();
-}
-
-function agregarOpcionProvincias(selectElement, value, text) {
-    var opcion = document.createElement("option");
-    opcion.value = value;
-    opcion.text = text;
-    selectElement.add(opcion);
-}
-
-
-//Agregar distritos dependiendo la pronvincia seleccionada
-function actualizarDistritos() {
-    var provinciaSeleccionada = document.getElementById("cbobox-provincia").value;
-
-    var comboDistritos = document.getElementById("cbobox-distrito");
-
-    comboDistritos.innerHTML = '';
-
-    if (provinciaSeleccionada === "chiclayo") {
-        agregarOpcionDistritos(comboDistritos, "pimentel", "Pimentel");
-        agregarOpcionDistritos(comboDistritos, "lagunas", "Lagunas");
-        agregarOpcionDistritos(comboDistritos, "monsefu", "Monsefú");
-        agregarOpcionDistritos(comboDistritos, "eten", "Eten");
-        agregarOpcionDistritos(comboDistritos, "puertoeten", "Puerto Eten");
-        agregarOpcionDistritos(comboDistritos, "cayaltí", "Cayaltí");
-        agregarOpcionDistritos(comboDistritos, "chiclayo", "Chiclayo");
-        agregarOpcionDistritos(comboDistritos, "la victoria", "La Victoria");
-    } else if (provinciaSeleccionada === "lima") {
-        agregarOpcionDistritos(comboDistritos, "breña", "Breña");
-        agregarOpcionDistritos(comboDistritos, "sanisidro", "San Isidro");
-        agregarOpcionDistritos(comboDistritos, "lamolina", "La Molina");
-        agregarOpcionDistritos(comboDistritos, "santiagodesurco", "Santiago de Surco");
-        agregarOpcionDistritos(comboDistritos, "lince", "Lince");
-        agregarOpcionDistritos(comboDistritos, "surquillo", "Surquillo");
-        agregarOpcionDistritos(comboDistritos, "chosica", "Chosica");
-        agregarOpcionDistritos(comboDistritos, "comas", "Comas");
+async function mostrar_provincias(){
+    var departamento = document.getElementById('cbobox-departamento').value; 
+    try {
+        if (departamento){
+        const response = await fetch(`/retornar_provincias/${departamento}`);
+        const data = await response.json();
+        var select = document.getElementById("mostrar_provincias");
+        select.innerHTML = "";
+        for (var i = 0 ;  i< data.length ;  i++){
+            var option = document.createElement("option");
+            option.value = data[i];
+            option.textContent = data[i];
+            select.appendChild(option);
+        }
+        }
+    } catch (error) {
+        console.error('Error al obtener los datos de provincia:', error);
     }
 }
 
-function agregarOpcionDistritos(selectElement, value, text) {
-    var opcion = document.createElement("option");
-    opcion.value = value;
-    opcion.text = text;
-    selectElement.add(opcion);
+async function mostrar_distritos() {
+    var provincia = document.getElementById('mostrar_provincias').value; // Obtener el valor seleccionado de la provincia
+    try {
+        if (provincia) {
+            const response = await fetch(`/retornar_distritos/${provincia}`);
+            const data = await response.json();
+            var select = document.getElementById("distrito");
+            select.innerHTML = "";
+            for (var i = 0 ;  i< data.length ;  i++){
+                var option = document.createElement("option");
+                option.textContent = data[i];
+                select.appendChild(option);
+            }
+        }
+    } catch (error) {
+        console.error('Error al obtener los datos de distritos:', error);
+    }
 }
+

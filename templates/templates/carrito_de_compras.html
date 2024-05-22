@@ -26,23 +26,21 @@
                             </div>
                             <div class="cont-cbo-box">
                                 <h6 class="dep"><b>Departamento:</b></h6>
-                                <select onchange="actualizarProvincias()" name="cbobox-departamento"
-                                    id="cbobox-departamento">
+                                <select onchange="" name="departamento"  id="cbobox-departamento" onclick="mostrar_provincias()">
                                     <option value=""></option>
-                                    <option value="lima">Lima</option>
-                                    <option value="lambayeque">Lambayeque</option>
-                                </select>
+                                    {%  for departamento in departamentos %}
+                                    <option>{{ departamento[1] }}</option>
+                                    {% endfor %}
+                                </select> 
                             </div>
                             <div class="cont-cbo-box">
                                 <h6 class="prov"><b>Provincia:</b></h6>
-                                <select onchange="actualizarDistritos()" name="cbobox-provincia" id="cbobox-provincia">
-
+                                <select id="mostrar_provincias"  onclick="mostrar_distritos()">
                                 </select>
                             </div>
                             <div class="cont-cbo-box">
                                 <h6 class="dist"><b>Distrito:</b></h6>
-                                <select name="cbobox-distrito" id="cbobox-distrito">
-
+                                <select name="cbobox-distrito" id="distrito" >
                                 </select>
                             </div>
                             <div class="cont-input-text">

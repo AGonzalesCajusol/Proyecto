@@ -49,7 +49,8 @@ def calzado():
 
 @app.route('/carrito_de_compras')
 def carrito_de_compras():
-    return render_template('/templates/carrito_de_compras.html')
+    departamentos = controlador_departamento.obtener_departamentos()
+    return render_template('/templates/carrito_de_compras.html', departamentos = departamentos)
 
 @app.route('/libro_de_reclamaciones')
 def libro_de_reclamaciones():
@@ -600,17 +601,17 @@ def actualizar_distrito():
     return redirect(url_for('distrito'))
 
 ## ---rutas para retornar provincias
-@app.route('/retornar_provincias/<string:departamento>', methods=['POST'])
+@app.route('/retornar_provincias/<string:departamento>')
 def retornar_provincias(departamento):
     id_departamento = controlador_departamento.id_departamento_por_nombre(departamento)
     provincias = controlador_provincia.nombre_provinciasxdepartamento(id_departamento)
+    print(provincias)
     return  jsonify(provincias)
 
 ## ---rutas para retornar distritos
-@app.route('/retornar_distritos/<string:provincia>', methods=['POST'])
+@app.route('/retornar_distritos/<string:provincia>')
 def retornar_distritos(provincia):
-    id_provincia = controlador_provincia.id_provincia_por_nombre(provincia)
-    distritos = controlador_distrito.nombre_distritosxprovincias(id_provincia)
+    distritos = controlador_provincia.id_provincia_por_nombre(provincia)
     return  jsonify(distritos)
 
 @app.route('/apis_obtener_categorias')
