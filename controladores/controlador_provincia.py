@@ -9,6 +9,17 @@ def nombre_provincias():
     conexion.close()
     return provincias
 
+def nombre_provinciasxdepartamento(id_departamento):
+    conexion = obtener_conexion()
+    provincias = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT provincia FROM provincia where id_departamento  = %s", (id_departamento))
+        provincias = cursor.fetchall()
+    conexion.close()
+    return provincias
+
+
+
 def id_provincia_por_nombre(nombre):
     conexion = obtener_conexion()
     provincia, departamento = nombre.split(' - ')

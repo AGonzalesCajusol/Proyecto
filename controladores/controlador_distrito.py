@@ -9,6 +9,16 @@ def nombre_distritos():
     conexion.close()
     return distritos
 
+def nombre_distritosxprovincias(id_provincia):
+    conexion = obtener_conexion()
+    distritos = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT distrito FROM provincia where id_provincia  = %s", (id_provincia))
+        distritos  = cursor.fetchall()
+    conexion.close()
+    return distritos
+
+
 def id_distrito_por_nombre(nombre):
     conexion = obtener_conexion()
     distrito, provincia = nombre.split(' - ')
