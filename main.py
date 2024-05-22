@@ -595,10 +595,15 @@ def actualizar_distrito():
 @app.route('/retornar_provincias/<string:departamento>', methods=['POST'])
 def retornar_provincias(departamento):
     id_departamento = controlador_departamento.id_departamento_por_nombre(departamento)
-    provincias = controlador_provincia.
-    return  redirect(url_for('distrito'))
+    provincias = controlador_provincia.nombre_provinciasxdepartamento(id_departamento)
+    return  jsonify(provincias)
 
-
+## ---rutas para retornar distritos
+@app.route('/retornar_distritos/<string:provincia>', methods=['POST'])
+def retornar_distritos(provincia):
+    id_provincia = controlador_provincia.id_provincia_por_nombre(provincia)
+    distritos = controlador_distrito.nombre_distritosxprovincias(id_provincia)
+    return  jsonify(distritos)
 
 @app.route('/apis_obtener_categorias')
 def api_obtenercategorias():
