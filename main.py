@@ -547,15 +547,17 @@ def eliminar_provincia(id):
 @app.route('/modificar_provincia', methods=['POST'])
 def modificar_provincia():
     id = request.form['id']
+    departamentos = controlador_departamento.obtener_departamentos()
     provincia = controlador_provincia.obtener_provincia_por_id(id)
-    return render_template('modificar_provincia.html', provincia = provincia)
+    return render_template('modificar_provincia.html', provincia = provincia, departamentos = departamentos)
 
 @app.route('/actualizar_provincia', methods=['POST'])
 def actualizar_provincia():
     id = request.form['id']
     provincia = request.form['provincia']
-    departamento = int(request.form['departamento'])
-    controlador_provincia.actualizar_provincia(id, provincia, departamento)
+    departamento = request.form['departamento']
+    id_departamento = controlador_departamento.id_departamento_por_nombre(departamento)
+    controlador_provincia.actualizar_provincia(id , provincia , id_departamento)
     return redirect(url_for('provincia'))
 
 #--distrito

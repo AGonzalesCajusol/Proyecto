@@ -86,7 +86,7 @@ def obtener_provincia_por_id(id):
     conexion = obtener_conexion()
     provincia = None
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT id, provincia, id_departamento FROM provincia WHERE id = %s", (id))
+        cursor.execute('SELECT pr.id, pr.provincia, de.departamento FROM provincia pr inner join departamento de on pr.id_departamento = de.id   where pr.id=%s', (id))
         provincia = cursor.fetchone()
     conexion.close()
     return provincia

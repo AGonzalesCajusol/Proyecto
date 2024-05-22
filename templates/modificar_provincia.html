@@ -13,7 +13,15 @@
                         <label for="provincia" class="mb-3">Provincia:</label>
                         <input required type="text" class="form-control" placeholder="provincia" name="provincia" id="provincia" value="{{ provincia[1] }}">    
                         <label for="departamento" class="form-label">Departamento:</label>
-                        <input required type="number" class="form-control" placeholder="departamento" name="departamento" id="departamento" value="{{ provincia[2] }}">
+                        <select class="form-select" name="departamento">
+                            {% for departamento in departamentos  %}
+                                {% if provincia[2] == departamento[1] %}
+                                <option  selected> {{ departamento[1] }} </option>
+                                {% else %}
+                                <option > {{ departamento[1] }} </option>
+                                {% endif %}  
+                            {% endfor %}     
+                        </select>
                     </div>
                     <hr>
                     <div class="text-end">
