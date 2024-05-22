@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from clases import clase_categoria as clscat
-from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario
-import os, random
+from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
+import os
 
 
 app = Flask(__name__)
@@ -479,6 +479,121 @@ def actualizar_producto():
     id_grupo_edad = controlador_grupoedad.id_grupo_edad_por_nombre(grupoedad)
     controlador_producto.actualizar_producto(id_producto, nombre, precio, estado, descripcion, descuento, id_tipopr, id_genero, id_marca, id_categoria, id_grupo_edad, enlace_imagen)
     return redirect(url_for('producto'))
+
+
+
+#--departamento
+
+@app.route('/departamento')
+def departamento():
+    departamento = controlador_departamento.obtener_departamentos()
+    return render_template('departamento.html', departamentos=departamento)
+
+@app.route('/registrar_departamento')
+def registrar_departamento():
+    return render_template('registrar_departamento.html')
+
+@app.route('/insertar_departamento', methods=['POST'])
+def insertar_departamento():
+    departamento = request.form['departamento']
+    controlador_departamento.insertar_departamento(departamento)
+    return redirect(url_for('departamento'))
+
+@app.route('/eliminar_departamento/<int:id>')
+def eliminar_departamento(id):
+    controlador_departamento.eliminar_departamento(id)
+    return redirect(url_for('departamento'))
+
+@app.route('/modificar_departamento', methods=['POST'])
+def modificar_departamento():
+    id = request.form['id']
+    departamento = controlador_departamento.obtener_departamento_por_id(id)
+    return render_template('modificar_departamento.html', departamento = departamento)
+
+@app.route('/actualizar_departamento', methods=['POST'])
+def actualizar_departamento():
+    id = request.form['id']
+    departamento = request.form['departamento']
+    controlador_departamento.actualizar_departamento(id, departamento, )
+    return redirect(url_for('departamento'))
+
+#--provincia
+
+@app.route('/provincia')
+def provincia():
+    provincia = controlador_provincia.obtener_provincia()
+    return render_template('provincia.html', provincias = provincia)
+
+@app.route('/registrar_provincia')
+def registrar_provincia():
+    return render_template('registrar_provincia.html')
+
+@app.route('/insertar_provincia', methods=['POST'])
+def insertar_provincia():
+    provincia = request.form['provincia']
+    departamento = int(request.form['departamento'])
+    controlador_provincia.insertar_provincia(provincia,departamento)
+    return redirect(url_for('provincia'))
+
+@app.route('/eliminar_provincia/<int:id>')
+def eliminar_provincia(id):
+    controlador_provincia.eliminar_provincia(id)
+    return redirect(url_for('provincia'))
+
+@app.route('/modificar_provincia', methods=['POST'])
+def modificar_provincia():
+    id = request.form['id']
+    provincia = controlador_provincia.obtener_provincia_por_id(id)
+    return render_template('modificar_provincia.html', provincia = provincia)
+
+@app.route('/actualizar_provincia', methods=['POST'])
+def actualizar_provincia():
+    id = request.form['id']
+    provincia = request.form['provincia']
+    departamento = int(request.form['departamento'])
+    controlador_provincia.actualizar_provincia(id, provincia, departamento)
+    return redirect(url_for('provincia'))
+
+#--distrito
+
+@app.route('/distrito')
+def distrito():
+    distrito = controlador_distrito.obtener_distrito()
+    return render_template('distrito.html', distritos = distrito)
+
+@app.route('/registrar_distrito')
+def registrar_distrito():
+    return render_template('registrar_distrito.html')
+
+@app.route('/insertar_distrito', methods=['POST'])
+def insertar_distrito():
+    distrito = request.form['distrito']
+    provincia = int(request.form['provincia'])
+    controlador_distrito.insertar_distrito(distrito,provincia)
+    return redirect(url_for('distrito'))
+
+@app.route('/eliminar_distrito/<int:id>')
+def eliminar_distrito(id):
+    controlador_distrito.eliminar_distrito(id)
+    return redirect(url_for('distrito'))
+
+@app.route('/modificar_distrito', methods=['POST'])
+def modificar_distrito():
+    id = request.form['id']
+    distrito = controlador_distrito.obtener_distrito_por_id(id)
+    return render_template('modificar_distrito.html', distrito = distrito)
+
+@app.route('/actualizar_distrito', methods=['POST'])
+def actualizar_distrito():
+    id = request.form['id']
+    distrito = request.form['distrito']
+    provincia = int(request.form['provincia'])
+    controlador_distrito.actualizar_distrito(id, distrito, provincia)
+    return redirect(url_for('distrito'))
+
+
+
+
 
 @app.route('/apis_obtener_categorias')
 def api_obtenercategorias():
