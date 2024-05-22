@@ -1,3 +1,4 @@
+from flask import render_template
 from bd import obtener_conexion
 
 def nombre_provincias():
@@ -44,12 +45,23 @@ def nombre_departamento_provincia_por_id(id_provincia):
     return nombre_departamento_provincia
 
 
-def insertar_provincia(provincia, departamento):
+##anggelo
+def obtener_departamentos():
+    conexion = obtener_conexion()
+    departamentos = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT id, departamento FROM departamento ORDER BY departamento ASC")
+        departamentos = cursor.fetchall()
+    conexion.close()
+    return departamentos
+
+def insertar_provincia(provincia, id_departamento):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
-        cursor.execute('INSERT INTO provincia (provincia, id_departamento) VALUES (%s, %s)', (provincia, departamento))
+        cursor.execute('INSERT INTO provincia (provincia, id_departamento) VALUES (%s, %s)', (provincia, id_departamento))
     conexion.commit()
     conexion.close()
+## anggelo
 
 def obtener_provincia():
     conexion = obtener_conexion()
@@ -82,3 +94,15 @@ def actualizar_provincia(id, provincia, departamento):
         cursor.execute("UPDATE provincia SET provincia = %s, id_departamento = %s WHERE id = %s", (provincia, departamento, id))
     conexion.commit()
     conexion.close()
+
+#-----------anggelo 
+def obtener_departamentos():
+    conexion = obtener_conexion()
+    departamentos = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT id, departamento FROM departamento ORDER BY departamento ASC")
+        departamentos = cursor.fetchall()
+    conexion.close()
+    return departamentos
+
+#--------- anggelo

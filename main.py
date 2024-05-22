@@ -524,10 +524,14 @@ def provincia():
     provincia = controlador_provincia.obtener_provincia()
     return render_template('provincia.html', provincias = provincia)
 
+#anggelo modifico
 @app.route('/registrar_provincia')
 def registrar_provincia():
-    return render_template('registrar_provincia.html')
-
+    departamentos = controlador_departamento.obtener_departamentos()
+    return render_template('registrar_provincia.html', departamentos=departamentos)
+#.--------------------------------------------------------------------------------------
+#.--------------------------------------------------------------------------------------
+#.--------------------------------------------------------------------------------------
 @app.route('/insertar_provincia', methods=['POST'])
 def insertar_provincia():
     provincia = request.form['provincia']
@@ -624,6 +628,17 @@ def api_obtenercategorias():
         rpt["mensaje"] = "Ocurrio un error"
         rpt["datos"] = list()
     return jsonify(rpt)
+#-----anggelo
+
+
+@app.route('/insertar_provincia', methods=['POST'])
+def insertar_provincia_route():
+    provincia = request.form['provincia']
+    id_departamento = request.form['departamento']
+    insertar_provincia(provincia, id_departamento)
+    return redirect(url_for('registrarprovincia'))
+
+#-------anggelo
 
 
 if __name__ ==  '__main__':

@@ -12,15 +12,13 @@
                         <label for="provincia" class="form-label">Provincia:</label>
                         <input required type="text" class="form-control" placeholder="provincia" name="provincia" id="provincia">
                     </div>
-                    <div class="mb-3">                        
-                        <div class="mb-3">
-                            <label for="departamento" class="form-label">Departamento:</label>
-                            <select class="form-select" id="departamento" name="departamento" required>
-                                {% for departamento in departamentos %}
-                                <option value="{{ departamento[0] }}"> {{ departamento[1] }} </option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label for="departamento" class="form-label">Departamento: </label>
+                        <select class="form-select" id="departamento" name="departamento" required>
+                            {% for departamento in departamentos %}
+                            <option value="{{ departamento[0] }}">{{ departamento[1] }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <hr>
                     <div class="text-end">
