@@ -1,0 +1,31 @@
+{% extends 'maestra.html' %}
+{% block titulo %} Modificar Distrito {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Modificar Distrito</h3>
+                <form action="{{ url_for('actualizar_distrito') }}" method="post">
+                    <input type="hidden" name="id" value="{{ distrito[0] }}">
+                    <div class="mb-3">
+                        <label for="distrito" class="mb-3">Distrito:</label>
+                        <input required type="text" class="form-control" placeholder="distrito" name="distrito" id="distrito" value="{{ distrito[1] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="provincia" class="form-label">Provincia:</label>
+                        <input required type="number" class="form-control" placeholder="provincia" name="provincia" id="provincia" value="{{ distrito[2] }}">
+                    </div>
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('distrito') }}" class="btn btn-danger mt-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

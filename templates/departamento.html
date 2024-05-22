@@ -1,0 +1,36 @@
+{% extends 'maestra.html' %}
+{% block titulo %} Departamentos {% endblock %}
+
+
+{% block tabla %}
+<div class="col-lg-4 col-md-7 ms-5 mt-4 me-4">
+    <a href="{{ url_for('registrar_departamento') }}" button class="btn btn-primary">Nuevo</a>
+    <hr>
+    <table class="table table-bordered table-hover text-center table-responsive">
+        <thead class="table-secondary">
+            <tr>
+                <th>ID</th>
+                <th>Departamento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for departamento in departamentos %}
+            <tr>
+                <td>{{ departamento[0] }}</td>
+                <td>{{ departamento[1] }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <form action="{{ url_for('modificar_departamento') }}" method="post">
+                            <input type="hidden" name="id" value="{{ departamento[0] }}">
+                            <button type="submit" class="btn btn-warning me-4 text-white">Modificar</button>
+                        </form>
+                        <a href="{{ url_for('eliminar_departamento', id=departamento[0]) }}" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

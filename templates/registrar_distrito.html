@@ -1,0 +1,34 @@
+{% extends 'maestra.html' %}
+{% block titulo %} Agregar Distrito {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Agregar Distrito</h3>
+                <form action="{{ url_for('insertar_distrito') }}" method="post">
+                    <div class="mb-3">
+                        <label for="distrito" class="form-label">Distrito:</label>
+                        <input required type="text" class="form-control" placeholder="distrito" name="distrito" id="distrito">
+                    </div>
+                    <div class="mb-3">
+                        <label for="provincia" class="form-label">Provincia:</label>
+                        <input required type="number" class="form-control" placeholder="provincia" name="provincia" id="provincia">
+                        <!-- <select class="form-select" id="provincia" name="provincia" required>
+                            {% for provincia in provincias %}
+                                <option value="{{ provincia[0] }}">{{  provincia[1] }} - {{  provincia[2] }} </option>
+                            {% endfor %}
+                        </select> -->
+                    </div>
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('distrito') }}" class="btn btn-danger mt-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

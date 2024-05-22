@@ -1,0 +1,25 @@
+{% extends 'maestra.html' %}
+{% block titulo %} Agregar Departamento {% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="mb-4 mt-4">Agregar Departamento</h3>
+                <form action="{{ url_for('insertar_departamento') }}" method="post">
+                    <div class="mb-3">
+                        <label for="departamento" class="form-label">Departamento:</label>
+                        <input required type="text" class="form-control" placeholder="departamento" name="departamento" id="departamento">
+                    </div>
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('departamento') }}" class="btn btn-danger mt-2">Volver</a>
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
