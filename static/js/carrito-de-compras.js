@@ -78,6 +78,7 @@ function guardardi (){
     try {
         if (departamento && provincia && distrito && jiron){
             localStorage.removeItem("datos_envio");
+            var monto = 0
             var dic = {
                 "departamento" : departamento,
                 "provincia": provincia,
@@ -85,10 +86,12 @@ function guardardi (){
                 "jiron": jiron,
                 "direccion": direccion,
                 "referencia": referencia,
+                "monto": monto
             }
             var dicJson = JSON.stringify(dic);
             localStorage.setItem('datos_envio', dicJson);
-            window.open( "contenedor-carrito-de-comprasde_productos");
+
+            window.location.href = "pago_de_productos";
         }else{
             alert("Ingrese todos sus datos porfavor")
         }

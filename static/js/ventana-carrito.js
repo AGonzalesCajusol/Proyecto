@@ -103,7 +103,7 @@ document.getElementById("ventana-modal-2").addEventListener("animationend", func
 });
 
 function irCarrito() {
-    var nuevaVentana = window.open('carrito_de_compras','_self');
+    var nuevaVentana = window.open('carrito_de_compras','_contenedor-carrito-de-compras');
 }
 
 /* //Variable global

@@ -16,47 +16,53 @@
                 <div id="contenedor-mi-pedido"> <!-- color blanco -->
                     <h4><b>Mi pedido</b></h4>
                 </div>
+
                 <div id="contenedor-cuerpo-carrito"> <!-- color amarillo -->
                     <div id="contenedor-contenedor-cuerpo-carrito">
                         <div id="contenedor-productos">
                         </div>
-                        <div id="contenedor-direccion-envio--tipo-de-entrega">
-                            <div id="contenedor-direccion-envio">
-                                <h6><b><u>Ingresa tu dirección de envío</u></b></h6>
+                            <div id="contenedor-direccion-envio--tipo-de-entrega">
+                                <div id="contenedor-direccion-envio">
+                                    <h6><b><u>Ingresa tu dirección de envío</u></b></h6>
+                                </div>
+                                <div class="cont-cbo-box">
+                                    <h6 class="dep"><b>Departamento:</b></h6>
+                                    <select onchange="" name="departamento"  id="cbobox-departamento" onclick="mostrar_provincias()">
+                                        <option value=""></option>
+                                        {%  for departamento in departamentos %}
+                                        <option>{{ departamento[1] }}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>
+                                <div class="cont-cbo-box">
+                                    <h6 class="prov"><b>Provincia:</b></h6>
+                                    <select id="mostrar_provincias"  name="provincia" onclick="mostrar_distritos()">
+                                    </select>
+                                </div>
+                                <div class="cont-cbo-box">
+                                    <h6 class="dist"><b>Distrito:</b></h6>
+                                    <select name="cbobox-distrito" id="distrito" >
+                                    </select>
+                                </div>
+                                <div class="cont-input-text">
+                                    <h6 class="dep"><b>Avenida/Calle/Jirón:</b></h6>
+                                    <input class="form-control me-5" type="text" name="text-avenida-calle-jiron"
+                                        id="text-avenida-calle-jiron">
+                                </div>
+                                <div class="cont-input-text">
+                                    <h6 class="dep"><b>Dpto/Interior/Piso/Lote/Bloque (opcional):</b></h6>
+                                    <input class="form-control me-5" type="text" name="text-dpto-int..." id="text-dpto-int">
+                                </div>
+                                <label id="lbl-tipo-de-entrega" for="">Tipo de entrega: <b>A domicilio</b></label>
                             </div>
-                            <div class="cont-cbo-box">
-                                <h6 class="dep"><b>Departamento:</b></h6>
-                                <select onchange="" name="departamento"  id="cbobox-departamento" onclick="mostrar_provincias()">
-                                    <option value=""></option>
-                                    {%  for departamento in departamentos %}
-                                    <option>{{ departamento[1] }}</option>
-                                    {% endfor %}
-                                </select> 
-                            </div>
-                            <div class="cont-cbo-box">
-                                <h6 class="prov"><b>Provincia:</b></h6>
-                                <select id="mostrar_provincias"  onclick="mostrar_distritos()">
-                                </select>
-                            </div>
-                            <div class="cont-cbo-box">
-                                <h6 class="dist"><b>Distrito:</b></h6>
-                                <select name="cbobox-distrito" id="distrito" >
-                                </select>
-                            </div>
-                            <div class="cont-input-text">
-                                <h6 class="dep"><b>Avenida/Calle/Jirón:</b></h6>
-                                <input class="form-control me-5" type="text" name="text-avenida-calle-jiron"
-                                    id="text-avenida-calle-jiron">
-                            </div>
-                            <div class="cont-input-text">
-                                <h6 class="dep"><b>Dpto/Interior/Piso/Lote/Bloque (opcional):</b></h6>
-                                <input class="form-control me-5" type="text" name="text-dpto-int..." id="text-dpto-int">
-                            </div>
-                            <label id="lbl-tipo-de-entrega" for="">Tipo de entrega: <b>A domicilio</b></label>
+                            <form action="/pago_de_productos">
+                                <a onclick="guardardi()"  id="btn-continuar-compra-carrito" >Continuar con mi compra</a>
+                            </form>
+
                         </div>
-                        <a onclick="guardardi()"  id="btn-continuar-compra-carrito">Continuar con mi compra</a>
-                    </div>
                 </div>
+           
+
             </div>
         </div>
 

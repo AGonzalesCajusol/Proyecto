@@ -73,7 +73,19 @@ def moda_niños():
 
 @app.route('/pago_de_productos')
 def pago_de_productos():
-    return render_template('/templates/pago_de_productos.html')
+    distrito = request.values.get('cbobox-distrito')
+    provincia = request.values.get('provincia')
+    departamento = request.values.get('departamento')
+    print(distrito,provincia,departamento)
+    dato = controlador_envio.direccion_envio(distrito,provincia, departamento)
+    return render_template('/templates/pago_de_productos.html', monto = dato)
+
+@app.route('/calcularmonto')
+def monto(distrito,provincia,departamento):
+    dato = controlador_envio.direccion_envio(distrito,provincia, departamento)
+    print(dato)
+    return jsonify({"monto" : dato})
+
 
 @app.route('/preguntas_frecuentes')
 def preguntas_frecuentes():
