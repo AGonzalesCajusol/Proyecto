@@ -66,17 +66,34 @@ function cargarProductos() {
 }
 
 function guardardi (){
-    console.log("hello")
-    // Obtener los valores que deseas almacenar
+    var departamento = document.getElementById('cbobox-departamento').value;
+    var provincia = document.getElementById('mostrar_provincias').value;
+    var distrito = document.getElementById('distrito').value;
+    var jiron = document.getElementById('text-avenida-calle-jiron').value;
     var direccion = document.getElementById("text-avenida-calle-jiron").value;
     var referencia = document.getElementById("text-dpto-int").value;
-
-    // Almacenar los valores en localStorage
-    localStorage.setItem("direccion", direccion);
-    localStorage.setItem("referencia", referencia);
-
+    console.log(departamento,provincia,distrito,jiron);
+    try {
+        if (departamento && provincia && distrito && jiron){
+            localStorage.removeItem("datos_envio");
+            var dic = {
+                "departamento" : departamento,
+                "provincia": provincia,
+                "distrito": distrito,
+                "jiron": jiron,
+                "direccion": direccion,
+                "referencia": referencia,
+            }
+            var dicJson = JSON.stringify(dic);
+            localStorage.setItem('datos_envio', dicJson);
+            window.open( "pago_de_productos");
+        }else{
+            alert("Ingrese todos sus datos porfavor")
+        }
+    } catch {
+        alert("Ocurrio un error")
+    }
 }
-
 
 //Función para eliminar un producto del carrito de compras
 function eliminarProductoDelCarrito() {
@@ -93,28 +110,6 @@ function eliminarProductoDelCarrito() {
         cargarProductos();
     }
 }
-
-
-function irPaginaPagoDeProductos() {
-    var valorCboBoxDep = document.getElementById("cbobox-departamento").value;
-    var valorCboBoxProv = document.getElementById("cbobox-provincia").value;
-    var valorCboBoxDist = document.getElementById("cbobox-distrito").value;
-    var valorDireccion = document.getElementById("text-avenida-calle-jiron").value;
-
-    if (
-        valorCboBoxDep.trim() === "" ||
-        valorCboBoxProv.trim() === "" ||
-        valorCboBoxDist.trim() === "" ||
-        valorDireccion.trim() === ""
-      ) {
-        alert("Por favor, ingrese una dirección válida");
-      } else {
-        guardarDatosCliente();
-        window.open("pago_de_productos.html","_self");
-      }
-}
-
-//Función para obtener los datos de la dirección del cliente
 function guardarDatosCliente() {
     var valorCboBoxDep = document.getElementById("cbobox-departamento").value;
     var valorCboBoxProv = document.getElementById("cbobox-provincia").value;
@@ -172,6 +167,48 @@ async function mostrar_distritos() {
         }
     } catch (error) {
         console.error('Error al obtener los datos de distritos:', error);
+    }
+}
+
+function agregarProductoAlCarrito() {
+    var botonSeleccionado = document.querySelector('#btn-seleccionado');
+
+    if (botonSeleccionado !== null) {
+
+
+        var titulo = document.getElementById('valor-titulo-producto').textContent;
+        var rutaImagen = document.getElementById('imagen-carrito-vista-previa').getAttribute('src');
+        var cantidad = parseInt(document.getElementById('valor-cantidad').textContent.replace('Cantidad: ', ''));
+        
+        var precio = document.getElementById('valor-precio').textContent;
+        var precio = parseFloat(precio.match(/\d+\.\d+/)[0]).toFixed(2);
+
+        var total = document.getElementById('valor-total').textContent;
+        total =parseFloat(total.match(/\d+\.\d+/)[0]).toFixed(2);
+  
+        
+        var key = parseInt(obtenerValorUnico());
+        
+        var datos = {   
+            // id: elid,
+            nombre: titulo,
+            talla: valorTalla,
+            rutaImagen: rutaImagen,
+            cantidad: cantidad,
+            precio: precio,
+            subtotal: total
+        };
+        
+        console.log(datos);
+        
+        localStorage.setItem(key, JSON.stringify(datos));
+
+        cerrarVentanaCarrito();
+        abrirVentanaModal2();
+        resetearIDboton(botonSeleccionado);
+
+    } else {
+        alert("Seleccione una talla");
     }
 }
 

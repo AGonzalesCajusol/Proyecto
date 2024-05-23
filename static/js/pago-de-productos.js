@@ -207,16 +207,22 @@ function irPaginaDeInicio() {
 }
 
 function abrirVentanaModalPagoConfirmado() {
-    var chckbox1 = document.getElementById("chckbox-recibire-yo");
-    var chckbox2 = document.getElementById("chckbox-recibira-otra-persona");
+    // var chckbox1 = document.getElementById("chckbox-recibire-yo");
+    // var chckbox2 = document.getElementById("chckbox-recibira-otra-persona");
     var dniReceptorPedido = document.getElementById("input-dni-cliente-pago").value;
     var nomApeReceptorPedido = document.getElementById("input-dni-nomApe-cliente").value;
 
-    if ((!chckbox1.checked || !chckbox2.checked) && dniReceptorPedido.trim() === '' && nomApeReceptorPedido.trim() === '') {
-        alert("Por favor, complete todos sus datos");
-    } else {
-        var ventanaPagoRealizado = document.getElementById("cont-pago-realizado");
-        ventanaPagoRealizado.style.display = "flex";
+    // if ((!chckbox1.checked || !chckbox2.checked) && dniReceptorPedido.trim() === '' && nomApeReceptorPedido.trim() === '') {
+    // } else {
+    //     var ventanaPagoRealizado = document.getElementById("cont-pago-realizado");
+    //     ventanaPagoRealizado.style.display = "flex";
+    // }
+    //Verificamos que se hayan ingresado los datos del cliente
+    
+    if (dniReceptorPedido && nomApeReceptorPedido){
+        alert("Felicidades por su compra :)")
+    }else{
+        alert("Ya es tarde duerma")
     }
 
 }

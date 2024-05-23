@@ -24,10 +24,10 @@ def validarusuario():
         flash('Datos incorrectos', 'success')
         return redirect(url_for('usuario'))
     
-@app.route('/transaccion_pedido')
-def usuarios():
-        nombres = request.form['nombres']
-        return redirect(url_for('usuario'))
+# @app.route('/transaccion_pedido')
+# def usuarios():
+#         nombres = request.form['nombres']
+#         return redirect(url_for('usuario'))
 
 #------rutas de tienda
 
