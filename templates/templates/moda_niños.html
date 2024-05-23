@@ -58,6 +58,9 @@
 <div id="contenedor-cards">
     {% for hm in datos_hm  %}
     <div id="card-card-1" class="card">
+        <div class="contenedor-id-card">
+            <input type="hidden" value="{{ hm[0] }} " id="id">
+        </div>
         <div class="espacio-card-1">
             <div class="contenedor-titulo-card">
                 {{hm[1]}}
@@ -107,6 +110,7 @@
             <div id="contenedor-imgcarrito-descripcioneleccion">
                 <img id="imagen-carrito-vista-previa" src="" alt="">
                 <div>
+                    <h6 id="valor-id" style="text-align: justify;"></h6>
                     <h6 id="valor-titulo-producto" style="text-align: justify;"></h6>
                     <h6 id="valor-cantidad"></h6>
                     <h6 id="valor-precio"></h6>

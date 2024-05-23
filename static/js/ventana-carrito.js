@@ -26,23 +26,21 @@ function resetearIDboton(bttn) {
 }
 
 function abrirVentanaCarrito(boton) {
+    var cardReferente = boton.closest('.card ');
+    var ids =   cardReferente.querySelector('.contenedor-id-card input').value;
 
-    var cardReferente = boton.closest('.card');
-
-    // var ids =   cardReferente.querySelector('.contenedor-id-card')
     var titulos = cardReferente.querySelector('.contenedor-titulo-card');
     var cantidades = cardReferente.querySelector('.cantidad-item');
     var precios = cardReferente.querySelector('.contenedor-precio h6:last-child');
     var imagen = cardReferente.querySelector('.item');
 
-    // var id = ids.textContent.trim();
     var titulo = titulos.textContent.trim();
     var cantidad = cantidades.textContent.trim();
     var precio = precios.textContent.trim().replace('S/. ', '');
     var totalProducto = (cantidad * precio).toFixed(2);
     var rutaImagen = imagen.getAttribute('src');
 
-    // document.getElementById('valor-id-producto').textContent = id;
+    document.getElementById('valor-id').textContent = ids;
     document.getElementById('valor-titulo-producto').textContent = titulo;
     document.getElementById('valor-precio').innerHTML = '<b>Precio: </b> S/. ' + precio;
     document.getElementById('valor-cantidad').innerHTML = '<b>Cantidad: </b>' + cantidad;
@@ -116,7 +114,7 @@ function agregarProductoAlCarrito() {
 
         var valorTalla = botonSeleccionado.textContent;
 
-        // var elid = document.getElementById('valor-id-producto').textContent;
+        var ids = document.getElementById('valor-id').textContent
         var titulo = document.getElementById('valor-titulo-producto').textContent;
         var rutaImagen = document.getElementById('imagen-carrito-vista-previa').getAttribute('src');
         var cantidad = parseInt(document.getElementById('valor-cantidad').textContent.replace('Cantidad: ', ''));
@@ -127,11 +125,11 @@ function agregarProductoAlCarrito() {
         var total = document.getElementById('valor-total').textContent;
         total =parseFloat(total.match(/\d+\.\d+/)[0]).toFixed(2);
   
-        
         var key = parseInt(obtenerValorUnico());
         
+        var data = []
         var datos = {   
-            // id: elid,
+            id: ids,
             nombre: titulo,
             talla: valorTalla,
             rutaImagen: rutaImagen,
@@ -139,10 +137,8 @@ function agregarProductoAlCarrito() {
             precio: precio,
             subtotal: total
         };
-        
-        console.log(datos);
-        
-        localStorage.setItem(key, JSON.stringify(datos));
+        data.push(datos);
+        localStorage.setItem("productos",JSON.stringify(data));
 
         cerrarVentanaCarrito();
         abrirVentanaModal2();
