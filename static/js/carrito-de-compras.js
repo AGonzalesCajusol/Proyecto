@@ -1,14 +1,53 @@
-// Se ejecuta al abrir la página
 document.addEventListener("DOMContentLoaded", function () {
-    var indicadorHayProductos = Object.keys(localStorage).filter(clave => !isNaN(clave)).length;
-    if (indicadorHayProductos === 0) {
-        mostrarDivNoHayProductos();
-        document.getElementById("titulo-carrito-de-compras").remove();
-    } else {
+    var indicadorHayProductos = localStorage.getItem("productos") ? 1 : 0;
+    console.log(indicadorHayProductos)
+    if (indicadorHayProductos ==  1) {
         mostrarDivHayProductos();
+        document.getElementById("titulo-carrito-de-compras").remove();
         cargarProductos();
+    } else {
+        mostrarDivNoHayProductos();
     }
 });
+
+function cargarProductos() {
+    // Obtener el div contenedor de productos
+    var divContenedorProductos = document.getElementById("contenedor-productos");
+    // Obtener los productos del localStorage
+    var productos = JSON.parse(localStorage.getItem("productos")) || [];
+    // Inicializar la cadena de registro
+    var registro = '';
+    // Recorrer la lista de productos
+    productos.forEach(producto => {
+        try {
+            // Obtener los datos del producto
+            var tituloProd = producto.nombre;
+            var tallaProd = producto.talla;
+            var rutaImagenProd = producto.rutaImagen;
+            var cantidadProd = producto.cantidad;
+            var precioProd = parseFloat(producto.precio);
+            var subtotalProd = parseFloat(producto.subtotal);
+            // Construir la representación HTML del producto
+            registro += `<div class="card-producto">
+                <div class="cont-producto">
+                    <img class="img-card-producto" src="${rutaImagenProd}" alt="">
+                    <div class="cont-descr-producto">
+                        <h6 class="titulo-producto"><b>${tituloProd}</b></h6>
+                        <h6><b>Talla: </b>${tallaProd}</h6>
+                        <h6><b>Precio: </b>S/. ${precioProd.toFixed(2)}</h6>
+                        <h6><b>Cantidad: </b>${cantidadProd}</h6>
+                        <div><b>Subtotal producto: </b>S/. ${subtotalProd.toFixed(2)}</div>
+                    </div>
+                    <button id="btn-eliminar-producto" onclick="eliminarProductoDelCarrito()">Eliminar</button>
+                </div>
+            </div>`;
+        } catch (error) {
+            // Manejar el error de JSON no válido
+        }
+    });
+    // Mostrar los productos en el contenedor
+    divContenedorProductos.innerHTML = registro;
+}
 
 //Función que muestra los productos en el carrito de compras
 function mostrarDivHayProductos() {
@@ -25,46 +64,6 @@ function mostrarDivNoHayProductos() {
     contenedorHayProductos.style.display = "none";
     contenedorNoHayProductos.style.display = "flex";
 }
-
-
-function cargarProductos() {
-    // Obtener el div contenedor de productos
-    var divContenedorProductos = document.getElementById("contenedor-productos");
-
-    // Inicializar la cadena de registro
-    var registro = '';
-
-    // Recorrer el local storage para obtener todos los productos agregados
-    for (var i = 0; i < localStorage.length; i++) {
-        var clave = localStorage.key(i);
-
-        if (clave !== "direccionCliente") {
-            var itemClave = localStorage.getItem(clave);
-
-            try {
-                // Intentar analizar la cadena JSON
-                var objetoProductoJSON = JSON.parse(itemClave);
-
-                // Obtener los datos del producto
-                var tituloProd = objetoProductoJSON.nombre;
-                var tallaProd = objetoProductoJSON.talla;
-                var rutaImagenProd = objetoProductoJSON.rutaImagen;
-                var cantidadProd = objetoProductoJSON.cantidad;
-                var precioProd = parseFloat(objetoProductoJSON.precio);
-                var subtotalProd = parseFloat(objetoProductoJSON.subtotal);
-
-                // Construir la representación HTML del producto
-                registro += '<div class="card-producto"><div class="cont-producto"><p class="identificador-producto">' + clave + '</p><img class="img-card-producto" src="' + rutaImagenProd + '" alt=""><div class="cont-descr-producto"><h6 class="titulo-producto"><b>' + tituloProd + '</b></h6><h6><b>Talla: </b>' + tallaProd + '</h6><h6><b>Precio: </b>S/. ' + precioProd + '</h6><h6><b>Cantidad: </b>' + cantidadProd + '</h6><div><b>Subtotal producto: </b>S/. ' + subtotalProd + '</div></div><button id="btn-eliminar-producto" onclick="eliminarProductoDelCarrito()">Eliminar</button></div></div>';
-            } catch (error) {
-                // Manejar el error de JSON no válido
-            }
-        }
-    }
-
-    // Mostrar los productos en el contenedor
-    divContenedorProductos.innerHTML = registro;
-}
-
 function guardardi (){
     var departamento = document.getElementById('cbobox-departamento').value;
     var provincia = document.getElementById('mostrar_provincias').value;

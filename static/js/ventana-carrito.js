@@ -107,39 +107,51 @@ function irCarrito() {
 var key = parseInt(1); */
 
 function agregarProductoAlCarrito() {
-
+    // Obtener el botón seleccionado
     var botonSeleccionado = document.querySelector('#btn-seleccionado');
 
     if (botonSeleccionado !== null) {
-
+        // Obtener los valores de los elementos de la página
         var valorTalla = botonSeleccionado.textContent;
-
-        var ids = document.getElementById('valor-id').textContent
+        var ids = document.getElementById('valor-id').textContent;
         var titulo = document.getElementById('valor-titulo-producto').textContent;
         var rutaImagen = document.getElementById('imagen-carrito-vista-previa').getAttribute('src');
         var cantidad = parseInt(document.getElementById('valor-cantidad').textContent.replace('Cantidad: ', ''));
         
         var precio = document.getElementById('valor-precio').textContent;
-        var precio = parseFloat(precio.match(/\d+\.\d+/)[0]).toFixed(2);
+        precio = parseFloat(precio.match(/\d+\.\d+/)[0]).toFixed(2);
 
         var total = document.getElementById('valor-total').textContent;
-        total =parseFloat(total.match(/\d+\.\d+/)[0]).toFixed(2);
-  
-        var key = parseInt(obtenerValorUnico());
-        
-        var data = []
-        var datos = {   
-            id: ids,
-            nombre: titulo,
-            talla: valorTalla,
-            rutaImagen: rutaImagen,
-            cantidad: cantidad,
-            precio: precio,
-            subtotal: total
-        };
-        data.push(datos);
-        localStorage.setItem("productos",JSON.stringify(data));
+        total = parseFloat(total.match(/\d+\.\d+/)[0]).toFixed(2);
 
+        // Obtener los productos existentes del localStorage
+        var productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+        // Verificar si el producto ya existe en el carrito
+        var productoExistente = productos.find(producto => producto.id === ids && producto.talla === valorTalla && producto.nombre === titulo);
+
+        if (productoExistente) {
+            // Si el producto ya existe, incrementar la cantidad
+            productoExistente.cantidad += cantidad;
+            productoExistente.subtotal = (parseFloat(productoExistente.precio) * productoExistente.cantidad).toFixed(2);
+        } else {
+            // Si el producto no existe, agregarlo a la lista de productos
+            var datos = {   
+                id: ids,
+                nombre: titulo,
+                talla: valorTalla,
+                rutaImagen: rutaImagen,
+                cantidad: cantidad,
+                precio: precio,
+                subtotal: (parseFloat(precio) * cantidad).toFixed(2)
+            };
+            productos.push(datos);
+        }
+
+        // Guardar la lista actualizada en el localStorage
+        localStorage.setItem("productos", JSON.stringify(productos));
+
+        // Llamar a otras funciones necesarias
         cerrarVentanaCarrito();
         abrirVentanaModal2();
         resetearIDboton(botonSeleccionado);

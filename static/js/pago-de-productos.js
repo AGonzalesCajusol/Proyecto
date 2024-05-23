@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function cargarProductos() {
     //Obtengo el div al que le insertaré el producto
     var divContenedorProductos = document.getElementById("contenedor-productos");
-
     //Variable para almacenar el contenido HTML del div al que le insertaré los productos
     var registro = '';
 
