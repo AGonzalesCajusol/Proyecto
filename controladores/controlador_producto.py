@@ -37,16 +37,18 @@ def obtener_calzados():
     productos = []
     with conexion.cursor() as cursor:
         cursor.execute("""
-            SELECT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
+            SELECT DISTINCT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
                 p.descripcion, p.estado, tp.tipo AS tipo_producto, g.genero, m.marca, c.categoria, ge.grupoedad, 
-                p.enlace_imagen
+                p.enlace_imagen, pr.color
             FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 
             INNER JOIN categoria c ON p.id_categoria = c.id 
             INNER JOIN genero g ON p.id_genero = g.id 
             INNER JOIN grupo_edad ge ON p.id_grupo_edad = ge.id 
-            Where c.categoria = "Calzado"
+            INNER JOIN detalle_presentacion dp ON p.id = dp.id_producto
+            INNER JOIN presentacion pr ON pr.id = dp.id_presentacion
+            WHERE c.categoria = "Calzado" 
             ORDER BY p.id ASC;
         """)
         productos = cursor.fetchall()
@@ -58,17 +60,20 @@ def obtener_modahombre():
     productos = []
     with conexion.cursor() as cursor:
         cursor.execute("""
-            SELECT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
+            SELECT DISTINCT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
                 p.descripcion, p.estado, tp.tipo AS tipo_producto, g.genero, m.marca, c.categoria, ge.grupoedad, 
-                p.enlace_imagen
+                p.enlace_imagen,pr.color
             FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 
             INNER JOIN categoria c ON p.id_categoria = c.id 
             INNER JOIN genero g ON p.id_genero = g.id 
             INNER JOIN grupo_edad ge ON p.id_grupo_edad = ge.id 
-            Where c.categoria = "Ropa Hombre"
+            INNER JOIN detalle_presentacion dp ON p.id = dp.id_producto
+            INNER JOIN presentacion pr ON pr.id = dp.id_presentacion
+            WHERE c.categoria = "Ropa Hombre" 
             ORDER BY p.id ASC;
+
         """)
         productos = cursor.fetchall()
     conexion.close()
@@ -82,17 +87,20 @@ def obtener_ropaniños():
     productos = []
     with conexion.cursor() as cursor:
         cursor.execute("""
-            SELECT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
+            SELECT DISTINCT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
                 p.descripcion, p.estado, tp.tipo AS tipo_producto, g.genero, m.marca, c.categoria, ge.grupoedad, 
-                p.enlace_imagen
+                p.enlace_imagen, pr.color
             FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 
             INNER JOIN categoria c ON p.id_categoria = c.id 
             INNER JOIN genero g ON p.id_genero = g.id 
             INNER JOIN grupo_edad ge ON p.id_grupo_edad = ge.id 
-            Where c.categoria = "Ropa niños"
+            INNER JOIN detalle_presentacion dp ON p.id = dp.id_producto
+            INNER JOIN presentacion pr ON pr.id = dp.id_presentacion
+            WHERE c.categoria = "Ropa niños"
             ORDER BY p.id ASC;
+
         """)
         productos = cursor.fetchall()
     conexion.close()
@@ -103,17 +111,19 @@ def obtener_modamujer():
     productos = []
     with conexion.cursor() as cursor:
         cursor.execute("""
-            SELECT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
+            SELECT DISTINCT p.id, p.nombre, p.precio, p.descuento, ROUND(p.precio - (p.precio * p.descuento), 2) AS precio_d, 
                 p.descripcion, p.estado, tp.tipo AS tipo_producto, g.genero, m.marca, c.categoria, ge.grupoedad, 
-                p.enlace_imagen
+                p.enlace_imagen, pr.color
             FROM producto p 
             INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id 
             INNER JOIN marca m ON p.id_marca = m.id 
             INNER JOIN categoria c ON p.id_categoria = c.id 
             INNER JOIN genero g ON p.id_genero = g.id 
             INNER JOIN grupo_edad ge ON p.id_grupo_edad = ge.id 
-            Where c.categoria = "Ropa Mujer"
-            ORDER BY p.id ASC;
+            INNER JOIN detalle_presentacion dp ON p.id = dp.id_producto
+            INNER JOIN presentacion pr ON pr.id = dp.id_presentacion
+            WHERE c.categoria = "Ropa Mujer"
+            ORDER BY p.id ASC;  
         """)
         productos = cursor.fetchall()
     conexion.close()

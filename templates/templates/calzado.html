@@ -60,6 +60,9 @@
     <div id="contenedor-cards">
         {% for cat in datos_calzado %}
         <div id="card-card" class="card">
+            <div class="contenedor-id-cards">
+                <input type="hidden" value="{{ cat[13] }} " id="color">
+            </div>
             <div class="contenedor-id-card">
                 <input type="hidden" value="{{ cat[0] }} " id="id">
             </div>
@@ -122,7 +125,8 @@
             <div id="contenedor-imgcarrito-descripcioneleccion">
                 <img id="imagen-carrito-vista-previa" src="" alt="">
                 <div>
-                    <h6 id="valor-id" style="text-align: justify;"></h6>
+                    <h6 id="valor-color" style="text-align: justify;" hidden></h6>
+                    <h6 id="valor-id" style="text-align: justify;" hidden></h6>
                     <h6 id="valor-titulo-producto" style="text-align: justify;"></h6>
                     <h6 id="valor-titulo-producto" style="text-align: justify;"></h6>
                     <h6 id="valor-cantidad"></h6>

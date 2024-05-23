@@ -18,7 +18,9 @@ function cargarProductos() {
     // Inicializar la cadena de registro
     var registro = '';
     // Recorrer la lista de productos
+    var indice = -1;
     productos.forEach(producto => {
+        indice++;
         try {
             // Obtener los datos del producto
             var tituloProd = producto.nombre;
@@ -27,6 +29,7 @@ function cargarProductos() {
             var cantidadProd = producto.cantidad;
             var precioProd = parseFloat(producto.precio);
             var subtotalProd = parseFloat(producto.subtotal);
+
             // Construir la representación HTML del producto
             registro += `<div class="card-producto">
                 <div class="cont-producto">
@@ -38,8 +41,8 @@ function cargarProductos() {
                         <h6><b>Cantidad: </b>${cantidadProd}</h6>
                         <div><b>Subtotal producto: </b>S/. ${subtotalProd.toFixed(2)}</div>
                     </div>
-                    <button id="btn-eliminar-producto" onclick="eliminarProductoDelCarrito()">Eliminar</button>
-                </div>
+                    <a id="btn-eliminar-producto" onclick="eliminarProductoDelCarrito(${indice} )">Eliminar<a>
+                    </div>
             </div>`;
         } catch (error) {
             // Manejar el error de JSON no válido
@@ -85,7 +88,7 @@ function guardardi (){
             }
             var dicJson = JSON.stringify(dic);
             localStorage.setItem('datos_envio', dicJson);
-            window.open( "pago_de_productos");
+            window.open( "contenedor-carrito-de-comprasde_productos");
         }else{
             alert("Ingrese todos sus datos porfavor")
         }
@@ -94,21 +97,23 @@ function guardardi (){
     }
 }
 
-//Función para eliminar un producto del carrito de compras
-function eliminarProductoDelCarrito() {
-    var identificadorProducto = event.target.parentElement.querySelector('.identificador-producto').innerText;
+function eliminarProductoDelCarrito(indice) {
+    // Obtener los productos del localStorage
+    var productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-    // Elimina el producto del local storage
-    localStorage.removeItem(identificadorProducto);
+    // Verificar que el índice proporcionado esté dentro del rango de productos
+    if (indice >= 0 && indice < productos.length) {
+        // Eliminar el diccionario del array de productos
+        productos.splice(indice, 1);
+        localStorage.setItem("productos", JSON.stringify(productos));
 
-    // Actualiza la interfaz de usuario
-    var indicadorHayProductos = Object.keys(localStorage).filter(clave => !isNaN(clave)).length;
-    if (indicadorHayProductos === 0) {
-        window.open("carrito_de_compras","_self");
-    } else {
+        // Actualizar la interfaz de usuario
         cargarProductos();
+    } else {
+        console.error("El índice proporcionado está fuera del rango de productos.");
     }
 }
+
 function guardarDatosCliente() {
     var valorCboBoxDep = document.getElementById("cbobox-departamento").value;
     var valorCboBoxProv = document.getElementById("cbobox-provincia").value;

@@ -28,6 +28,8 @@ function resetearIDboton(bttn) {
 function abrirVentanaCarrito(boton) {
     var cardReferente = boton.closest('.card ');
     var ids =   cardReferente.querySelector('.contenedor-id-card input').value;
+    var color =   cardReferente.querySelector('.contenedor-id-cards input').value;
+
 
     var titulos = cardReferente.querySelector('.contenedor-titulo-card');
     var cantidades = cardReferente.querySelector('.cantidad-item');
@@ -40,6 +42,7 @@ function abrirVentanaCarrito(boton) {
     var totalProducto = (cantidad * precio).toFixed(2);
     var rutaImagen = imagen.getAttribute('src');
 
+    document.getElementById('valor-color').textContent = color;
     document.getElementById('valor-id').textContent = ids;
     document.getElementById('valor-titulo-producto').textContent = titulo;
     document.getElementById('valor-precio').innerHTML = '<b>Precio: </b> S/. ' + precio;
@@ -114,6 +117,8 @@ function agregarProductoAlCarrito() {
         // Obtener los valores de los elementos de la página
         var valorTalla = botonSeleccionado.textContent;
         var ids = document.getElementById('valor-id').textContent;
+        var colores= document.getElementById('valor-color').textContent
+        colores = colores.valueOf.trim
         var titulo = document.getElementById('valor-titulo-producto').textContent;
         var rutaImagen = document.getElementById('imagen-carrito-vista-previa').getAttribute('src');
         var cantidad = parseInt(document.getElementById('valor-cantidad').textContent.replace('Cantidad: ', ''));
@@ -143,6 +148,7 @@ function agregarProductoAlCarrito() {
                 rutaImagen: rutaImagen,
                 cantidad: cantidad,
                 precio: precio,
+                color:  colores,
                 subtotal: (parseFloat(precio) * cantidad).toFixed(2)
             };
             productos.push(datos);
