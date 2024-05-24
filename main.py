@@ -121,7 +121,7 @@ def ini():
 @app.route('/pago_deproducto/<string:departamento>/<string:provincia>/<string:distrito>')
 def pago_deproducto(departamento,provincia,distrito):
     monto = controlador_envio.morto_envio(distrito,provincia,departamento)
-    return render_template('pago_de_productos.html', monto = monto)
+    return render_template('/templates/pago_de_productos.html', monto = monto)
 
 # --------marca--------------
 @app.route('/marca')
