@@ -74,11 +74,9 @@ function guardardi (){
     var jiron = document.getElementById('text-avenida-calle-jiron').value;
     var direccion = document.getElementById("text-avenida-calle-jiron").value;
     var referencia = document.getElementById("text-dpto-int").value;
-    console.log(departamento,provincia,distrito,jiron);
     try {
         if (departamento && provincia && distrito && jiron){
             localStorage.removeItem("datos_envio");
-            var monto = 0
             var dic = {
                 "departamento" : departamento,
                 "provincia": provincia,
@@ -86,19 +84,22 @@ function guardardi (){
                 "jiron": jiron,
                 "direccion": direccion,
                 "referencia": referencia,
-                "monto": monto
+                "monto": 0.0
             }
             var dicJson = JSON.stringify(dic);
             localStorage.setItem('datos_envio', dicJson);
-
-            window.location.href = "pago_de_productos";
-        }else{
+            
+            var url = "/pago_deproducto/" + departamento + "/" + provincia + "/" + distrito;
+            console.log(url);
+            window.location.href =  url;
+        }else{  
             alert("Ingrese todos sus datos porfavor")
         }
     } catch {
         alert("Ocurrio un error")
     }
 }
+
 
 function eliminarProductoDelCarrito(indice) {
     // Obtener los productos del localStorage
