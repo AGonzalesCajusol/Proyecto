@@ -117,16 +117,13 @@ def ini():
     return  render_template('maestra.html')
 
 #-------------------------------TRANSACCIÓN------------------------------------
-@app.route("/retornar_stockproducto/<string:id>/<string:color>/<string:talla>", methods=["GET"])
-def stockproducto(id,color,talla):
-    try:
-        stock = controlador_producto.stock();
-    except:
-
-        return " hello"
-    
-
-#------------------------------------------------------------------------------------
+@app.route("/retornar_stockproducto/<string:id>/<string:color>/<string:talla>", methods=["POST"])
+def stockproducto(id, color, talla):
+    id_presentacion = controlador_detallepresentacion.obteneridxpresentacion(color, talla)
+    stock = controlador_producto.stock(id_presentacion, id)
+    if stock is None:
+        stock = 0
+    return jsonify(stock)
 
 # --
 @app.route('/pago_deproducto/<string:departamento>/<string:provincia>/<string:distrito>')
@@ -204,6 +201,7 @@ def actualizar_tipoproducto():
     descripcion = request.form['descripcion']
     controlador_tipoproducto.actualizar_tipoproducto(id,tipo,descripcion)
     return redirect('tipo_producto')
+
 
 #------Categoria
 

@@ -18,6 +18,14 @@ def insertar_detalle(id_producto, id_presentacion, stock):
     conexion.commit()
     conexion.close()
 
+def   obteneridxpresentacion(color,talla):
+    conexion = obtener_conexion()
+    id = 0
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT id  FROM presentacion WHERE color = %s AND talla = %s ", (color,talla))
+        id=  cursor.fetchone()
+    conexion.close()
+    return id
 
 
 def eliminar_genero(id):
