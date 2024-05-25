@@ -118,7 +118,6 @@ function agregarProductoAlCarrito() {
         var valorTalla = botonSeleccionado.textContent;
         var ids = document.getElementById('valor-id').textContent;
         var colores= document.getElementById('valor-color').textContent
-        colores = colores.valueOf.trim
         var titulo = document.getElementById('valor-titulo-producto').textContent;
         var rutaImagen = document.getElementById('imagen-carrito-vista-previa').getAttribute('src');
         var cantidad = parseInt(document.getElementById('valor-cantidad').textContent.replace('Cantidad: ', ''));
