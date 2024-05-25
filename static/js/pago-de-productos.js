@@ -9,9 +9,8 @@ function cargarProductos() {
     var divContenedorProductos = document.getElementById("contenedor-productos");
     //Variable para almacenar el contenido HTML del div al que le insertaré los productos
     var registro = '';
-
     var total = 0;
-    var costoEnvio = 15;
+    var costoEnvio = document.getElementById('mnt').value;
 
     //Recorro el local storage para obtener todos los productos agregados
     for (i = 0; i < localStorage.length; i++) {
@@ -20,7 +19,6 @@ function cargarProductos() {
         if (!isNaN(clave) && clave !== "direccionCliente") {
             var itemClave = localStorage.getItem(clave);
             var objetoProductoJSON = JSON.parse(itemClave);
-
             //Obtengo los datos del producto
             var tituloProd = objetoProductoJSON.nombre;
             var tallaProd = objetoProductoJSON.talla;
@@ -29,14 +27,11 @@ function cargarProductos() {
             var precioProd = parseFloat(objetoProductoJSON.precio);
             var subtotalProd = parseFloat(objetoProductoJSON.subtotal);
             total += subtotalProd;
-
             registro += '<div class="card-producto"><div class="cont-producto"><img class="img-card-producto" src="' + rutaImagenProd + '" alt=""><div class="cont-descr-producto"><h6 class="titulo-producto"><b>' + tituloProd + '</b></h6><h6><b>Talla: </b>' + tallaProd + '</h6><h6><b>Precio: </b>S/. ' + precioProd + '</h6><h6><b>Cantidad: </b>' + cantidadProd + '</h6><div><b>Subtotal producto: </b>S/. ' + subtotalProd + '</div></div></div></div>';
         }
     }
-
     total = parseFloat(total + costoEnvio).toFixed(2);
     var subtotalProductos = parseFloat(total - costoEnvio).toFixed(2);
-
     divContenedorProductos.innerHTML = registro + '<div class="subtotal-costo-envio-total"><h6><b>Subtotal productos: </b></h6><h6>S/. ' + subtotalProductos + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Costo de envío: </b></h6><h6>S/. ' + parseFloat(costoEnvio).toFixed(2) + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Total a pagar: </b></h6><h6>S/. ' + total + '</h6></div>';
 }
 

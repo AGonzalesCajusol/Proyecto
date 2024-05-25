@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     var indicadorHayProductos = localStorage.getItem("productos") ? 1 : 0;
     console.log(indicadorHayProductos)

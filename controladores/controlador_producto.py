@@ -10,6 +10,15 @@ def insertar_producto(nombre, precio, estado, descripcion, descuento, id_tipo_pr
     conexion.commit()
     conexion.close()
 
+def stock(id,color,talla):
+    conexion = obtener_conexion()
+    with conexion.cursor() as cursor:
+        cursor.execute('''
+            Select * from producto
+        ''')
+    conexion.close()
+
+
 
 def obtener_productos():
     conexion = obtener_conexion()

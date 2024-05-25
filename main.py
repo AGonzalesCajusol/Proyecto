@@ -116,6 +116,17 @@ def registrarusuario():
 def ini():
     return  render_template('maestra.html')
 
+#-------------------------------TRANSACCIÓN------------------------------------
+@app.route("/retornar_stockproducto/<string:id>/<string:color>/<string:talla>", methods=["GET"])
+def stockproducto(id,color,talla):
+    try:
+        stock = controlador_producto.stock();
+    except:
+
+        return " hello"
+    
+
+#------------------------------------------------------------------------------------
 
 # --
 @app.route('/pago_deproducto/<string:departamento>/<string:provincia>/<string:distrito>')
