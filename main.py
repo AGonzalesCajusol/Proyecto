@@ -122,12 +122,8 @@ def stockproducto(id, color, talla):
     print("entro")
     id_presentacion = controlador_detallepresentacion.obteneridxpresentacion(color, talla)
     stock = controlador_producto.stock(id_presentacion, id)
-
     if stock is None:
         stock = 0
-    print("Valor de stock:", stock)
-    print(stock)
-
     return jsonify(stock)
 
 # --

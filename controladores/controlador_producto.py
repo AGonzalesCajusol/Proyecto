@@ -13,13 +13,16 @@ def insertar_producto(nombre, precio, estado, descripcion, descuento, id_tipo_pr
 def stock(idpr, id_pro):
     conexion = obtener_conexion()
     stock = 0
-    with conexion.cursor() as cursor:
-        cursor.execute('''
-            select stock from detalle_presentacion
-                where detalle_presentacion.id_presentacion = %s  and detalle_presentacion.id_producto = %s;
-        ''',(idpr,id_pro))
-        stock = cursor.fetchone()
-    conexion.close()
+    try:
+        with conexion.cursor() as cursor:
+            cursor.execute('''
+                select stock from detalle_presentacion
+                    where detalle_presentacion.id_presentacion = %s  and detalle_presentacion.id_producto = %s;
+            ''',(idpr,id_pro))
+            stock = cursor.fetchone()
+        conexion.close()
+    except:
+        stock = 0
     return  stock
 
 def obtener_productos():
