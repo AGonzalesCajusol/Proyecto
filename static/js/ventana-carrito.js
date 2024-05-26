@@ -112,7 +112,6 @@ var key = parseInt(1); */
 function agregarProductoAlCarrito() {
     // Obtener el botón seleccionado
     var botonSeleccionado = document.querySelector('#btn-seleccionado');
-
     if (botonSeleccionado !== null) {
         // Obtener los valores de los elementos de la página
         var valorTalla = botonSeleccionado.textContent;
@@ -130,10 +129,8 @@ function agregarProductoAlCarrito() {
 
         // Obtener los productos existentes del localStorage
         var productos = JSON.parse(localStorage.getItem("productos")) || [];
-
         // Verificar si el producto ya existe en el carrito
         var productoExistente = productos.find(producto => producto.id === ids && producto.talla === valorTalla && producto.nombre === titulo);
-
         if (productoExistente) {
             // Si el producto ya existe, incrementar la cantidad
             productoExistente.cantidad += cantidad;

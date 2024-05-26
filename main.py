@@ -135,10 +135,10 @@ def stockproducto(id, color, talla):
     return Response(xml_response, mimetype='application/xml')
 
 # --
-@app.route('/pago_deproducto/<string:departamento>/<string:provincia>/<string:distrito>')
+@app.route('/pago_deproducto/<string:departamento>/<string:provincia>/<string:distrito>', methods=['POST'])
 def pago_deproducto(departamento,provincia,distrito):
     monto = controlador_envio.morto_envio(distrito,provincia,departamento)
-    return render_template('/templates/pago_de_productos.html', monto = monto)
+    return render_template('/pago/pago_de_productos.htmll', monto = monto)
 
 # --------marca--------------
 @app.route('/marca')

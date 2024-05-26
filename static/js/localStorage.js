@@ -1,13 +1,17 @@
+var estado = false;
+actualizar_productos();
 window.onload = function() {
     var pathname = window.location.pathname;
     if (pathname === "/carrito_de_compras") {
-        actualizar_storage();
+        actualizar_productos();
+        validar_stock();
     } else if (pathname === "/pagina2.html") {
         otra_funcion();
     } else {
         console.log("No hay una función específica para esta página.");
     }
 };
+
 function obtener_datos() {
     return new Promise(function(resolve, reject) {
         var local = localStorage.getItem("productos");
@@ -51,25 +55,125 @@ function obtener_datos() {
     });
 }
 
-function actualizar_storage() {
+function actualizar_productos() {
     obtener_datos().then(function(datos) {
-        var stocks = datos[0];
         var precios = datos[1];
-
-        //validamos el stock de cada producto 
-        var productos = localStorage.getItem("productos")
+        var productos = localStorage.getItem("productos");
         var objPr = JSON.parse(productos);
-  
-        for (var i = 0 ; i< objPr.length; i++){
-            var producto =  objPr[i]
-            var stock = producto.cantidad;
-            console.log(stocks[i])
-            console.log(stock)
+        var pr = [];
+
+        for (var i = 0; i < objPr.length; i++) {
+            var producto = objPr[i];
+            var subtotal = producto.cantidad * precios[i];
+            var diccionario = {
+                "cantidad": producto.cantidad,
+                "color": producto.color,
+                "id": producto.id,
+                "nombre": producto.nombre,
+                "precio": precios[i],
+                "rutaImagen": producto.rutaImagen,
+                "subtotal": subtotal,
+                "talla": producto.talla
+            };
+            pr.push(diccionario);
         }
-
-
+        localStorage.setItem("productos", JSON.stringify(pr));
     }).catch(function(error) {
         console.error("Error al actualizar los datos:", error);
     });
 }
 
+function validar_stock() {
+    obtener_datos().then(function(datos) {
+        estado = true;
+        var stocks = datos[0];
+        var precios = datos[1];
+        var productos = localStorage.getItem("productos");
+        var objPr = JSON.parse(productos);
+        var docu = document.getElementsByClassName('card-producto');
+
+        for (var i = 0; i < objPr.length; i++) {
+            var stock = objPr[i].cantidad;
+            var id = "stockDiv_" + i; 
+            var existingDiv = document.getElementById(id);
+            if (stock >= stocks[i]) {
+                if (stocks[i] == 0) {
+                    if (!existingDiv) {
+                        var div = document.createElement("div");
+                        div.id = id;
+                        div.textContent = "No hay stock del producto";
+                        docu[i].classList.add("border", "border-danger", "border-3");
+                        docu[i].appendChild(div);
+                    } else {
+                        existingDiv.textContent = "No hay stock del producto";
+                    }
+                    estado = false;
+                } else {
+                    if (!existingDiv) {
+                        var div = document.createElement("div");
+                        div.id = id;
+                        div.textContent = "Del producto solo quedan " + stocks[i] + " productos";
+                        docu[i].classList.add("border", "border-danger", "border-3");
+                        docu[i].appendChild(div);
+                    } else {
+                        existingDiv.textContent = "Del producto solo quedan " + stocks[i] + " productos";
+                    }
+                    estado = false;
+                }
+                alert("No hay stock del producto" + objPr[1].nombre);
+            } else {
+                if (existingDiv) {
+                    docu[i].removeChild(existingDiv);
+                }
+            }
+        }
+        return estado;
+    }).catch(function(error) {
+        console.error("Error al actualizar los datos:", error);
+    });
+}
+
+
+function guardardi() {
+    var departamento = document.getElementById('cbobox-departamento').value;
+    var provincia = document.getElementById('mostrar_provincias').value;
+    var distrito = document.getElementById('distrito').value;
+    var jiron = document.getElementById('text-avenida-calle-jiron').value;
+    var direccion = document.getElementById("text-avenida-calle-jiron").value;
+    var referencia = document.getElementById("text-dpto-int").value;
+    var esta = true;
+    try {
+        if (departamento && provincia && distrito && jiron) {
+            localStorage.removeItem("datos_envio");
+            var dic = {
+                "departamento": departamento,
+                "provincia": provincia,
+                "distrito": distrito,
+                "jiron": jiron,
+                "direccion": direccion,
+                "referencia": referencia,
+                "monto": 0.0
+            }
+            var dicJson = JSON.stringify(dic);
+            localStorage.setItem('datos_envio', dicJson);
+        } else {
+            alert("Ingrese todos sus datos por favor");
+            esta = false;
+        }
+       validar_stock();
+       console.log(estado,esta)
+        if (esta && estado) {
+            $.ajax({
+                type: "POST",
+                url: "/pago_deproducto/" + departamento + "/" + provincia + "/" + distrito,
+                success: function(response) {
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al realizar la solicitud:', error);
+                }
+            });
+        }
+    } catch (error) {
+        alert("Ocurrió un error: " + error);
+    }
+}

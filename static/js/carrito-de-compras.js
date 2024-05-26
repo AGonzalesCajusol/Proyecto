@@ -1,7 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     var indicadorHayProductos = localStorage.getItem("productos") ? 1 : 0;
-    console.log(indicadorHayProductos)
     if (indicadorHayProductos ==  1) {
         mostrarDivHayProductos();
         document.getElementById("titulo-carrito-de-compras").remove();
@@ -12,13 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function cargarProductos() {
-    // Obtener el div contenedor de productos
+    actualizar_productos();
     var divContenedorProductos = document.getElementById("contenedor-productos");
-    // Obtener los productos del localStorage
     var productos = JSON.parse(localStorage.getItem("productos")) || [];
-    // Inicializar la cadena de registro
     var registro = '';
-    // Recorrer la lista de productos
     var indice = -1;
     productos.forEach(producto => {
         indice++;
@@ -67,38 +63,6 @@ function mostrarDivNoHayProductos() {
     var contenedorNoHayProductos = document.getElementById("contenedor-mostrar-no-hay-productos");
     contenedorHayProductos.style.display = "none";
     contenedorNoHayProductos.style.display = "flex";
-}
-function guardardi (){
-    var departamento = document.getElementById('cbobox-departamento').value;
-    var provincia = document.getElementById('mostrar_provincias').value;
-    var distrito = document.getElementById('distrito').value;
-    var jiron = document.getElementById('text-avenida-calle-jiron').value;
-    var direccion = document.getElementById("text-avenida-calle-jiron").value;
-    var referencia = document.getElementById("text-dpto-int").value;
-    try {
-        if (departamento && provincia && distrito && jiron){
-            localStorage.removeItem("datos_envio");
-            var dic = {
-                "departamento" : departamento,
-                "provincia": provincia,
-                "distrito": distrito,
-                "jiron": jiron,
-                "direccion": direccion,
-                "referencia": referencia,
-                "monto": 0.0
-            }
-            var dicJson = JSON.stringify(dic);
-            localStorage.setItem('datos_envio', dicJson);
-            
-            var url = "/pago_deproducto/" + departamento + "/" + provincia + "/" + distrito;
-            console.log(url);
-            window.location.href =  url;
-        }else{  
-            alert("Ingrese todos sus datos porfavor")
-        }
-    } catch {
-        alert("Ocurrio un error")
-    }
 }
 
 
