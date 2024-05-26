@@ -6,6 +6,36 @@
 {% block titulo %}  Pago de productos  {% endblock %}
 {% block contenido %}
     <main>
+        <div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="message">
+                Launch static backdrop modal
+            </button>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Proceso de Transaccion</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <div class="spinner-border spinner-border-lg text-primary" role="status" id="sta">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <div class="">
+                                    <img src=" {{ url_for('static', filename = 'img/confirmar.png') }}" alt="">
+                                </div>
+                            </div>
+                            <div class="mensaje">
+                                    <h5 id="mensaje">Su compra ha sido registrada, gracias por comprar</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
         <div id="cont-main-pago-prod">
             <input type="text" id="mnt"  value = "{{ monto[0] }}" hidden>
             <h4 style="margin-bottom: 40px;"><b>¡Estás a un paso de completar tu pedido!</b></h4>
