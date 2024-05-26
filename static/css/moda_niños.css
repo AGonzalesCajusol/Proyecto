@@ -54,7 +54,8 @@
 }
 
 .contenedor-item{
-    width: fit-content;
+    width: 250px;
+    height: 280px;
     display: flex;
     justify-content: center;
 }
@@ -179,6 +180,8 @@
     background-color: #1d1d1b;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    width: 290px;
+    height: 95px;
 }
 
 .espacio-card-2{
