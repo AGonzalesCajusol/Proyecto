@@ -75,14 +75,12 @@
                 <div class="contenedor-contenido-card">
                     <div class="contenedor-precio">
                         {% if cat[2] == cat[4]  %}
-                        <h6 class="text-danger text-end ">S/. {{ cat[2] }}</h6>
+                        <h6 class="text-danger text-end">S/. {{ cat[2] }}</h6>
                         {% else %}
                         <h6><s class="text-secondary">S/. {{ cat[2] }}</s></h6>
                         <h6 class="text-danger">S/. {{ cat[4] }}</h6>
                         {% endif %}
                     </div>
-                    
-
                     <div class="contenedor-item">
                         <img class="item" src="{{ url_for('static', filename='img/' + cat[12]) }}" alt="Imagen item 1">
                     </div>
@@ -103,8 +101,6 @@
             </div>
         </div>
         {% endfor %}
-
-
     </div>
     <!-- Lógica -->
 
