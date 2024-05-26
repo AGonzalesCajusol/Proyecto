@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function cargarProductos() {
+    actualizar_productos();
     var divContenedorProductos = document.getElementById("contenedor-productos");
     var productos = JSON.parse(localStorage.getItem("productos")) || [];
     var registro = '';
@@ -62,38 +63,6 @@ function mostrarDivNoHayProductos() {
     var contenedorNoHayProductos = document.getElementById("contenedor-mostrar-no-hay-productos");
     contenedorHayProductos.style.display = "none";
     contenedorNoHayProductos.style.display = "flex";
-}
-function guardardi (){
-    var departamento = document.getElementById('cbobox-departamento').value;
-    var provincia = document.getElementById('mostrar_provincias').value;
-    var distrito = document.getElementById('distrito').value;
-    var jiron = document.getElementById('text-avenida-calle-jiron').value;
-    var direccion = document.getElementById("text-avenida-calle-jiron").value;
-    var referencia = document.getElementById("text-dpto-int").value;
-    try {
-        if (departamento && provincia && distrito && jiron){
-            localStorage.removeItem("datos_envio");
-            var dic = {
-                "departamento" : departamento,
-                "provincia": provincia,
-                "distrito": distrito,
-                "jiron": jiron,
-                "direccion": direccion,
-                "referencia": referencia,
-                "monto": 0.0
-            }
-            var dicJson = JSON.stringify(dic);
-            localStorage.setItem('datos_envio', dicJson);
-            
-            var url = "/pago_deproducto/" + departamento + "/" + provincia + "/" + distrito;
-            console.log(url);
-            window.location.href =  url;
-        }else{  
-            alert("Ingrese todos sus datos porfavor")
-        }
-    } catch {
-        alert("Ocurrio un error")
-    }
 }
 
 
