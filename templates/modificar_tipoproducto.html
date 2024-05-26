@@ -15,8 +15,8 @@
                     <textarea class="form-control" placeholder="Descripción" name="descripcion" id="descripcion" rows="3">{{ tipo_producto[2] }}</textarea>
                     <hr>
                     <div class="text-end">
-                        <a href="{{ url_for('tipo_producto') }}" class="btn btn-danger mt-2">Volver</a>
-                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                        <a href="{{ url_for('tipo_producto') }}" class="btn btn-danger mt-2" onclick="return confirmarCancelacion()">Cancelar</a>
+                        <button type="submit" class="btn btn-primary mt-2" onclick="return confirmarModificacion()">Guardar</button>
                     </div>
                 </form>
                 
