@@ -1,142 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %} Inicio {% endblock %}</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo_point_roo.png') }}" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos-globales.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block titulo %}Inicio{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo_point_roo.png') }}" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos-globales.css') }}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet" />
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Roboto", sans-serif;
+            padding-top: 60px;
+            background-color: #f4f4f9;
         }
-        .offcanvas {
-            transition: transform 0.3s ease-in-out;
+
+        .header {
+            background-color: #343a40;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dee2e6;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1050;
+            height: 60px;
         }
-        .nav-item .nav-link {
-            transition: background-color 0.3s, color 0.3s;
-            border-radius: 0.25rem;
+
+        .header .logo {
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+
+        .header .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header .menu-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .breadcrumb {
+            margin: 70px 20px 10px 20px;
+        }
+
+        .user-info {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
             display: flex;
             align-items: center;
         }
-        .nav-item .nav-link:hover {
-            background-color: #0056b3;
-            color: white;
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        .nav-item .nav-link.active {
+
+        .btn-logout {
+            color: #fff;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-logout:hover {
+            color: #d9534f;
+        }
+
+        /* Sidenav Styles */
+        .sidenav {
+            height: calc(100% - 60px);
+            width: 0;
+            position: fixed;
+            z-index: 1051;
+            top: 60px;
+            /* Align with header */
+            left: 0;
+            background-color: #343a40;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
             background-color: #007bff;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
             color: white;
         }
-        .nav-item .nav-link i {
+
+        .main-content {
+            transition: margin-left 0.5s;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            /* Agregado margen inferior */
+            overflow-x: auto;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Add padding to avoid content overlay */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+
+        .sidenav a i {
             margin-right: 10px;
         }
-        .offcanvas-header {
+
+        .menu-btn i {
+            margin-left: 25px;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-container {
+            padding: 0 20px;
+            overflow-x: auto;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
             background-color: #343a40;
-        }
-        .offcanvas-title {
             color: white;
-        }
-        .btn-close {
-            color: white;
-        }
-        .offcanvas-body {
-            padding: 0;
-        }
-        .nav.flex-column {
-            width: 100%;
-        }
-        .nav-item {
-            width: 100%;
-        }
-        .menu-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1050;
         }
     </style>
 </head>
-<body>
-    <!-- Button to trigger offcanvas -->
-    <button class="btn btn-primary menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" id="menuButton">
-        <i class="bi bi-arrow-right"></i>
-    </button>
 
-    <!-- Offcanvas sidebar -->
-    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<body>
+    <div class="header">
+        <div class="d-flex align-items-center">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/logo_point_roo.png') }}" alt="Point Roo" />
+                <h5>Point Roo</h5>
+            </div>
+            <span class="menu-btn" onclick="openNav()">
+                <i class="bi bi-list"></i>
+            </span>
         </div>
-        <div class="offcanvas-body">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-white active" href="{{ url_for('index') }}"><i class="bi bi-house-door"></i>Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('marca') }}"><i class="bi bi-tags"></i>Marca</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('tipo_producto') }}"><i class="bi bi-box-seam"></i>Tipo Producto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('categoria') }}"><i class="bi bi-grid-3x3-gap"></i>Categoria</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('presentacion') }}"><i class="bi bi-journal"></i>Presentacion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('grupo_edad') }}"><i class="bi bi-people"></i>Grupo edad</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('genero') }}"><i class="bi bi-gender-ambiguous"></i>Genero</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('producto') }}"><i class="bi bi-box"></i>Producto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('detallepresentacion') }}"><i class="bi bi-card-list"></i>Detalle Presentacion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('detallepresentacion') }}"><i class="bi bi-person"></i>Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('departamento') }}"><i class="bi bi-building"></i>Departamento</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('provincia') }}"><i class="bi bi-map"></i>Provincia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('distrito') }}"><i class="bi bi-geo-alt"></i>Distrito</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('usuario') }}"><i class="bi bi-box-arrow-right"></i>Cerrar sesión</a>
-                </li>
-            </ul>
+        <div class="user-actions">
+            <div class="user-info">Bienvenido</div>
+            <a class="btn-logout nav-link text-white" href="{{ url_for('usuario') }}">
+                <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+            </a>
         </div>
     </div>
 
-    <div class="container mt-3">
-        {% block tabla %} {% endblock %}
-        {% block body %} {% endblock %}
+    <!-- Breadcrumb for navigation -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% block breadcrumb %}{% endblock %}
+        </ol>
+    </nav>
+
+    <!-- Sidenav -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('index') }}"><i class="bi bi-house-door"></i> Inicio</a>
+        <a href="{{ url_for('marca') }}"><i class="bi bi-tags"></i> Marca</a>
+        <a href="{{ url_for('tipo_producto') }}"><i class="bi bi-box-seam"></i> Tipo Producto</a>
+        <a href="{{ url_for('categoria') }}"><i class="bi bi-grid-3x3-gap"></i> Categoria</a>
+        <a href="{{ url_for('presentacion') }}"><i class="bi bi-journal"></i> Presentacion</a>
+        <a href="{{ url_for('grupo_edad') }}"><i class="bi bi-people"></i> Grupo edad</a>
+        <a href="{{ url_for('genero') }}"><i class="bi bi-gender-ambiguous"></i> Genero</a>
+        <a href="{{ url_for('producto') }}"><i class="bi bi-box"></i> Producto</a>
+        <a href="{{ url_for('detallepresentacion') }}"><i class="bi bi-card-list"></i> Detalle Presentacion</a>
+        <a href="{{ url_for('detallepresentacion') }}"><i class="bi bi-person"></i> Clientes</a>
+        <a href="{{ url_for('departamento') }}"><i class="bi bi-building"></i> Departamento</a>
+        <a href="{{ url_for('provincia') }}"><i class="bi bi-map"></i> Provincia</a>
+        <a href="{{ url_for('distrito') }}"><i class="bi bi-geo-alt"></i> Distrito</a>
+    </div>
+
+    <div class="container main-content mt-3">
+        <div class="table-container">{% block tabla %}</div>
+        {% endblock %} {% block body %}{% endblock %}
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var menuButton = document.getElementById('menuButton');
-            var offcanvas = document.getElementById('sidebarMenu');
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
 
-            offcanvas.addEventListener('show.bs.offcanvas', function () {
-                menuButton.style.display = 'none';
-            });
-
-            offcanvas.addEventListener('hidden.bs.offcanvas', function () {
-                menuButton.style.display = 'block';
-            });
-        });
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
     </script>
 </body>
+
 </html>
