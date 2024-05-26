@@ -5,11 +5,9 @@ window.onload = function() {
     if (pathname === "/carrito_de_compras") {
         actualizar_productos();
         validar_stock();
-    } else if (pathname === "/pagina2.html") {
-        otra_funcion();
-    } else {
-        console.log("No hay una función específica para esta página.");
-    }
+    } else if (pathname === "/pago_deproducto") {
+        actualizar_productos();
+    } 
 };
 
 function obtener_datos() {
@@ -143,6 +141,7 @@ function guardardi() {
     var referencia = document.getElementById("text-dpto-int").value;
     var esta = true;
     try {
+        validar_stock();
         if (departamento && provincia && distrito && jiron) {
             localStorage.removeItem("datos_envio");
             var dic = {
@@ -160,19 +159,19 @@ function guardardi() {
             alert("Ingrese todos sus datos por favor");
             esta = false;
         }
-       validar_stock();
-       console.log(estado,esta)
-        if (esta && estado) {
-            $.ajax({
-                type: "POST",
-                url: "/pago_deproducto/" + departamento + "/" + provincia + "/" + distrito,
-                success: function(response) {
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error al realizar la solicitud:', error);
-                }
-            });
-        }
+       if (esta && estado) {
+            // Llenar los campos del formulario con los valores adecuados
+            document.getElementsByName('distri')[0].value = distrito;
+            document.getElementsByName('provi')[0].value = provincia;
+            document.getElementsByName('depa')[0].value = departamento;
+
+            // Obtener el botón de enviar del formulario
+            var botonEnviar = document.getElementById('enviar');
+
+            // Hacer clic en el botón de enviar
+            botonEnviar.click();
+       }
+       
     } catch (error) {
         alert("Ocurrió un error: " + error);
     }

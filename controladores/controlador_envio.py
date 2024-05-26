@@ -12,7 +12,7 @@ def insertar_direccion_envio(nombres, direccion, montoenvio, referencia, tipo_en
         print("Ocurrió un error:", e)
 
 
-def morto_envio(distrito, provincia, departamento):
+def monto_envio(distrito, provincia, departamento):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
