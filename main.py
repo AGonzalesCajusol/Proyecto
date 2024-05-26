@@ -679,5 +679,300 @@ def insertar_provincia_route():
 #-------anggelo
 
 
+#####APIS######
+#####APIS######
+#####APIS######
+#####APIS######
+#####APIS######
+#####APIS######
+#####APIS######
+#####APIS######
+#####APIS######
+
+
+## OBTENER GENEROS 
+@app.route('/fs_obtener_generos')
+def api_obtener_generos():
+    try:
+        lista_genero = controlador_genero.obtener_generos()
+        rpt = dict()
+        lista_g = []
+
+        for genero in lista_genero:
+            objGenero = {
+                "id": genero[0],
+                "nombre": genero[1]
+            }
+            lista_g.append(objGenero)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_g
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+## OBTENER  MARCAS 
+
+
+@app.route('/fs_obtener_marcas')
+def api_obtenermarcas():
+    try:
+        lista_marca = controlador_marca.obtener_marcas()
+        rpt = dict()
+        lista_m = []
+        
+        for marca in lista_marca:
+            objMarca = {
+                "id": marca[0],
+                "nombre": marca[1]
+            }
+            lista_m.append(objMarca)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_m
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+
+## OBTENER  departamento  
+
+@app.route('/fs_obtener_departamentos')
+def api_obtener_departamentos():
+    try:
+        lista_departamento = controlador_departamento.obtener_departamentos()
+        rpt = dict()
+        lista_d = []
+
+        for departamento in lista_departamento:
+            objDepartamento = {
+                "id": departamento[0],
+                "departamento": departamento[1]
+            }
+            lista_d.append(objDepartamento)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_d
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+## OBTENER  grupo_edad  
+@app.route('/fs_obtener_grupos_edad')
+def api_obtener_grupos_edad():
+    try:
+        lista_grupo_edad = controlador_grupoedad.obtener_grupo_edad()
+        rpt = dict()
+        lista_ge = []
+
+        for grupo_edad in lista_grupo_edad:
+            objGrupoEdad = {
+                "id": grupo_edad[0],
+                "grupoedad": grupo_edad[1]
+            }
+            lista_ge.append(objGrupoEdad)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_ge
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+####obtener presentacion 
+@app.route('/fs_obtener_presentaciones')
+def api_obtener_presentaciones():
+    try:
+        lista_presentacion = controlador_presentacion.obtener_presentaciones()
+        rpt = dict()
+        lista_p = []
+
+        for presentacion in lista_presentacion:
+            objPresentacion = {
+                "id": presentacion[0],
+                "color": presentacion[1],
+                "talla": presentacion[2]
+            }
+            lista_p.append(objPresentacion)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_p
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+###obtener PROVINCIAS
+@app.route('/fs_obtener_provincias')
+def api_obtener_provincias():
+    try:
+        lista_provincia = controlador_provincia.obtener_provincia()
+        rpt = dict()
+        lista_p = []
+
+        for provincia in lista_provincia:
+            objProvincia = {
+                "id": provincia[0],
+                "provincia": provincia[1],
+                "departamento": provincia[2]
+            }
+            lista_p.append(objProvincia)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_p
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+### Obtener DISTRITOS
+@app.route('/fs_obtener_distritos')
+def api_obtener_distritos():
+    try:
+        lista_distritos = controlador_distrito.obtener_distrito()
+        rpt = dict()
+        lista_d = []
+
+        for distrito in lista_distritos:
+            objDistrito = {
+                "id": distrito[0],
+                "distrito": distrito[1],
+                "provincia": distrito[2]
+            }
+            lista_d.append(objDistrito)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_d
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+### Obtener TIPOS DE USUARIO
+@app.route('/fs_obtener_tipos_usuario')
+def api_obtener_tipos_usuario():
+    try:
+        lista_tipos_usuario = controlador_tipo_usuario.obtener_tipos_usuario()
+        rpt = dict()
+        lista_tipos = []
+
+        for tipo_usuario in lista_tipos_usuario:
+            objTipoUsuario = {
+                "id": tipo_usuario[0],
+                "nombre": tipo_usuario[1]
+            }
+            lista_tipos.append(objTipoUsuario)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_tipos
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+####obtenerusuarios
+
+@app.route('/fs_obtener_usuarios')
+def api_obtener_usuarios():
+    try:
+        email = request.args.get('email')
+        contraseña = request.args.get('contraseña')
+        lista_usuarios = controlador_usuario.obtener_usuario(email, contraseña)
+        rpt = dict()
+        lista_u = []
+
+        for usuario in lista_usuarios:
+            objUsuario = {
+                "nombres": usuario[0]
+            }
+            lista_u.append(objUsuario)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_u
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+### Obtener todos los productos
+@app.route('/fs_obtener_productos')
+def api_obtener_productos():
+    try:
+        productos = controlador_producto.obtener_productos()
+        rpt = {
+            "codigo": 1,
+            "mensaje": "Procesamiento correcto",
+            "datos": productos
+        }
+    except Exception as e:
+        rpt = {
+            "codigo": 0,
+            "mensaje": "Ocurrió un error: " + repr(e),
+            "datos": []
+        }
+    return jsonify(rpt)
+
+
+###direcciones_envio
+@app.route('/fs_obtener_direcciones_envio')
+def api_obtener_direcciones_envio():
+    try:
+        lista_direcciones = controlador_envio.direccion_envio()  # Suponiendo que `direccion_envio()` devuelve las direcciones de envío
+        rpt = dict()
+        lista_d = []
+
+        for direccion in lista_direcciones:
+            objDireccion = {
+                "id": direccion[0],
+                "nombres": direccion[1],
+                "direccion": direccion[2],
+                "montoenvio": float(direccion[3]),  # Convertir a float si es necesario
+                "referencia": direccion[4],
+                "tipo_envio": direccion[5],
+                "id_distrito": direccion[6]
+            }
+            lista_d.append(objDireccion)
+        
+        rpt["codigo"] = 1
+        rpt["mensaje"] = "Procesamiento correcto"
+        rpt["datos"] = lista_d
+    except Exception as e:
+        rpt["codigo"] = 0
+        rpt["mensaje"] = "Ocurrió un error: " + repr(e)
+        rpt["datos"] = []
+
+    return jsonify(rpt)
+
+
+
+
 if __name__ ==  '__main__':
     app.run(debug=5000)
