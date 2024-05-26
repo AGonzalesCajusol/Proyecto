@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function cargarProductos() {
+    validar_stock();
     // Obtengo los divs donde se insertarán los productos y los precios
     var divContenedorProductos = document.getElementById("productos");
     var divContenedorPrecios = document.getElementById("precios");
@@ -19,6 +20,8 @@ function cargarProductos() {
     costoEnvio = document.getElementById('mnt').value;
     
     var local = JSON.parse(localStorage.getItem("productos"));
+    var datosEnvio = JSON.parse(localStorage.getItem("datos_envio"));
+    var direccion = " departamento " + datosEnvio.departamento + " provincia  " +  datosEnvio.provincia + "distrito " + datosEnvio.distrito + "Jirón: "+  datosEnvio.jiron
     for (var i = 0; i < local.length; i++) {
         var objPr = local[i];
         var tituloProd = objPr.nombre;
@@ -31,7 +34,7 @@ function cargarProductos() {
     }
     subtotal();
     totalAPagar = parseFloat(subtotales) + parseFloat(costoEnvio);
-    registroPrecios += '<div class="subtotal-costo-envio-total"><h6><b>Subtotal productos: </b></h6><h6>S/. ' + subtotales + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Costo de envío: </b></h6><h6>S/. ' + parseFloat(costoEnvio).toFixed(2) + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Total a pagar: </b></h6><h6>S/. ' + totalAPagar + '</h6></div>';
+    registroPrecios += '<div class="subtotal-costo-envio-total"><h6><b>Subtotal productos: </b></h6><h6>S/. ' + subtotales + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Costo de envío: </b></h6><h6>S/. ' + parseFloat(costoEnvio).toFixed(2) + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Total a pagar: </b></h6><h6>S/. ' + totalAPagar + '</h6></div><div class="envio"><h6><b>Sera enviado a la dirección: </b></h6><h6>' + direccion+ '</h6></div>';
     divContenedorProductos.innerHTML = registroProductos;
     divContenedorPrecios.innerHTML = registroPrecios;
 }
@@ -91,7 +94,6 @@ function mostrarValoresDireccionCliente() {
 
     if (!valPisoOpc || valPisoOpc.trim() === "") {
         contenedorDireccion.innerHTML = '<h6><b>Dirección de entrega: </b>' + valCalle + ', ' + valDist + ', ' + valProv + ', ' + valDepart + '</h6>';
-        contenedorTarjeta.innerHTML = '<h6><b>Tarjeta: </b></h6><h6>VISA N° ' + numTarj1 + ' - ' + numTarj2 + ' - ' + numTarj3 + ' - ' + numTarj4 + '</h6>';
     } else {
         contenedorDireccion.innerHTML = '<h6><b>Dirección de entrega: </b>' + valCalle + ', ' + valPisoOpc + ', ' + valDist + ', ' + valProv + ', ' + valDepart + '</h6>';
         contenedorTarjeta.innerHTML = '<h6><b>Tarjeta: </b></h6><h6>VISA N° ' + numTarj1 + ' - ' + numTarj2 + ' - ' + numTarj3 + ' - ' + numTarj4 + '</h6>';
@@ -200,22 +202,15 @@ function irPaginaDeInicio() {
 }
 
 function abrirVentanaModalPagoConfirmado() {
-    // var chckbox1 = document.getElementById("chckbox-recibire-yo");
-    // var chckbox2 = document.getElementById("chckbox-recibira-otra-persona");
     var dniReceptorPedido = document.getElementById("input-dni-cliente-pago").value;
     var nomApeReceptorPedido = document.getElementById("input-dni-nomApe-cliente").value;
-
-    // if ((!chckbox1.checked || !chckbox2.checked) && dniReceptorPedido.trim() === '' && nomApeReceptorPedido.trim() === '') {
-    // } else {
-    //     var ventanaPagoRealizado = document.getElementById("cont-pago-realizado");
-    //     ventanaPagoRealizado.style.display = "flex";
-    // }
-    //Verificamos que se hayan ingresado los datos del cliente
-    
     if (dniReceptorPedido && nomApeReceptorPedido){
         alert("Felicidades por su compra :)")
+
     }else{
+
         alert("Ya es tarde duerma")
+        
     }
 
 }

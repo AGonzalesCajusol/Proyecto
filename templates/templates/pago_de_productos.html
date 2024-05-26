@@ -74,11 +74,7 @@
                             </div>
                             <div id="contenedor-direccion-envio--tipo-de-entrega">
                                 <div id="contenedor-direccion-envio">
-                                    <!-- <h6><b>Dirección de entrega: </b>Dirección abc</h6> -->
-                                </div>
-                                <div id="contenedor-tarjeta">
-                                    <!-- <h6><b>Tarjeta: </b></h6>
-                                    <h6>VISA N° 1234 - 5678 - 9012 - 3456</h6> -->
+                                    <h4>Los  productos seran enviados a esta direccion: <span id="dr"></span></h4>
                                 </div>
                                 <div id="cont-chckbox-yo-recibire">
                                     <input type="checkbox" class="form-check-input" id="chckbox-recibire-yo"
@@ -128,4 +124,28 @@
             </div>
         </div>
     </div>
+    <!-- Modal de Cargando -->
+<div class="modal" id="modalCargando">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cargando...</h5>
+      </div>
+      <div class="modal-body">
+        <p>Por favor, espere mientras procesamos su transacción.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal de Confirmación/Denegación -->
+  <div class="modal" id="modalResultado">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultadoTitulo"></h5>
+      </div>
+      <div class="modal-body">
+        <p id="resultadoMensaje"></p>
+      </div>
+    </div>
+  </div>
+  
 {% endblock %}
