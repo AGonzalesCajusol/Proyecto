@@ -167,6 +167,9 @@
     background-color: #1d1d1b;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    width: 128px;
+    height: 260px;
+    align-items: center;
 }
 
 .espacio-card-2{
@@ -175,6 +178,8 @@
     background-color: #ebebeb;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    width: 290px;
+    height: 515px;
 }
 
 .shrink {
