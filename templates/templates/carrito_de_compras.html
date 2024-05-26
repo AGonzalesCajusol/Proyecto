@@ -57,6 +57,15 @@
                             </div>
                                 <a onclick="guardardi()"  id="btn-continuar-compra-carrito" >Continuar con mi compra</a>
                         </div>
+
+                        <div>
+                            <form action="/pago_deproducto" method="POST">
+                                <input type="text" name="distri">
+                                <input type="text" name="provi">
+                                <input type="text" name="depa">
+                                <button id="enviar">Enviar</button>
+                            </form>
+                        </div>
                 </div>
            
 
