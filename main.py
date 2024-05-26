@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,Response
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,Response 
 from clases import clase_categoria as clscat
 from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
 import os
