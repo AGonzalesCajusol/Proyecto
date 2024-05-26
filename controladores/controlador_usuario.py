@@ -36,3 +36,20 @@ def usuario(email,contraseña):
         return nombres
     except Exception as e:
         print("Ocurrió un error:", e)
+
+
+
+
+################ codigo adicional ###
+def obtener_usuario(email, contraseña):
+    try:
+        nombres = []
+        conexion = obtener_conexion()
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT nombres FROM usuario WHERE correo = %s AND contraseña = %s", (email, contraseña))
+            nombres = cursor.fetchall()
+        conexion.close()
+        return nombres
+    except Exception as e:
+        print("Ocurrió un error:", e)
+        return None
