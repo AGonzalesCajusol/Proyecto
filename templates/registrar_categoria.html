@@ -8,14 +8,14 @@
         <div class="row">
             <div class="col-md-4">
                 <h3 class="mb-4 mt-4">Agregar Categoría</h3>
-                <form action="{{ url_for('insertar_categoria') }}" method="post">
+                <form action="{{ url_for('insertar_categoria') }}" method="post" onsubmit="return validarFormulario()">
                     <div class="mb-3">
                         <label for="categoria" class="form-label">Categoría:</label>
                         <input required type="text" class="form-control" id="categoria" name="categoria" placeholder="Ingrese el nombre de la categoría">
                     </div>
                     <hr>
                     <div class="text-end">
-                        <a href="{{ url_for('categoria') }}" class="btn btn-danger mt-2 me-2">Volver</a>
+                        <a href="{{ url_for('categoria') }}" class="btn btn-danger mt-2 me-2" onclick="return volver()">Volver</a>
                         <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                     </div>
                 </form>
