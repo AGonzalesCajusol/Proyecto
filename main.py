@@ -121,10 +121,12 @@ def ini():
 def stockproducto(id, color, talla):
     id_presentacion = controlador_detallepresentacion.obteneridxpresentacion(color, talla)
     stock = controlador_producto.stock(id_presentacion, id)
+    precio = controlador_producto.retornar_precio(id)
     if stock is None:
         stock = 0
     xml_response = f'''<respuesta>
     <valor>{stock}</valor>
+    <precio>{precio}</precio>
     </respuesta>'''
     return Response(xml_response, mimetype='application/xml')
 

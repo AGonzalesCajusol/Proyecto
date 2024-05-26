@@ -12,7 +12,7 @@ function actualizar_storage() {
     var local = localStorage.getItem("productos");
     if (local) {
         var productos = JSON.parse(local);
-        var promesas = productos.map(function(producto) {
+        var promesas = productos.map(function(producto, index) { // Guarda el índice original de cada producto
             return new Promise(function(resolve, reject) {
                 var xml = new XMLHttpRequest();
                 var url = "/retornar_stockproducto/" + producto.id + "/" + producto.color + "/" + producto.talla;
@@ -23,16 +23,13 @@ function actualizar_storage() {
                         const xmlResponseText = xml.responseText; 
                         const valores = xmlResponseText.split('<valor>').slice(1).map(cadena => cadena.split('</valor>')[0].trim());
                         const numeros = valores.map(valor => {
-                            // Reemplaza cualquier carácter que no sea un dígito o un punto con un espacio en blanco y luego elimina espacios en blanco adicionales
                             const valorLimpio = valor.replace(/[^\d.]/g, '').trim();
                             return parseFloat(valorLimpio);
                         });
-                        console.log(numeros);
+                        resolve({ index: index, numeros: numeros }); 
                     } else {
                         reject("No hay productos");
-                    }
-                    
-                    
+                    } 
                 };
                 xml.onerror = function() {
                     reject('Error en la solicitud XMLHttpRequest');
@@ -40,11 +37,10 @@ function actualizar_storage() {
                 xml.send();
             });
         });
-
-        Promise.all(promesas).then(function(datos) {
-            console.log("Datos actualizados:", datos);
-            // Guardar 'datos' en localStorage o realizar alguna otra acción
-            localStorage.setItem("datos_actualizados", JSON.stringify(datos));
+            Promise.all(promesas).then(function(resultados) {
+            resultados.sort((a, b) => a.index - b.index);
+            const numerosOrdenados = resultados.map(resultado => resultado.numeros);
+            console.log("Datos actualizados:", numerosOrdenados);
         }).catch(function(error) {
             console.error("Error al actualizar los datos:", error);
         });
