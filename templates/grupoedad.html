@@ -25,9 +25,9 @@
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <form action="/modificar_grupoedad" method="post">
                             <input type="hidden" name="id" value="{{ grupo_edad[0] }}">
-                            <button type="submit" class="btn btn-warning me-2">Modificar</button>
+                            <button type="submit" class="btn btn-warning me-2" onclick="return modificar()">Modificar</button>
                         </form>
-                        <a href="{{ url_for('eliminar_grupo_edad', id=grupo_edad[0]) }}" class="btn btn-danger">Eliminar</a>
+                        <a href="{{ url_for('eliminar_grupo_edad', id=grupo_edad[0]) }}" class="btn btn-danger" onclick="return confirmarEliminacion()">Eliminar</a>
                     </div>
                 </td>
             </tr>

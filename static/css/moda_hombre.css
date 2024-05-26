@@ -44,9 +44,11 @@
 }
 
 .contenedor-item{
-    width: fit-content;
+    width: 250px;
+    height: 250px;
     display: flex;
     justify-content: center;
+    
 }
 
 .item{
