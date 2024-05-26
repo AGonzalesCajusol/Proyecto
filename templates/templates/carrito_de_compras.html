@@ -18,6 +18,11 @@
                 </div>
 
                 <div id="contenedor-cuerpo-carrito"> <!-- color amarillo -->
+                    <div>
+                        <h6>El total actual de tu producto es de:  <span id="total"></span></h6>
+                    <hr>
+
+                    </div>
                     <div id="contenedor-contenedor-cuerpo-carrito">
                         <div id="contenedor-productos">
                         </div>
@@ -59,11 +64,11 @@
                         </div>
 
                         <div>
-                            <form action="/pago_deproducto" method="POST">
+                            <form id="miFormulario" action="/pago_deproducto" method="POST">
                                 <input type="text" name="distri">
                                 <input type="text" name="provi">
                                 <input type="text" name="depa">
-                                <button id="enviar">Enviar</button>
+                                <button type="submit" id="enviar">Enviar</button>
                             </form>
                         </div>
                 </div>

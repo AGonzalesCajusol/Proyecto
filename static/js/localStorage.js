@@ -1,10 +1,15 @@
 var estado = false;
+var toti = 0
 actualizar_productos();
 window.onload = function() {
+    var pre = document.getElementById("total");
     var pathname = window.location.pathname;
+    subtotal();
+    var pre = document.getElementById("total");
     if (pathname === "/carrito_de_compras") {
         actualizar_productos();
         validar_stock();
+        pre.textContent = toti;
     } else if (pathname === "/pago_deproducto") {
         actualizar_productos();
     } 
@@ -130,7 +135,13 @@ function validar_stock() {
         console.error("Error al actualizar los datos:", error);
     });
 }
-
+function subtotal() {
+    var local = JSON.parse(localStorage.getItem("productos"));
+    for (var i = 0; i < local.length; i++) {
+        var objPr = local[i];
+        toti += objPr.subtotal;
+    }
+}
 
 function guardardi() {
     var departamento = document.getElementById('cbobox-departamento').value;
