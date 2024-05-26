@@ -1,0 +1,39 @@
+{% extends "templates/maestra.html" %}
+{% block enlaces  %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pago_de_productos.css') }}">
+<script src="{{ url_for('static', filename='js/pago-de-productos.js') }}"></script>
+{% endblock %}
+{% block titulo %}  Pago de productos  {% endblock %}
+{% block contenido %}
+<style>
+    .large-div {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f3f3f3;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        padding: 15px;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div class="large-div">
+<div class="alert alert-success" role="alert">
+    Transacción completada. ¡Felicidades por su compra!
+</div>
+<p>This is a large div with a lot of content. You can add as much content as you want here.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar urna non elit cursus, eget sodales risus tempor. Nullam in ligula ut lectus porta volutpat nec a neque. Quisque ac odio nec lorem placerat semper. Donec elementum, quam eu condimentum euismod, eros sapien faucibus sapien, sit amet volutpat nulla libero vel orci. Suspendisse potenti. Sed suscipit mauris eget elit varius, nec accumsan mauris sollicitudin. Nullam id sapien non felis convallis condimentum. Sed lacinia eu justo eget malesuada. Proin ac lorem vehicula, aliquet nisi nec, malesuada lacus. In condimentum turpis et nunc malesuada, sed ultricies elit efficitur. Cras fermentum nunc sit amet nisi vulputate, non tristique nunc volutpat. Ut vestibulum, metus ac bibendum consectetur, dolor elit pharetra sapien, nec tincidunt ex dui at turpis. Nam fermentum turpis a augue accumsan, sit amet dapibus felis pharetra.</p>
+<!-- Add more content here -->
+</div>
+
+{% endblock %}

@@ -206,7 +206,7 @@ function abrirVentanaModalPagoConfirmado() {
     var nomApeReceptorPedido = document.getElementById("input-dni-nomApe-cliente").value;
     if (dniReceptorPedido && nomApeReceptorPedido){
         alert("Felicidades por su compra :)")
-
+        
     }else{
 
         alert("Ya es tarde duerma")
