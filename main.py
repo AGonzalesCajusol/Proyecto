@@ -134,9 +134,7 @@ def stockproducto(id, color, talla):
     </respuesta>'''
     return Response(xml_response, mimetype='application/xml')
 
-@app.route('/mensaje_transaccion')
-def mensaje_transaccion():
-    return render_template('/templates/mensaje_transaccion.html')
+
 
 @app.route('/pago_deproducto', methods=['POST'])
 def pago_deproducto():
