@@ -679,15 +679,7 @@ def insertar_provincia_route():
 #-------anggelo
 
 
-#####APIS######
-#####APIS######
-#####APIS######
-#####APIS######
-#####APIS######
-#####APIS######
-#####APIS######
-#####APIS######
-#####APIS######
+#####APISzelada rod4-------######
 
 
 ## OBTENER GENEROS 
