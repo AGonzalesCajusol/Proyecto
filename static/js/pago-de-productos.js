@@ -1,3 +1,6 @@
+var subtotales = 0
+var costoEnvio = 0
+var tota = 0
 document.addEventListener("DOMContentLoaded", function () {
     document.body.style.opacity="1";
     cargarProductos();
@@ -5,37 +8,42 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function cargarProductos() {
-    //Obtengo el div al que le insertaré el producto
-    var divContenedorProductos = document.getElementById("contenedor-productos");
-    //Variable para almacenar el contenido HTML del div al que le insertaré los productos
-    var registro = '';
+    // Obtengo los divs donde se insertarán los productos y los precios
+    var divContenedorProductos = document.getElementById("productos");
+    var divContenedorPrecios = document.getElementById("precios");
+    
+    // Variables para almacenar el contenido HTML de los productos y los precios
+    var registroProductos = '';
+    var registroPrecios = '';
     var total = 0;
-    var costoEnvio = document.getElementById('mnt').value;
-
-    //Recorro el local storage para obtener todos los productos agregados
-    for (i = 0; i < localStorage.length; i++) {
-        //Obtengo el producto almacenado en el local sotrage
-        var clave = localStorage.key(i);
-        if (!isNaN(clave) && clave !== "direccionCliente") {
-            var itemClave = localStorage.getItem(clave);
-            var objetoProductoJSON = JSON.parse(itemClave);
-            //Obtengo los datos del producto
-            var tituloProd = objetoProductoJSON.nombre;
-            var tallaProd = objetoProductoJSON.talla;
-            var rutaImagenProd = objetoProductoJSON.rutaImagen;
-            var cantidadProd = objetoProductoJSON.cantidad;
-            var precioProd = parseFloat(objetoProductoJSON.precio);
-            var subtotalProd = parseFloat(objetoProductoJSON.subtotal);
-            total += subtotalProd;
-            registro += '<div class="card-producto"><div class="cont-producto"><img class="img-card-producto" src="' + rutaImagenProd + '" alt=""><div class="cont-descr-producto"><h6 class="titulo-producto"><b>' + tituloProd + '</b></h6><h6><b>Talla: </b>' + tallaProd + '</h6><h6><b>Precio: </b>S/. ' + precioProd + '</h6><h6><b>Cantidad: </b>' + cantidadProd + '</h6><div><b>Subtotal producto: </b>S/. ' + subtotalProd + '</div></div></div></div>';
-        }
+    costoEnvio = document.getElementById('mnt').value;
+    
+    var local = JSON.parse(localStorage.getItem("productos"));
+    for (var i = 0; i < local.length; i++) {
+        var objPr = local[i];
+        var tituloProd = objPr.nombre;
+        var tallaProd = objPr.talla;
+        var rutaImagenProd = objPr.rutaImagen;
+        var cantidadProd = objPr.cantidad;
+        var precioProd = parseFloat(objPr.precio);
+        var subtotalProd = parseFloat(objPr.subtotal);
+        registroProductos += '<div class="card-producto"><div class="cont-producto"><img class="img-card-producto" src="' + rutaImagenProd + '" alt=""><div class="cont-descr-producto"><h6 class="titulo-producto"><b>' + tituloProd + '</b></h6><h6><b>Talla: </b>' + tallaProd + '</h6><h6><b>Precio: </b>S/. ' + precioProd + '</h6><h6><b>Cantidad: </b>' + cantidadProd + '</h6><div><b>Subtotal producto: </b>S/. ' + subtotalProd + '</div></div></div></div>';
     }
-    total = parseFloat(total + costoEnvio).toFixed(2);
-    var subtotalProductos = parseFloat(total - costoEnvio).toFixed(2);
-    divContenedorProductos.innerHTML = registro + '<div class="subtotal-costo-envio-total"><h6><b>Subtotal productos: </b></h6><h6>S/. ' + subtotalProductos + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Costo de envío: </b></h6><h6>S/. ' + parseFloat(costoEnvio).toFixed(2) + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Total a pagar: </b></h6><h6>S/. ' + total + '</h6></div>';
+    subtotal();
+    totalAPagar = parseFloat(subtotales) + parseFloat(costoEnvio);
+    registroPrecios += '<div class="subtotal-costo-envio-total"><h6><b>Subtotal productos: </b></h6><h6>S/. ' + subtotales + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Costo de envío: </b></h6><h6>S/. ' + parseFloat(costoEnvio).toFixed(2) + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Total a pagar: </b></h6><h6>S/. ' + totalAPagar + '</h6></div>';
+    divContenedorProductos.innerHTML = registroProductos;
+    divContenedorPrecios.innerHTML = registroPrecios;
 }
 
-//
+function subtotal() {
+    var local = JSON.parse(localStorage.getItem("productos"));
+    for (var i = 0; i < local.length; i++) {
+        var objPr = local[i];
+        subtotales += objPr.subtotal;
+    }
+}
+
 function mostrarResumenPedido() {
     var numtarj1 = document.getElementById("num1").value;
     var numtarj2 = document.getElementById("num2").value;
@@ -44,21 +52,14 @@ function mostrarResumenPedido() {
     var fectarj1 = document.getElementById("fec1").value;
     var fectarj2 = document.getElementById("fec2").value;
     var cvvtarj = document.getElementById("cvv").value;
-
     if (numtarj1.trim() === '' || numtarj2.trim() === '' || numtarj3.trim() === '' || numtarj4.trim() === '' || fectarj1.trim() === '' || fectarj2.trim() === '' || cvvtarj.trim() === '') {
         alert("Por favor, ingrese sus datos para continuar");
     } else {
         mostrarValoresDireccionCliente();
         document.getElementById("contenedor-mostrar-hay-productos").style.display = "flex";
     }
-
-        // Obtener los datos del localStorage
         var datosLocalStorage = JSON.stringify(localStorage.getItem('direccionCliente'));
-
-        // Actualizar el campo del formulario con los datos del localStorage
         document.getElementById('datosLocalStorageInput').value = datosLocalStorage;
-    
-        // Enviar el formulario al backend
         document.getElementById('formularioDatosLocalStorage').submit();
 }
 
@@ -69,18 +70,16 @@ function mostrarValoresDireccionCliente() {
     var numTarj3 = document.getElementById("num3").value;
     var numTarj4 = document.getElementById("num4").value;
 
-    // Obtener el valor asociado a la clave "direccionCliente"
     var claveDireccion = localStorage.getItem("direccionCliente");
 
-    // Verificar si la clave existe en localStorage antes de intentar parsear el JSON
     if (claveDireccion) {
         var objetoJSON = JSON.parse(claveDireccion);
-
         var valCalle = objetoJSON.calle;
         var valPisoOpc = objetoJSON.depapisoetc;
         var valDepart = formatoTitulo(objetoJSON.dpto);
         var valProv = formatoTitulo(objetoJSON.prov);
         var valDist = formatoTitulo(objetoJSON.dist);
+
 
         // Resto del código para utilizar los valores obtenidos...
     } else {

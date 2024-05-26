@@ -5,11 +5,9 @@ window.onload = function() {
     if (pathname === "/carrito_de_compras") {
         actualizar_productos();
         validar_stock();
-    } else if (pathname === "/pagina2.html") {
-        otra_funcion();
-    } else {
-        console.log("No hay una función específica para esta página.");
-    }
+    } else if (pathname === "/pago_deproducto") {
+        actualizar_productos();
+    } 
 };
 
 function obtener_datos() {
