@@ -15,9 +15,9 @@
 
     <style>
         body {
-            font-family: "Montserrat", sans-serif;
+            font-family: "Roboto", sans-serif;
             padding-top: 60px;
-            background-color: #f4f4f9;            
+            background-color: #f4f4f9;
         }
 
         .header {
@@ -95,7 +95,7 @@
             overflow-x: hidden;
             transition: transform 0.5s ease;
             padding-top: 20px;
-            transform: translateX(-100%);            
+            transform: translateX(-100%);
         }
 
         .sidenav.open {
@@ -108,7 +108,7 @@
             font-size: 18px;
             color: white;
             display: block;
-            transition: 0.3s;
+            transition: 0.5s;
             font-size: 15px;
         }
 
@@ -120,11 +120,17 @@
         .sidenav .closebtn {
             position: absolute;
             top: 0;
-            right: 25px;
-            font-size: 36px;
+            right: 0px;
+            font-size: 35px;
             margin-left: 50px;
             color: white;
         }
+
+        .sidenav .closebtn:hover {
+            color: white;
+            background-color: transparent;
+        }
+
 
         .main-content {
             transition: margin-left 0.5s;
@@ -230,8 +236,8 @@
 
     <!-- Sidenav -->
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="{{ url_for('index') }}"><i class="bi bi-house-door"></i> Inicio</a>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>        
+        <a href="{{ url_for('index') }}"><i class="bi bi-globe"></i> Inicio</a>        
         <a href="{{ url_for('marca') }}"><i class="bi bi-tags"></i> Marca</a>
         <a href="{{ url_for('tipo_producto') }}"><i class="bi bi-box-seam"></i> Tipo Producto</a>
         <a href="{{ url_for('categoria') }}"><i class="bi bi-grid-3x3-gap"></i> Categoria</a>
