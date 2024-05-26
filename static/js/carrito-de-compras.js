@@ -1,7 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     var indicadorHayProductos = localStorage.getItem("productos") ? 1 : 0;
-    console.log(indicadorHayProductos)
     if (indicadorHayProductos ==  1) {
         mostrarDivHayProductos();
         document.getElementById("titulo-carrito-de-compras").remove();
@@ -12,13 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function cargarProductos() {
-    // Obtener el div contenedor de productos
     var divContenedorProductos = document.getElementById("contenedor-productos");
-    // Obtener los productos del localStorage
     var productos = JSON.parse(localStorage.getItem("productos")) || [];
-    // Inicializar la cadena de registro
     var registro = '';
-    // Recorrer la lista de productos
     var indice = -1;
     productos.forEach(producto => {
         indice++;

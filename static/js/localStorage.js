@@ -55,19 +55,22 @@ function actualizar_storage() {
     obtener_datos().then(function(datos) {
         var stocks = datos[0];
         var precios = datos[1];
-
-        //validamos el stock de cada producto 
         var productos = localStorage.getItem("productos")
         var objPr = JSON.parse(productos);
-  
+        var docu = document.getElementsByClassName('card-producto');
         for (var i = 0 ; i< objPr.length; i++){
             var producto =  objPr[i]
             var stock = producto.cantidad;
             console.log(stocks[i])
             console.log(stock)
+
+            if(stock < stocks[i]){
+                console.log("stock en lo correcto")
+            }else{
+                alert("no hay stock")
+                docu[i].classList.add("border", "border-danger", "border-3");
+            }
         }
-
-
     }).catch(function(error) {
         console.error("Error al actualizar los datos:", error);
     });
