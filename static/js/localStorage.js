@@ -4,6 +4,7 @@ actualizar_productos();
 window.onload = function() {
     var pre = document.getElementById("total");
     var pathname = window.location.pathname;
+    document.getElementById("miFormulario").style.display = "none";
     subtotal();
     var pre = document.getElementById("total");
     if (pathname === "/carrito_de_compras") {
