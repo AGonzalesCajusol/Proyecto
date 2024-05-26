@@ -122,14 +122,17 @@ def stockproducto(id, color, talla):
     id_presentacion = controlador_detallepresentacion.obteneridxpresentacion(color, talla)
     stock = controlador_producto.stock(id_presentacion, id)
     precio = controlador_producto.retornar_precio(id)
+    descuento = controlador_producto.retornardsc(id)
+    precio_str = precio[0] - (precio[0] * descuento[0])
     if stock is None:
         stock = 0
+    else:
+        stock = stock[0]
     xml_response = f'''<respuesta>
-    <valor>{stock}</valor>
-    <precio>{precio}</precio>
+    <stock>{stock}</stock>
+    <precio>{precio_str}</precio>
     </respuesta>'''
     return Response(xml_response, mimetype='application/xml')
-
 
 # --
 @app.route('/pago_deproducto/<string:departamento>/<string:provincia>/<string:distrito>')

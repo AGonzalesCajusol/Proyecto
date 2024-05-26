@@ -11,6 +11,19 @@ def insertar_producto(nombre, precio, estado, descripcion, descuento, id_tipo_pr
     conexion.close()
 
 
+def retornardsc(id):
+    conexion = obtener_conexion()
+    dsc= 0
+    with conexion.cursor() as cursor:
+        cursor.execute("""
+            select descuento  from producto where id = %s;
+        """,(id))
+        dsc= cursor.fetchone()
+    conexion.close()
+    return dsc
+        
+
+
 def retornar_precio(id):
     conexion = obtener_conexion()
     precio= 0
