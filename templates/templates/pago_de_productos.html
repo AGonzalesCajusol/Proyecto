@@ -14,20 +14,21 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Proceso de Transaccion</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <a><img id="logo_tienda"
+                                src="{{ url_for('static', filename='img/logo_point_roo.png') }}" alt="logo de point roo"></a>
+                            <h1 class="modal-title fs-5 " id="staticBackdropLabel"><span>Proceso de Transaccion</span></h1>
                         </div>
                         <div class="modal-body">
                             <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
                                 <div class="spinner-border spinner-border-lg text-primary" role="status" id="sta">
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
-                                <div class="">
-                                    <img src=" {{ url_for('static', filename = 'img/confirmar.png') }}" alt="">
+                                <div class=" text-center">
+                                    <img class="w-25" src=" {{ url_for('static', filename = '') }}" alt="" >
                                 </div>
                             </div>
                             <div class="mensaje">
-                                    <h5 id="mensaje">Su compra ha sido registrada, gracias por comprar</h5>
+                                    <h5 id="mensaje">Esto puedo tomar algunos segundos....</h5>
                             </div>
                         </div>
                     </div>
