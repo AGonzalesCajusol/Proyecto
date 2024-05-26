@@ -26,9 +26,9 @@
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <form action="/modificarmarca" method="post">
                             <input type="hidden" name="id" value="{{ marca[0] }}">
-                            <button type="submit" class="btn btn-warning me-4 text-white ">Modificar</button>
+                            <button type="submit" class="btn btn-warning me-4 text-white " onclick="return modificar()">Modificar</button>
                         </form>
-                        <a href="{{ url_for('eliminar_marca', id=marca[0]) }}" class="btn btn-danger">Eliminar</a>
+                        <a href="{{ url_for('eliminar_marca', id=marca[0]) }}" class="btn btn-danger" onclick="return confirmarEliminacion()">Eliminar</a>
                     </div>
                 </td>
             </tr>
