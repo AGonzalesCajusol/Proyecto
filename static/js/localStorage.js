@@ -12,27 +12,42 @@ function actualizar_storage() {
     var local = localStorage.getItem("productos");
     if (local) {
         var productos = JSON.parse(local);
-        for (var i = 0; i < productos.length; i++) {
-            var id = productos[i].id;
-            var talla = productos[i].talla;
-            var color = productos[i].color;
-            
-            var xml = new XMLHttpRequest();
-            var url = "/retornar_stockproducto/"+ id+ "/"+color + "/"+ talla;
-            xml.open("GET", url, true); // Cambiado a método GET
-            xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xml.onload = function() {
-                if (xml.status >= 200 && xml.status < 300) {
-                    console.log("Stock actualizado:", xml.responseText);
-                } else {
-                    console.log("No hay productos", xml.responseText);
-                }
-            };
-            xml.onerror = function() {
-                console.error('Error en la solicitud XMLHttpRequest');
-            };
-            xml.send();
-        }
+        var promesas = productos.map(function(producto) {
+            return new Promise(function(resolve, reject) {
+                var xml = new XMLHttpRequest();
+                var url = "/retornar_stockproducto/" + producto.id + "/" + producto.color + "/" + producto.talla;
+                xml.open("GET", url, true);
+                xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xml.onload = function() {
+                    if (xml.status >= 200 && xml.status < 300) {
+                        const xmlResponseText = xml.responseText; 
+                        const valores = xmlResponseText.split('<valor>').slice(1).map(cadena => cadena.split('</valor>')[0].trim());
+                        const numeros = valores.map(valor => {
+                            // Reemplaza cualquier carácter que no sea un dígito o un punto con un espacio en blanco y luego elimina espacios en blanco adicionales
+                            const valorLimpio = valor.replace(/[^\d.]/g, '').trim();
+                            return parseFloat(valorLimpio);
+                        });
+                        console.log(numeros);
+                    } else {
+                        reject("No hay productos");
+                    }
+                    
+                    
+                };
+                xml.onerror = function() {
+                    reject('Error en la solicitud XMLHttpRequest');
+                };
+                xml.send();
+            });
+        });
+
+        Promise.all(promesas).then(function(datos) {
+            console.log("Datos actualizados:", datos);
+            // Guardar 'datos' en localStorage o realizar alguna otra acción
+            localStorage.setItem("datos_actualizados", JSON.stringify(datos));
+        }).catch(function(error) {
+            console.error("Error al actualizar los datos:", error);
+        });
     } else {
         console.log("No hay productos en el localStorage.");
     }

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,Response
 from clases import clase_categoria as clscat
 from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
 import os
@@ -119,12 +119,15 @@ def ini():
 #-------------------------------TRANSACCIÓN------------------------------------
 @app.route("/retornar_stockproducto/<string:id>/<string:color>/<string:talla>", methods=["GET"])
 def stockproducto(id, color, talla):
-    print("entro")
     id_presentacion = controlador_detallepresentacion.obteneridxpresentacion(color, talla)
     stock = controlador_producto.stock(id_presentacion, id)
     if stock is None:
         stock = 0
-    return jsonify(stock)
+    xml_response = f'''<respuesta>
+    <valor>{stock}</valor>
+    </respuesta>'''
+    return Response(xml_response, mimetype='application/xml')
+
 
 # --
 @app.route('/pago_deproducto/<string:departamento>/<string:provincia>/<string:distrito>')
