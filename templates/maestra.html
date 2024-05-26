@@ -265,7 +265,59 @@
         function closeNav() {
             document.getElementById("mySidenav").classList.remove('open');
         }
-
+        //MODIFICAR >>>> onclick="return modificar()"
+        function modificar() {
+            if (confirm('¿Deseas MODIFICAR este registro?')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        //ELIMINAR  >>>> onclick="return confirmarEliminacion()"
+        function confirmarEliminacion() {
+            if (confirm('¿Deseas ELIMINAR este registro?')) {
+                alert('ELIMINACIÓN EXITOSA!!!');
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //GUARD MOD >>>> onclick="return confirmarModificacion()"
+        function confirmarModificacion() {
+            if (confirm('CONFIRMAR MODIFICACION')) {
+                alert('MODIFICACION EXITOSA!!!');
+                return true; 
+            } else {
+                return false; 
+            }
+        }
+        //CANCELAR  >>>> onclick="return confirmarCancelacion()"
+        function confirmarCancelacion() {
+            if (confirm('¿CANCELAR MODIFICACION?')) {
+                alert('NO SE REALIZARON MODIFICACIONES!');
+                return true; 
+            } else {
+                return false; 
+            }
+        }
+        //GUARDAR   >>>> en el form al lado de: method="post" onsubmit="return validarFormulario()"
+        function validarFormulario() {
+            if (confirm('CONFIRMAR ACCION')) {
+                alert('REGISTRADO CORRECTAMENTE!!!');
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //VOLVER   >>>> onclick="return volver()"
+        function volver() {
+            if (confirm('REDIRIGIENDO A LA PAGUINA ANTERIOR..')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
 </body>
 
