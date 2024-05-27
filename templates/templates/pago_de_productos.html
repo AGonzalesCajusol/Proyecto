@@ -7,7 +7,7 @@
 {% block contenido %}
     <main>
         <div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="message">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="message" hidden>
                 Launch static backdrop modal
             </button>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -16,7 +16,7 @@
                         <div class="modal-header text-center">
                             <a><img id="logo_tienda"
                                 src="{{ url_for('static', filename='img/logo_point_roo.png') }}" alt="logo de point roo"></a>
-                            <h1 class="modal-title fs-5 " id="staticBackdropLabel"><span>Proceso de Transaccion</span></h1>
+                            <h1 class="modal-title fs-5 " id="staticBackdropLabel"><span>Proceso de Transaccion</span> <a href="" id="enlace"></a></h1>
                         </div>
                         <div class="modal-body">
                             <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
@@ -24,7 +24,7 @@
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                                 <div class=" text-center">
-                                    <img class="w-25" src=" {{ url_for('static', filename = '') }}" alt="" >
+                                    <img class="w-25" src="" alt="" id="im">
                                 </div>
                             </div>
                             <div class="mensaje">
@@ -105,32 +105,30 @@
                                 <div id="contenedor-direccion-envio">
                                     <h4>Los  productos seran enviados a esta direccion: <span id="dr"></span></h4>
                                 </div>
-                                <div id="cont-chckbox-yo-recibire">
-                                    <input type="checkbox" class="form-check-input" id="chckbox-recibire-yo"
-                                        onclick="manejarCheckbox(this)">
-                                    <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1"><i>Yo recibiré
-                                            el pedido</i></label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="grupo-checkbox" id="chckbox-recibire-yo" onclick="habilitar('chckbox-recibire-yo')">
+                                    <label class="form-check-label" for="chckbox-recibire-yo"><i>Yo recibiré el pedido</i></label>
                                 </div>
-                                <div id="cont-chckbox-recibira-otro">
-                                    <input type="checkbox" class="form-check-input" id="chckbox-recibira-otra-persona"
-                                        onclick="manejarCheckbox(this)">
-                                    <label id="lbl-he-leido" class="form-check-label" for="exampleCheck1"><i>Lo recibirá
-                                            otra persona:</i></label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="grupo-checkbox" id="chckbox-recibira-otra-persona" onclick="habilitar('chckbox-recibira-otra-persona')">
+                                    <label class="form-check-label" for="chckbox-recibira-otra-persona"><i>Lo recibirá otra persona:</i></label>
                                 </div>
-                            <form action="/transaccion_pedido">
+                                
+                                
+                   
                                 <input type="hidden" id="datosLocalStorageInput" name="datosLocalStorage">
                                 <div style="margin-bottom: 20px;" id="cont-dni-receptor-pedido">
                                     <h6><b name="dni">DNI del receptor del pedido:</b></h6>
-                                    <input id="input-dni-cliente-pago" class="inpt-dni-ape-nom" type="text">
+                                    <input id="input-dni-cliente-pago" class="inpt-dni-ape-nom" type="text" disabled>
                                 </div>
                                 <div id="cont-ape-nom-receptor-pedido">
                                     <h6><b name="nombres">Apellidos y nombres:</b></h6>
-                                    <input id="input-dni-nomApe-cliente" class="inpt-dni-ape-nom" type="text">
+                                    <input  id="input-dni-nomApe-cliente" class="inpt-dni-ape-nom" type="text" disabled>
                                 </div>
                             </div>
                             <button onclick="abrirVentanaModalPagoConfirmado()" id="btn-confirmar-pago">Confirmar
                                 pago</button>
-                            </form>
+                            
 
                         </div>
                     </div>

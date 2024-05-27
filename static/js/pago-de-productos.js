@@ -2,7 +2,7 @@ var subtotales = 0
 var costoEnvio = 0
 var tota = 0
 document.addEventListener("DOMContentLoaded", function () {
-    document.body.style.opacity="1";
+    document.body.style.opacity = "1";
     cargarProductos();
     var inputEnfocarPorDefecto = document.getElementById("num1").focus();
 });
@@ -12,16 +12,16 @@ function cargarProductos() {
     // Obtengo los divs donde se insertarán los productos y los precios
     var divContenedorProductos = document.getElementById("productos");
     var divContenedorPrecios = document.getElementById("precios");
-    
+
     // Variables para almacenar el contenido HTML de los productos y los precios
     var registroProductos = '';
     var registroPrecios = '';
     var total = 0;
     costoEnvio = document.getElementById('mnt').value;
-    
+
     var local = JSON.parse(localStorage.getItem("productos"));
     var datosEnvio = JSON.parse(localStorage.getItem("datos_envio"));
-    var direccion = " departamento " + datosEnvio.departamento + " provincia  " +  datosEnvio.provincia + "distrito " + datosEnvio.distrito + "Jirón: "+  datosEnvio.jiron
+    var direccion = " departamento " + datosEnvio.departamento + " provincia  " + datosEnvio.provincia + "distrito " + datosEnvio.distrito + "Jirón: " + datosEnvio.jiron
     for (var i = 0; i < local.length; i++) {
         var objPr = local[i];
         var tituloProd = objPr.nombre;
@@ -34,7 +34,7 @@ function cargarProductos() {
     }
     subtotal();
     totalAPagar = parseFloat(subtotales) + parseFloat(costoEnvio);
-    registroPrecios += '<div class="subtotal-costo-envio-total"><h6><b>Subtotal productos: </b></h6><h6>S/. ' + subtotales + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Costo de envío: </b></h6><h6>S/. ' + parseFloat(costoEnvio).toFixed(2) + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Total a pagar: </b></h6><h6>S/. ' + totalAPagar + '</h6></div><div class="envio"><h6><b>Sera enviado a la dirección: </b></h6><h6>' + direccion+ '</h6></div>';
+    registroPrecios += '<div class="subtotal-costo-envio-total"><h6><b>Subtotal productos: </b></h6><h6>S/. ' + subtotales + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Costo de envío: </b></h6><h6>S/. ' + parseFloat(costoEnvio).toFixed(2) + '</h6></div><div class="subtotal-costo-envio-total"><h6><b>Total a pagar: </b></h6><h6>S/. ' + totalAPagar + '</h6></div><div class="envio"><h6><b>Sera enviado a la dirección: </b></h6><h6>' + direccion + '</h6></div>';
     divContenedorProductos.innerHTML = registroProductos;
     divContenedorPrecios.innerHTML = registroPrecios;
 }
@@ -61,9 +61,9 @@ function mostrarResumenPedido() {
         mostrarValoresDireccionCliente();
         document.getElementById("contenedor-mostrar-hay-productos").style.display = "flex";
     }
-        var datosLocalStorage = JSON.stringify(localStorage.getItem('direccionCliente'));
-        document.getElementById('datosLocalStorageInput').value = datosLocalStorage;
-        document.getElementById('formularioDatosLocalStorage').submit();
+    var datosLocalStorage = JSON.stringify(localStorage.getItem('direccionCliente'));
+    document.getElementById('datosLocalStorageInput').value = datosLocalStorage;
+    document.getElementById('formularioDatosLocalStorage').submit();
 }
 
 //Setear los campos de dirección ingresada
@@ -204,21 +204,41 @@ function irPaginaDeInicio() {
 function abrirVentanaModalPagoConfirmado() {
     var dniReceptorPedido = document.getElementById("input-dni-cliente-pago").value;
     var nomApeReceptorPedido = document.getElementById("input-dni-nomApe-cliente").value;
-    if (dniReceptorPedido && nomApeReceptorPedido){
-        alert("Felicidades por su compra :)")
-        
-    }else{
+    var mensaje = document.getElementById("mensaje");
+    var elemento = document.getElementById("sta");
+    var imgElement = document.getElementById("im");
 
-        alert("Ya es tarde duerma")
-        
+    if (dniReceptorPedido.length === 0 || nomApeReceptorPedido.length === 0) {
+        alert("LLena los campos del receptor");
+    } else {
+        // Abrir el modal
+        document.getElementById("message").click();
+        var enlace = document.getElementById("enlace");
+
+        // Función que se ejecutará después de 3 segundos
+        function actionAfterThreeSeconds() {
+            mensaje.textContent = "";
+            elemento.remove();
+            if (dniReceptorPedido && nomApeReceptorPedido) {
+                mensaje.textContent = "Felicidades por su compra";
+                enlace.href = "/inicio";
+                enlace.textContent = "Ir";
+                var imagePath = "/static/img/check.gif";
+            } else {
+                mensaje.textContent = "La transacción ha sido fallida";
+                var imagePath = "/static/img/cnacelar.gif";
+                enlace.textContent = "X";
+                enlace.href = "carrito_de_compras";
+            }
+            imgElement.src = imagePath;
+        }
+        setTimeout(actionAfterThreeSeconds, 3000);
     }
-
 }
-
+//limpiar local
 //Pasar de un campo a otro sin necesidad de hacer tab o click en él
 function checkInput(input, nextInputID) {
     var inputValueLength = input.value.length;
-
     if (inputValueLength === input.maxLength) {
         var nextInput = document.getElementById(nextInputID);
         if (nextInput) {
@@ -226,3 +246,25 @@ function checkInput(input, nextInputID) {
         }
     }
 }
+function habilitar(idCheckbox) {
+    var chckboxRecibireYo = document.getElementById("chckbox-recibire-yo");
+    var chckboxRecibiraOtro = document.getElementById("chckbox-recibira-otra-persona");
+    var dniReceptorPedido = document.getElementById("input-dni-cliente-pago");
+    var nomApeReceptorPedido = document.getElementById("input-dni-nomApe-cliente");
+
+    if (idCheckbox === "chckbox-recibire-yo" && chckboxRecibireYo.checked) {
+        chckboxRecibiraOtro.checked = false;
+    } else if (idCheckbox === "chckbox-recibira-otra-persona" && chckboxRecibiraOtro.checked) {
+        chckboxRecibireYo.checked = false;
+    }
+
+    if (chckboxRecibireYo.checked || chckboxRecibiraOtro.checked) {
+        dniReceptorPedido.disabled = false;
+        nomApeReceptorPedido.disabled = false;
+    } else {
+        dniReceptorPedido.disabled = true;
+        nomApeReceptorPedido.disabled = true;
+    }
+}
+
+
