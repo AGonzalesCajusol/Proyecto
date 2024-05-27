@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,Response 
 from clases import clase_categoria as clscat
-from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_pedido,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
-import os
+from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_transaccion,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
+import os, json
 
 
 app = Flask(__name__)
@@ -145,6 +145,35 @@ def pago_deproducto():
     print(monto)
     return render_template('/templates/pago_de_productos.html', monto=monto)
 
+############################################################
+@app.route('/transaccion', methods=['POST'])
+def receive_data():
+    data = request.json
+    datos_envio = data.get('datos_envio')
+    datos_receptor = data.get('datos_receptor')
+    productos = data.get('productos', [])
+    if isinstance(datos_envio, str):
+        datos_envio = json.loads(datos_envio)  
+
+    distrito = datos_envio.get('distrito')
+    direccion = datos_envio.get('direccion')
+    referencia = datos_envio.get('referencia')
+    # Datos receptor
+    dni = datos_receptor.get('dni')
+    nombre = datos_receptor.get('nombre')
+    id_distr = controlador_distrito.id_distrito_por_nombre(distrito)
+    estado = "C"
+    id_usuario = 1
+    tipo_comprobante = "B"
+    forma_pago = "T"
+    try:
+        # Toda la transacción 
+        controlador_transaccion.realizar_transaccion(nombre, dni, direccion, referencia, id_distr, estado, id_usuario, productos, tipo_comprobante, forma_pago)
+        return jsonify({'message': 'Data received and transaction completed successfully', 'success': True}), 200
+    except Exception as e:
+        # Si ocurre un error durante la transacción
+        return jsonify({'message': str(e), 'success': False}), 500
+##############################################################
 # --------marca--------------
 @app.route('/marca')
 def marca():

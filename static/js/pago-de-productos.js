@@ -211,11 +211,34 @@ function abrirVentanaModalPagoConfirmado() {
     if (dniReceptorPedido.length === 0 || nomApeReceptorPedido.length === 0) {
         alert("LLena los campos del receptor");
     } else {
-        // Abrir el modal
+        const datos_receptor = {
+            dni: dniReceptorPedido,
+            nombre: nomApeReceptorPedido
+        };    
+        const env_dt = JSON.parse(localStorage.getItem('datos_envio'));
+        const prod = JSON.parse(localStorage.getItem('productos'));
+        const data = {
+            datos_envio: env_dt,
+            productos: prod,
+            datos_receptor: datos_receptor
+        };  
+        fetch('/your-endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        
         document.getElementById("message").click();
         var enlace = document.getElementById("enlace");
-
-        // Función que se ejecutará después de 3 segundos
         function actionAfterThreeSeconds() {
             mensaje.textContent = "";
             elemento.remove();
