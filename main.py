@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,Response 
 from clases import clase_categoria as clscat
-from controladores import controlador_categoria,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_transaccion,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
+from controladores import controlador_categoria,controlador_tipo_usuario,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_transaccion,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
 import os, json
 
 
@@ -148,30 +148,35 @@ def pago_deproducto():
 ############################################################
 @app.route('/transaccion', methods=['POST'])
 def transaccion():
-    try:
-        data = request.json
-        datos_envio = data.get('datos_envio')
-        datos_receptor = data.get('datos_receptor')
-        productos = data.get('productos', [])
-        if isinstance(datos_envio, str):
-            datos_envio = json.loads(datos_envio)  
+    data = request.json
+    datos_envio = data.get('datos_envio')
+    datos_receptor = data.get('datos_receptor')
+    productos = data.get('productos', [])
+    if isinstance(datos_envio, str):
+        datos_envio = json.loads(datos_envio)  
 
-        distrito = datos_envio.get('distrito')
-        departamento = datos_envio.get('departamento')
-        direccion = datos_envio.get('direccion')
-        referencia = datos_envio.get('referencia')
-        # Datos receptor
-        dni = datos_receptor.get('dni')
-        nombre = datos_receptor.get('nombre')
-        id_distr = controlador_distrito.id_distritoxnombre(distrito,departamento)
+    distrito = datos_envio.get('distrito')
+    provincia = datos_envio.get('provincia')
+    direccion = datos_envio.get('direccion')
+    referencia = datos_envio.get('referencia')
+    # Datos receptor
+    dni = datos_receptor.get('dni')
+    nombre = datos_receptor.get('nombre')
+    try:
+        print("entre yupi")
+        print(distrito,provincia)
+        id_distr = controlador_distrito.id_distritoxnombre(distrito,provincia)
+        print(id_distr)
         estado = "C"
         id_usuario = 1
         tipo_comprobante = "B"
         forma_pago = "T"
         # Toda la transacción 
+        print("tmr ctme")
         controlador_transaccion.realizar_transaccion(nombre, dni, direccion, referencia, id_distr, estado, id_usuario, productos, tipo_comprobante, forma_pago)
         return jsonify({'message': 'Data received and transaction completed successfully', 'success': True}), 200
     except Exception as e:
+        print("q mal")
         # Si ocurre un error durante la transacción
         return jsonify({'message': str(e), 'success': False}), 500
 ##############################################################

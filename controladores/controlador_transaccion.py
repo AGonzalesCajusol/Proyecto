@@ -56,12 +56,14 @@ def realizar_transaccion(nombres, dni, direccion, referencia, id_distrito, estad
                 (nombres, dni, direccion, referencia, id_distrito)
             )
             id_envio = cursor.lastrowid
+            print("Dirección de envío registrada. ID de envío:", id_envio)
 
             cursor.execute(
                 "INSERT INTO pedido (estado, id_usuario, id_envio) VALUES (%s, %s, %s)",
                 (estado, id_usuario, id_envio)
             )
             id_pedido = cursor.lastrowid
+            print("Pedido registrado. ID de pedido:", id_pedido)
 
             subtotal_total = 0
 
@@ -113,24 +115,25 @@ def realizar_transaccion(nombres, dni, direccion, referencia, id_distrito, estad
                     "UPDATE detalle_presentacion SET stock = stock - %s WHERE id_presentacion = %s",
                     (cantidad, id_pre)
                 )
-
             cursor.execute(
                 "SELECT monto FROM distrito WHERE id = %s",
                 (id_distrito,)
             )
             monto_envio = cursor.fetchone()[0]
+            print("Monto de envío obtenido:", monto_envio)
 
-            subtotal_con_envio = subtotal_total + monto_envio
-            igv = round(subtotal_con_envio * 0.18, 2)
-            total = subtotal_con_envio + igv
+            subtotal_con_envio = round(subtotal_total + monto_envio,2)
+            print("Subtotal con envío:", subtotal_con_envio)
 
+            igv = round(float(subtotal_con_envio) * float(0.18),2)
+            
+            total = subtotal_con_envio
+            
             cursor.execute(
-                "INSERT INTO comprobante (monto_envio, subtotal, igv, total, tipo_comprobante, forma_pago, id_pedido) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                (monto_envio, subtotal_total, igv, total, tipo_comprobante, forma_pago, id_pedido)
-            )
-
+                 "INSERT INTO comprobante (monto_envio, subtotal, igv, total, tipo_comprobante, forma_pago, id_pedido) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                     (monto_envio, subtotal_total, igv, total, tipo_comprobante, forma_pago, id_pedido))
+            print("Transacción realizada exitosamente.")       
         conexion.commit()
-
     except Exception as e:
         conexion.rollback()
         raise e

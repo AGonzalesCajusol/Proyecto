@@ -36,7 +36,7 @@ def id_distritoxnombre(distrito,provincia):
     conexion = obtener_conexion()
     id_distrito = None
     with conexion.cursor() as cursor:
-        cursor.execute("SELECT distrito.id FROM distrito INNER JOIN provincia ON provincia.id = distrito.id_provincia  WHERE distrito.distrito = %s AND provincia.provincia = %s),", (distrito, provincia))
+        cursor.execute("SELECT distrito.id FROM distrito INNER JOIN provincia ON provincia.id = distrito.id_provincia WHERE distrito.distrito = %s AND provincia.provincia = %s", (distrito, provincia))
         resultado = cursor.fetchone()
         if resultado:
             id_distrito = resultado[0]

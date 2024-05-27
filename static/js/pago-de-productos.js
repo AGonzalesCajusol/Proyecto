@@ -1,6 +1,7 @@
 var subtotales = 0
 var costoEnvio = 0
 var tota = 0
+var  general = true
 document.addEventListener("DOMContentLoaded", function () {
     document.body.style.opacity = "1";
     cargarProductos();
@@ -209,7 +210,7 @@ function abrirVentanaModalPagoConfirmado() {
     var imgElement = document.getElementById("im");
 
     if (dniReceptorPedido.length === 0 || nomApeReceptorPedido.length === 0) {
-        alert("LLena los campos del receptor");
+        alert("Llena los campos del receptor");
     } else {
         const datosReceptor = {
             dni: dniReceptorPedido,
@@ -222,7 +223,7 @@ function abrirVentanaModalPagoConfirmado() {
             productos: productos,
             datos_receptor: datosReceptor
         };  
-        const mensaje = true
+
         fetch('/transaccion', {
             method: 'POST',
             headers: {
@@ -232,38 +233,40 @@ function abrirVentanaModalPagoConfirmado() {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                console.log('Transacción completada con éxito:', data.message);
-            } else {
-                mensaje = data.message;
+            var enlace = document.getElementById("enlace");
+            function actionAfterThreeSeconds() {
+                mensaje.textContent = "";
+                elemento.remove();
+                if (dniReceptorPedido && nomApeReceptorPedido && general) {
+                    mensaje.textContent = "Felicidades por su compra";
+                    enlace.href = "/inicio";
+                    enlace.textContent = "Ir";
+                    var imagePath = "/static/img/check.gif";
+                } else {
+                    mensaje.textContent = "La transacción ha sido fallida";
+                    var imagePath = "/static/img/cnacelar.gif";
+                    enlace.textContent = "X";
+                    enlace.href = "carrito_de_compras";
+                }
+                imgElement.src = imagePath;
             }
+            setTimeout(actionAfterThreeSeconds, 3000);
         })
         .catch(error => {
             console.error('Error al realizar la solicitud:', error);
-            mensaje = false
-        });
-        
-        document.getElementById("message").click();
-        var enlace = document.getElementById("enlace");
-        function actionAfterThreeSeconds() {
-            mensaje.textContent = "";
+            mensaje.textContent = "Error al realizar la transacción";
+            var enlace = document.getElementById("enlace");
+            enlace.textContent = "X";
+            enlace.href = "carrito_de_compras";
+            imgElement.src = "/static/img/cancelar.gif";
+
             elemento.remove();
-            if (dniReceptorPedido && nomApeReceptorPedido && mensaje) {
-                mensaje.textContent = "Felicidades por su compra";
-                enlace.href = "/inicio";
-                enlace.textContent = "Ir";
-                var imagePath = "/static/img/check.gif";
-            } else {
-                mensaje.textContent = "La transacción ha sido fallida";
-                var imagePath = "/static/img/cnacelar.gif";
-                enlace.textContent = "X";
-                enlace.href = "carrito_de_compras";
-            }
-            imgElement.src = imagePath;
-        }
-        setTimeout(actionAfterThreeSeconds, 3000);
+        });
+
+        document.getElementById("message").click();
     }
 }
+
 //limpiar local
 //Pasar de un campo a otro sin necesidad de hacer tab o click en él
 function checkInput(input, nextInputID) {
