@@ -211,18 +211,19 @@ function abrirVentanaModalPagoConfirmado() {
     if (dniReceptorPedido.length === 0 || nomApeReceptorPedido.length === 0) {
         alert("LLena los campos del receptor");
     } else {
-        const datos_receptor = {
+        const datosReceptor = {
             dni: dniReceptorPedido,
             nombre: nomApeReceptorPedido
         };    
-        const env_dt = JSON.parse(localStorage.getItem('datos_envio'));
-        const prod = JSON.parse(localStorage.getItem('productos'));
+        const datosEnvio = JSON.parse(localStorage.getItem('datos_envio'));
+        const productos = JSON.parse(localStorage.getItem('productos'));
         const data = {
-            datos_envio: env_dt,
-            productos: prod,
-            datos_receptor: datos_receptor
+            datos_envio: datosEnvio,
+            productos: productos,
+            datos_receptor: datosReceptor
         };  
-        fetch('/your-endpoint', {
+        const mensaje = true
+        fetch('/transaccion', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -231,10 +232,15 @@ function abrirVentanaModalPagoConfirmado() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
+            if (data.success) {
+                console.log('Transacción completada con éxito:', data.message);
+            } else {
+                mensaje = data.message;
+            }
         })
-        .catch((error) => {
-            console.error('Error:', error);
+        .catch(error => {
+            console.error('Error al realizar la solicitud:', error);
+            mensaje = false
         });
         
         document.getElementById("message").click();
@@ -242,7 +248,7 @@ function abrirVentanaModalPagoConfirmado() {
         function actionAfterThreeSeconds() {
             mensaje.textContent = "";
             elemento.remove();
-            if (dniReceptorPedido && nomApeReceptorPedido) {
+            if (dniReceptorPedido && nomApeReceptorPedido && mensaje) {
                 mensaje.textContent = "Felicidades por su compra";
                 enlace.href = "/inicio";
                 enlace.textContent = "Ir";

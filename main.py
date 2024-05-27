@@ -147,7 +147,7 @@ def pago_deproducto():
 
 ############################################################
 @app.route('/transaccion', methods=['POST'])
-def receive_data():
+def transaccion():
     data = request.json
     datos_envio = data.get('datos_envio')
     datos_receptor = data.get('datos_receptor')
