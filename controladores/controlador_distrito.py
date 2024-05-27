@@ -31,6 +31,18 @@ def id_distrito_por_nombre(nombre):
     conexion.close()
     return id_distrito
 
+
+def id_distritoxnombre(distrito,provincia):
+    conexion = obtener_conexion()
+    id_distrito = None
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT distrito.id FROM distrito INNER JOIN provincia ON provincia.id = distrito.id_provincia  WHERE distrito.distrito = %s AND provincia.provincia = %s),", (distrito, provincia))
+        resultado = cursor.fetchone()
+        if resultado:
+            id_distrito = resultado[0]
+    conexion.close()
+    return id_distrito
+
 def nombre_provincia_distrito_por_id(id_distrito):
     conexion = obtener_conexion()
     nombre_provincia_distrito = None

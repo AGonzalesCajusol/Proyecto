@@ -148,25 +148,26 @@ def pago_deproducto():
 ############################################################
 @app.route('/transaccion', methods=['POST'])
 def transaccion():
-    data = request.json
-    datos_envio = data.get('datos_envio')
-    datos_receptor = data.get('datos_receptor')
-    productos = data.get('productos', [])
-    if isinstance(datos_envio, str):
-        datos_envio = json.loads(datos_envio)  
-
-    distrito = datos_envio.get('distrito')
-    direccion = datos_envio.get('direccion')
-    referencia = datos_envio.get('referencia')
-    # Datos receptor
-    dni = datos_receptor.get('dni')
-    nombre = datos_receptor.get('nombre')
-    id_distr = controlador_distrito.id_distrito_por_nombre(distrito)
-    estado = "C"
-    id_usuario = 1
-    tipo_comprobante = "B"
-    forma_pago = "T"
     try:
+        data = request.json
+        datos_envio = data.get('datos_envio')
+        datos_receptor = data.get('datos_receptor')
+        productos = data.get('productos', [])
+        if isinstance(datos_envio, str):
+            datos_envio = json.loads(datos_envio)  
+
+        distrito = datos_envio.get('distrito')
+        departamento = datos_envio.get('departamento')
+        direccion = datos_envio.get('direccion')
+        referencia = datos_envio.get('referencia')
+        # Datos receptor
+        dni = datos_receptor.get('dni')
+        nombre = datos_receptor.get('nombre')
+        id_distr = controlador_distrito.id_distritoxnombre(distrito,departamento)
+        estado = "C"
+        id_usuario = 1
+        tipo_comprobante = "B"
+        forma_pago = "T"
         # Toda la transacción 
         controlador_transaccion.realizar_transaccion(nombre, dni, direccion, referencia, id_distr, estado, id_usuario, productos, tipo_comprobante, forma_pago)
         return jsonify({'message': 'Data received and transaction completed successfully', 'success': True}), 200
