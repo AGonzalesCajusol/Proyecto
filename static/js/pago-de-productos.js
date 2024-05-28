@@ -253,13 +253,15 @@ function abrirVentanaModalPagoConfirmado() {
             setTimeout(actionAfterThreeSeconds, 3000);
         })
         .catch(error => {
-            console.error('Error al realizar la solicitud:', error);
-            mensaje.textContent = "Error al realizar la transacción";
-            var enlace = document.getElementById("enlace");
-            enlace.textContent = "X";
-            enlace.href = "carrito_de_compras";
-            imgElement.src = "/static/img/cnacelar.gif";
-            elemento.remove();
+            setTimeout(function() {
+                console.error('Error al realizar la solicitud:', error);
+                mensaje.textContent = "Error al realizar la transacción";
+                var enlace = document.getElementById("enlace");
+                enlace.textContent = "X";
+                enlace.href = "carrito_de_compras";
+                imgElement.src = "/static/img/cnacelar.gif";
+                elemento.remove();
+            }, 2000);            
         });
 
         document.getElementById("message").click();
