@@ -93,6 +93,6 @@ def realizar_transaccion(nombres, dni, direccion, referencia, id_distrito, estad
         conexion.commit()
     except Exception as e:
         conexion.rollback()
-        raise e
+        raise ("Ocurrio un error en el proceso de transaccion")
     finally:
         conexion.close()

@@ -258,7 +258,7 @@ function abrirVentanaModalPagoConfirmado() {
             var enlace = document.getElementById("enlace");
             enlace.textContent = "X";
             enlace.href = "carrito_de_compras";
-            imgElement.src = "/static/img/cancelar.gif";
+            imgElement.src = "/static/img/cnacelar.gif";
             elemento.remove();
         });
 

@@ -110,8 +110,6 @@ def registrarusuario():
 
 #-------------------------
 #-----------No tocar nada hacía abajo
-#Puto el que modifica
-
 @app.route('/ini')
 def ini():
     return  render_template('maestra.html')
@@ -142,7 +140,6 @@ def pago_deproducto():
     provincia = request.form['provi']
     departamento = request.form['depa']
     monto = controlador_envio.monto_envio(distrito, provincia, departamento)
-    print(monto)
     return render_template('/templates/pago_de_productos.html', monto=monto)
 
 ############################################################
@@ -172,7 +169,7 @@ def transaccion():
         controlador_transaccion.realizar_transaccion(nombre, dni, direccion, referencia, id_distr, estado, id_usuario, productos, tipo_comprobante, forma_pago)
         return jsonify({'message': 'Data received and transaction completed successfully', 'success': True}), 200
     except Exception as e:
-        raise
+        raise ("Ocurrio un error en ka funcion de transaccion revisar codigo")
 ##############################################################
 # --------marca--------------
 @app.route('/marca')
@@ -667,7 +664,6 @@ def actualizar_distrito():
 def retornar_provincias(departamento):
     id_departamento = controlador_departamento.id_departamento_por_nombre(departamento)
     provincias = controlador_provincia.nombre_provinciasxdepartamento(id_departamento)
-    print(provincias)
     return  jsonify(provincias)
 
 ## ---rutas para retornar distritos
