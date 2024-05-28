@@ -237,7 +237,7 @@ function abrirVentanaModalPagoConfirmado() {
             function actionAfterThreeSeconds() {
                 mensaje.textContent = "";
                 elemento.remove();
-                if (dniReceptorPedido && nomApeReceptorPedido && general) {
+                if (dniReceptorPedido && nomApeReceptorPedido && general==true) {
                     mensaje.textContent = "Felicidades por su compra";
                     enlace.href = "/inicio";
                     enlace.textContent = "Ir";
@@ -259,7 +259,6 @@ function abrirVentanaModalPagoConfirmado() {
             enlace.textContent = "X";
             enlace.href = "carrito_de_compras";
             imgElement.src = "/static/img/cancelar.gif";
-
             elemento.remove();
         });
 

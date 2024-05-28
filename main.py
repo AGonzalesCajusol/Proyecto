@@ -163,22 +163,16 @@ def transaccion():
     dni = datos_receptor.get('dni')
     nombre = datos_receptor.get('nombre')
     try:
-        print("entre yupi")
-        print(distrito,provincia)
         id_distr = controlador_distrito.id_distritoxnombre(distrito,provincia)
-        print(id_distr)
         estado = "C"
         id_usuario = 1
         tipo_comprobante = "B"
         forma_pago = "T"
         # Toda la transacción 
-        print("tmr ctme")
         controlador_transaccion.realizar_transaccion(nombre, dni, direccion, referencia, id_distr, estado, id_usuario, productos, tipo_comprobante, forma_pago)
         return jsonify({'message': 'Data received and transaction completed successfully', 'success': True}), 200
     except Exception as e:
-        print("q mal")
-        # Si ocurre un error durante la transacción
-        return jsonify({'message': str(e), 'success': False}), 500
+        raise
 ##############################################################
 # --------marca--------------
 @app.route('/marca')

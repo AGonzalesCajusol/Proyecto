@@ -100,6 +100,9 @@ function validar_stock() {
             var stock = objPr[i].cantidad;
             var id = "stockDiv_" + i; 
             var existingDiv = document.getElementById(id);
+
+            console.log(stocks[i])
+
             if (stock >= stocks[i]) {
                 if (stocks[i] == 0) {
                     if (!existingDiv) {
@@ -124,12 +127,13 @@ function validar_stock() {
                     }
                     estado = false;
                 }
-                alert("No hay stock del producto" + objPr[1].nombre);
+                alert("Verifica el stock" + objPr[1].nombre);
             } else {
                 if (existingDiv) {
                     docu[i].removeChild(existingDiv);
                 }
             }
+
         }
         return estado;
     }).catch(function(error) {

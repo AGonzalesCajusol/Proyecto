@@ -1,52 +1,5 @@
 from bd import obtener_conexion
 
-# def direccionenvio (nombres,dni,direccion,referencia,id_distrito):
-#     conexion = obtener_conexion()
-#     with conexion.cursor() as cursor:
-#         cursor.execute("insert into direccion_envio(nombres,dni,direccion,referencia,id_distrito) values (%s,%s,%s,%s,%s)",(nombres,dni,direccion,referencia ,id_distrito))
-#     id = cursor.lastrowid
-#     conexion.commit()
-#     conexion.close()
-#     return id
-# def pedido(fecha_pedido,hora_pedido,estado,id_usuario,id_dr):
-#     conexion = obtener_conexion()
-#     with conexion.cursor() as cursor:
-#         cursor.execute("insert into pedido (fecha_pedido,hora_pedido,estado,id_usuario,id_envio) values (%s,%s,%s,%s,%s)",(fecha_pedido,hora_pedido,estado,id_usuario,id_dr))
-#     id = cursor.lastrowid
-#     conexion.commit()
-#     conexion.close()
-#     return id
-# def detalle_pedido(fecha_pedido,hora_pedido,precio,cantidad,subtotal,id_producto,id_pedido):
-#     conexion = obtener_conexion()
-#     with conexion.cursor() as cursor:
-#         cursor.execute("insert detalle_pedido (fecha_pedido,hora_pedido,precio,cantidad,subtotal,id_producto,id_pedido) values (%s,%s,%s,%s,%s)",(fecha_pedido,hora_pedido,precio,cantidad,subtotal,id_producto,id_pedido))
-#     conexion.commit()
-#     conexion.close()
-def comprabante(fecha,monto_envio,subtotal,igv,total,tipo_comprobante,forma_pago,id_pedido):
-    conexion = obtener_conexion()
-    with conexion.cursor() as cursor:
-        cursor.execute("insert comprobante (fecha,hora,monto_envio,subtotal,igv,total,tipo_comprobante,forma_pago,id_pedido) values (%s,%s,%s,%s,%s)",(fecha,monto_envio,subtotal,igv,total,tipo_comprobante,forma_pago,id_pedido))
-    conexion.commit()
-    conexion.close()
-def disminuit_stock(id_pre,cantidad):
-    conexion = obtener_conexion()
-    with conexion.cursor() as cursor:
-        # Consultar el stock actual del producto
-        cursor.execute("SELECT stock FROM detalle_presentacion WHERE id = %s", (id_pre))
-        stock_actual = cursor.fetchone()[0]
-
-        # Verificar si hay suficiente stock para la venta
-        if stock_actual < cantidad:
-            raise ValueError("No hay suficiente stock disponible")
-
-        # Calcular el nuevo stock después de la venta
-        nuevo_stock = stock_actual - cantidad
-
-        # Actualizar el stock en la base de datos
-        cursor.execute("UPDATE detalle_presentacion SET stock = %s WHERE id = %s", (nuevo_stock, id_pre))
-    conexion.commit()
-    conexion.close()
-
 def realizar_transaccion(nombres, dni, direccion, referencia, id_distrito, estado, id_usuario, productos, tipo_comprobante, forma_pago):
     conexion = obtener_conexion()
     try:
@@ -57,15 +10,15 @@ def realizar_transaccion(nombres, dni, direccion, referencia, id_distrito, estad
             )
             id_envio = cursor.lastrowid
             print("Dirección de envío registrada. ID de envío:", id_envio)
-
             cursor.execute(
                 "INSERT INTO pedido (estado, id_usuario, id_envio) VALUES (%s, %s, %s)",
                 (estado, id_usuario, id_envio)
             )
+            
             id_pedido = cursor.lastrowid
             print("Pedido registrado. ID de pedido:", id_pedido)
 
-            subtotal_total = 0
+            subtotal_total = 0.0
 
             for producto in productos:
                 talla = producto.get('talla')
@@ -101,7 +54,7 @@ def realizar_transaccion(nombres, dni, direccion, referencia, id_distrito, estad
                 dsc = cursor.fetchone()
                 if not dsc:
                     raise ValueError("No se encontró el producto con id {}".format(id_producto))
-                precio, descuento = dsc
+                precio, descuento = float(dsc[0]), float(dsc[1])
                 descuento = precio * descuento
                 subtotal = (precio - descuento) * cantidad
                 subtotal_total += subtotal
@@ -115,28 +68,31 @@ def realizar_transaccion(nombres, dni, direccion, referencia, id_distrito, estad
                     "UPDATE detalle_presentacion SET stock = stock - %s WHERE id_presentacion = %s",
                     (cantidad, id_pre)
                 )
+            
+            # Obtener monto de envío sin IGV
             cursor.execute(
                 "SELECT monto FROM distrito WHERE id = %s",
                 (id_distrito,)
             )
-            monto_envio = cursor.fetchone()[0]
-            print("Monto de envío obtenido:", monto_envio)
+            monto_envio = float(cursor.fetchone()[0])
+            igv_envio = monto_envio * 0.18
+            monto_envio_sin_igv = monto_envio - igv_envio
 
-            subtotal_con_envio = round(subtotal_total + monto_envio,2)
-            print("Subtotal con envío:", subtotal_con_envio)
+            # Calcular subtotales y totales
+            subtotal_sin_igv = subtotal_total - (subtotal_total * 0.18)
+            igv_productos = subtotal_total - subtotal_sin_igv
+            igv_total = igv_productos + igv_envio
+            total = subtotal_total + monto_envio
 
-            igv = round(float(subtotal_con_envio) * float(0.18),2)
-            
-            total = subtotal_con_envio
-            
             cursor.execute(
-                 "INSERT INTO comprobante (monto_envio, subtotal, igv, total, tipo_comprobante, forma_pago, id_pedido) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                     (monto_envio, subtotal_total, igv, total, tipo_comprobante, forma_pago, id_pedido))
-            print("Transacción realizada exitosamente.")       
+                "INSERT INTO comprobante (monto_envio, subtotal, igv, total, tipo_comprobante, forma_pago, id_pedido) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                (monto_envio_sin_igv, subtotal_sin_igv, igv_total, total, tipo_comprobante, forma_pago, id_pedido)
+            )
+            print("Transacción realizada exitosamente.")
+        
         conexion.commit()
     except Exception as e:
         conexion.rollback()
         raise e
-
     finally:
         conexion.close()
