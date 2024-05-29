@@ -6,10 +6,12 @@ function mostrarMenuLateral() {
         containerMenu.style.visibility = 'hidden';
         containerMenu.style.transform = 'translateX(-100%)';
         body.classList.remove('menu-open');
+        body.style.overflow='auto';
     } else {
         containerMenu.style.visibility = 'visible';
         containerMenu.style.transform = 'translateX(0%)';
         body.classList.add('menu-open');
+        body.style.overflow = 'auto';
     }
 }
 
@@ -39,3 +41,6 @@ function cerrarVentanaModalInicioSesion() {
 function abrirPaginaRegistroDeUsuario() {
     window.open('registro_de_usuario.html','_blank');
 }
+
+
+
