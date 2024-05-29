@@ -269,6 +269,11 @@ function abrirVentanaModalPagoConfirmado() {
 }
 
 //limpiar local
+
+function LimpiarLocal(){
+    localStorage.clear()
+}
+
 //Pasar de un campo a otro sin necesidad de hacer tab o click en él
 function checkInput(input, nextInputID) {
     var inputValueLength = input.value.length;

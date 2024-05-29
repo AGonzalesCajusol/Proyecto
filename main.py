@@ -166,7 +166,7 @@ def transaccion():
         tipo_comprobante = "B"
         forma_pago = "T"
         # Toda la transacción 
-        controlador_transaccion.realizar_transaccion(nombre, dni, direccion, referencia, id_distr, estado, id_usuario, productos, tipo_comprobante, forma_pago,"hola")
+        controlador_transaccion.realizar_transaccion(nombre, dni, direccion, referencia, id_distr, estado, id_usuario, productos, tipo_comprobante, forma_pago)
         return jsonify({'message': 'Data received and transaction completed successfully', 'success': True}), 200
     except Exception as e:
         raise ("Ocurrio un error en ka funcion de transaccion revisar codigo")
