@@ -94,15 +94,3 @@ def actualizar_provincia(id, provincia, departamento):
         cursor.execute("UPDATE provincia SET provincia = %s, id_departamento = %s WHERE id = %s", (provincia, departamento, id))
     conexion.commit()
     conexion.close()
-
-#-----------anggelo 
-def obtener_departamentos():
-    conexion = obtener_conexion()
-    departamentos = []
-    with conexion.cursor() as cursor:
-        cursor.execute("SELECT id, departamento FROM departamento ORDER BY departamento ASC")
-        departamentos = cursor.fetchall()
-    conexion.close()
-    return departamentos
-
-#--------- anggelo

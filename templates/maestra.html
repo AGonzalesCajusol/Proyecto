@@ -12,6 +12,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+
+
 
     <style>
         body {
@@ -43,10 +48,10 @@
         .header .logo img {
             height: 55px;
             margin-right: 20px;
-            border-radius: 50%;        
+            border-radius: 50%;
         }
 
-        
+
 
         .header .menu-btn {
             font-size: 1.5rem;
@@ -208,6 +213,33 @@
         .btn-logout i {
             margin-right: 10px;
         }
+
+        .breadcrumb {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        .breadcrumb-item.active {
+            color: #6c757d;
+        }
+
+        .barra_separadora {
+            background-color: #fff8d4;
+            width: 100%;
+            height: 30px;
+        }
     </style>
 </head>
 
@@ -229,18 +261,34 @@
             </a>
         </div>
     </div>
+    
+    <div class="barra_separadora">
+
+        <!------------------------- Cabecera-fin ------------------------->
+
+    </div>
 
     <!-- Breadcrumb for navigation -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            {% block breadcrumb %}{% endblock %}
-        </ol>
-    </nav>
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-2 rounded">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Inicio</a></li>
+                {% for name, url in generate_breadcrumbs() %}
+                {% if loop.last %}
+                <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
+                {% else %}
+                <li class="breadcrumb-item"><a href="{{ url }}">{{ name }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ol>
+        </nav>
+    </div>
+
 
     <!-- Sidenav -->
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>        
-        <a href="{{ url_for('index') }}"><i class="bi bi-globe"></i> Inicio</a>        
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('index') }}"><i class="bi bi-globe"></i> Inicio</a>
         <a href="{{ url_for('marca') }}"><i class="bi bi-tags"></i> Marca</a>
         <a href="{{ url_for('tipo_producto') }}"><i class="bi bi-box-seam"></i> Tipo Producto</a>
         <a href="{{ url_for('categoria') }}"><i class="bi bi-grid-3x3-gap"></i> Categoria</a>
@@ -269,57 +317,133 @@
             document.getElementById("mySidenav").classList.remove('open');
         }
         //MODIFICAR >>>> onclick="return modificar()"
-        function modificar() {
-            if (confirm('¿Deseas MODIFICAR este registro?')) {
-                return true;
-            } else {
-                return false;
-            }
+        function modificar(e) {
+            e.preventDefault();
+
+            iziToast.info({
+                title: 'Se va a modificar el registro!',
+                timeout: 500,
+                onClosed: function () {
+                    e.target.form.submit();
+                }
+            });
         }
-        
-        //ELIMINAR  >>>> onclick="return confirmarEliminacion()"
-        function confirmarEliminacion() {
-            if (confirm('¿Deseas ELIMINAR este registro?')) {
-                alert('ELIMINACIÓN EXITOSA!!!');
-                return true;
-            } else {
-                return false;
-            }
+
+
+
+        function confirmarEliminacion(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Deseas ELIMINAR este registro?',
+                text: "Esta acción es irreversible!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar!',
+                cancelButtonText: 'No, cancelar!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Eliminado!',
+                        'El registro ha sido eliminado.',
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            if (e.target.form) {
+                                e.target.form.submit();
+                            } else {
+                                window.location = e.target.href;
+                            }
+                        }
+                    });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Cancelado',
+                        'No se realizó ninguna eliminación.',
+                        'error'
+                    )
+                }
+            });
         }
+
+
         //GUARD MOD >>>> onclick="return confirmarModificacion()"
-        function confirmarModificacion() {
-            if (confirm('CONFIRMAR MODIFICACION')) {
-                alert('MODIFICACION EXITOSA!!!');
-                return true; 
-            } else {
-                return false; 
-            }
+        function confirmarModificacion(e) {
+            e.preventDefault();
+            iziToast.success({
+                title: 'Modificación Confirmada!',
+                message: 'La modificación ha sido realizada.',
+                timeout: 1000,
+                onClosed: function () {
+                    e.target.form.submit();
+                }
+            });
         }
+
         //CANCELAR  >>>> onclick="return confirmarCancelacion()"
-        function confirmarCancelacion() {
-            if (confirm('¿CANCELAR MODIFICACION?')) {
-                alert('NO SE REALIZARON MODIFICACIONES!');
-                return true; 
-            } else {
-                return false; 
-            }
+        function confirmarCancelacion(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Cancelar Modificación?',
+                text: "Esta acción es irreversible!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, cancelar!',
+                cancelButtonText: 'No, continuar!',
+                reverseButtons: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Cancelado!',
+                        'No se realizaron modificaciones.',
+                        'info'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            window.history.back();
+                        }
+                    });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Continuar',
+                        'Continuando con la modificación.',
+                        'success'
+                    )
+                }
+            });
         }
+
         //GUARDAR   >>>> en el form al lado de: method="post" onsubmit="return validarFormulario()"
-        function validarFormulario() {
-            if (confirm('CONFIRMAR ACCION')) {
-                alert('REGISTRADO CORRECTAMENTE!!!');
-                return true;
-            } else {
-                return false;
-            }
+
+        function validarFormulario(e) {
+            e.preventDefault();
+
+            iziToast.success({
+                title: 'REGISTRADO CORRECTAMENTE!!!',
+                timeout: 500,
+                onClosed: function () {
+                    document.querySelector('form').submit();
+                }
+            });
         }
+
+
         //VOLVER   >>>> onclick="return volver()"
-        function volver() {
-            if (confirm('REDIRIGIENDO A LA PAGUINA ANTERIOR..')) {
-                return true;
-            } else {
-                return false;
-            }
+        function volver(e) {
+            e.preventDefault();
+
+            iziToast.info({
+                title: 'Redirigiendo a la página anterior...',
+                timeout: 500,
+                onClosed: function () {
+                    window.history.back();
+                }
+            });
         }
     </script>
 </body>

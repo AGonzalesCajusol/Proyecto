@@ -93,3 +93,4 @@ def actualizar_distrito(id, distrito, provincia):
         cursor.execute("UPDATE distrito SET distrito = %s, id_provincia = %s WHERE id = %s", (distrito, provincia, id))
     conexion.commit()
     conexion.close()
+

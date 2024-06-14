@@ -192,8 +192,9 @@ def eliminar_marca(id):
     controlador_marca.eliminar_marca(id)
     return redirect(url_for('marca'))
 
+#anggelo el def de marca era modificar_marca
 @app.route('/modificarmarca', methods=['POST'])
-def modificar_marca():
+def modificarmarca():
     id = request.form['id']
     marca = controlador_marca.obtener_marca_por_id(id)
     return render_template('modificar_marca.html', marca=marca)
@@ -228,8 +229,9 @@ def eliminar_tipoproducto(id):
     controlador_tipoproducto.eliminar_tipoproducto(id)
     return redirect(url_for('tipo_producto'))
 
+#modifique el def antes era modificar_tipo_producto
 @app.route('/modificar_tipoproducto', methods=['POST'])
-def modificar_tipo_producto():
+def modificar_tipoproducto():
     id = request.form['id']
     tipo_producto = controlador_tipoproducto.obtener_tipoproducto_id(id)
     return render_template('modificar_tipoproducto.html', tipo_producto = tipo_producto)
@@ -336,9 +338,9 @@ def insertar_grupo_edad():
 def eliminar_grupo_edad(id):
     controlador_grupoedad.eliminar_grupo_edad(id)
     return redirect(url_for('grupo_edad'))
-
+#anggelo mofique el def era modificar_grupo_edad
 @app.route('/modificar_grupoedad', methods=['POST'])
-def modificar_grupo_edad():
+def modificar_grupoedad():
     id = request.form['id']
     grupo_edad = controlador_grupoedad.obtener_grupo_edad_id(id)
     return render_template('modificar_grupoedad.html', grupo_edad=grupo_edad)
@@ -988,8 +990,58 @@ def api_obtener_direcciones_envio():
 
     return jsonify(rpt)
 
+#anggelo---------------
+breadcrumbs = {
+    'index': 'Inicio',
+    'categoria': 'Categoría',
+    'departamento': 'Departamento',
+    'detallepresentacion': 'Detalle Presentación',
+    'distrito': 'Distrito',
+    'genero': 'Género',
+    'grupo_edad': 'Grupo de Edad',
+    'maestra': 'Maestra',
+    'marca': 'Marca',
+    'modificar_producto': 'Modificar Producto',
+    'modificar_categoria': 'Modificar Categoría',
+    'modificar_departamento': 'Modificar Departamento',
+    'modificar_detallepresentacion': 'Modificar Detalle Presentación',
+    'modificar_distrito': 'Modificar Distrito',
+    'modificar_genero': 'Modificar Género',
+    'modificar_grupoedad': 'Modificar Grupo de Edad',
+    'modificarmarca': 'Modificar Marca',
+    'modificar_presentacion': 'Modificar Presentación',
+    'modificar_provincia': 'Modificar Provincia',
+    'modificar_tipo_producto': 'Modificar Tipo Producto',
+    'presentacion': 'Presentación',
+    'producto': 'Producto',
+    'provincia': 'Provincia',
+    'registrar_categoria': 'Registrar Categoría',
+    'registrar_departamento': 'Registrar Departamento',
+    'registrar_detallepresentacion': 'Registrar Detalle Presentación',
+    'registrar_distrito': 'Registrar Distrito',
+    'registrargenero': 'Registrar Género',
+    'registrargrupoedad': 'Registrar Grupo de Edad',
+    'registrarmarca': 'Registrar Marca',
+    'registrar_presentacion': 'Registrar Presentación',
+    'registrarproducto': 'Registrar Producto',
+    'registrar_provincia': 'Registrar Provincia',
+    'registrar_tipoproducto': 'Registrar Tipo Producto',
+    'tipo_producto': 'Tipo Producto'
+}
 
+# Función para generar los Breadcrumbs
+def generate_breadcrumbs():
+    path = request.path.strip('/').split('/')
+    breadcrumbs_list = []
+    for p in path:
+        if p in breadcrumbs:
+            breadcrumbs_list.append((breadcrumbs[p], url_for(p)))
+    return breadcrumbs_list
 
+# Hacer que la función esté disponible en todas las plantillas
+app.jinja_env.globals.update(generate_breadcrumbs=generate_breadcrumbs)
+
+#fin--------
 
 if __name__ ==  '__main__':
     app.run(debug=5000)

@@ -116,8 +116,8 @@
                     <!-- Agrega aquí los campos para los ID de tipo_producto, genero, marca, categoria, grupo_edad y presentacion -->
                     <hr>
                     <div class="text-end">
-                        <a href="{{url_for('producto')}}" class="btn btn-danger mt-2 me-2" onclick="return confirmarCancelacion()">Cancelar</a>
-                        <button type="submit" class="btn btn-primary mt-2" onclick="return confirmarModificacion()">Guardar</button>
+                        <a href="{{url_for('producto')}}" class="btn btn-danger mt-2 me-2" onclick=" confirmarCancelacion(event)">Cancelar</a>
+                        <button type="submit" class="btn btn-primary mt-2" onclick=" confirmarModificacion(event)">Guardar</button>
                     </div>
                 </form>
             </div>

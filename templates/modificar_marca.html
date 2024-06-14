@@ -12,9 +12,10 @@
                     <label for="marca" class="mb-3">Marca:</label>
                     <input required type="text" class="form-control" placeholder="Marca" name="marca" id="marca" value="{{ marca[1] }}">
                     <hr>
-                    <div class="text-end">
-                        <a href=" {{ url_for('marca') }}" class="btn btn-danger mt-2" onclick="return confirmarCancelacion()">Cancelar</a>
-                        <button type="submit" class="btn btn-primary mt-2" onclick="return confirmarModificacion()">Guardar</button>
+                    <div class="text-end">                        
+                        <a href=" {{ url_for('marca') }}" class="btn btn-danger mt-2" onclick="confirmarCancelacion(event)">Cancelar</a>
+                        <button type="submit" class="btn btn-primary mt-2" onclick="confirmarModificacion(event)">Guardar</button>
+
                     </div>
                 </form>
                 
@@ -25,5 +26,3 @@
 
 
 {% endblock %}
-
- 

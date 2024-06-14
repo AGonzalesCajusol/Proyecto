@@ -6,13 +6,13 @@
     <div class="container ">
         <div class="row ">
             <div class="col-md-4">
-                <h3 class="mb-4 mt-4">Agregar Marca</h3>
-                <form action="/insertarmarca" method="post" onsubmit="return validarFormulario()">
+                <h3 class="mb-4 mt-4">Agregar Marca</h3>                
+                <form action="/insertarmarca" method="post" onsubmit="validarFormulario(event)">
                     <label for="marca" class="mb-3">Marca:</label>
                     <input required type="text" class="form-control" placeholder="Marca" name="marca" id="marca">
                     <hr>
                     <div class="text-end">
-                        <a href=" {{url_for('marca')}} " class="btn btn-danger mt-2" onclick="return volver()">Volver</a>
+                        <a href=" {{url_for('marca')}} " class="btn btn-danger mt-2" onclick="volver(event)">Volver</a>
                         <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                     </div>
                 </form>
@@ -21,7 +21,4 @@
     </div>
 </section>
 
-
 {% endblock %}
-
- 

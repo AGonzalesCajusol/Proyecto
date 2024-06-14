@@ -1,7 +1,6 @@
 {% extends 'maestra.html' %} 
 {% block titulo %} marca {% endblock %}
 
-
 {% block tabla %} 
 <div class="col-lg-4  col-md-7 ms-5 mt-4 me-4">
     <a href="{{ url_for('registrarmarca') }}">
@@ -26,9 +25,10 @@
                     <div class="btn-group" role="group" aria-label="Acciones">
                         <form action="/modificarmarca" method="post">
                             <input type="hidden" name="id" value="{{ marca[0] }}">
-                            <button type="submit" class="btn btn-warning me-4 text-white " onclick="return modificar()">Modificar</button>
+                            <button type="submit" class="btn btn-warning me-4 text-white" onclick="modificar(event)">Modificar</button>
                         </form>
-                        <a href="{{ url_for('eliminar_marca', id=marca[0]) }}" class="btn btn-danger" onclick="return confirmarEliminacion()">Eliminar</a>
+                        <a href="{{ url_for('eliminar_marca', id=marca[0]) }}" class="btn btn-danger" onclick="confirmarEliminacion(event)">Eliminar</a>
+
                     </div>
                 </td>
             </tr>

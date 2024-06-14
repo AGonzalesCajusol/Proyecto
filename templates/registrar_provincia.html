@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-4">
                 <h3 class="mb-4 mt-4">Agregar Provincia</h3>
-                <form action="{{ url_for('insertar_provincia') }}" method="post" onsubmit="return validarFormulario()">
+                <form action="{{ url_for('insertar_provincia') }}" method="post" onsubmit=" validarFormulario(event)">
                     <div class="mb-3">
                         <label for="provincia" class="form-label">Provincia:</label>
                         <input required type="text" class="form-control" placeholder="provincia" name="provincia" id="provincia">
@@ -18,11 +18,11 @@
                             {% for departamento in departamentos %}
                             <option value="{{ departamento[0] }}">{{ departamento[1] }}</option>
                             {% endfor %}
-                        </select>
+                        </select>   
                     </div>
                     <hr>
                     <div class="text-end">
-                        <a href="{{ url_for('provincia') }}" class="btn btn-danger mt-2" onclick="return volver()">Volver</a>
+                        <a href="{{ url_for('provincia') }}" class="btn btn-danger mt-2" onclick=" volver(event)">Volver</a>
                         <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                     </div>
                 </form>
