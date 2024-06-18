@@ -1,0 +1,216 @@
+{% extends 'maestra.html' %}
+
+{% block titulo %} Categorías {% endblock %}
+
+{% block tabla %}
+<div class="row mb-3">
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-2 ">
+        <label for="year-select" class="my-2 me-3 form-label">Año:</label>
+        <select class="form-select  text-center" name="year" id="year-select">
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+        </select>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 ">
+        <div>
+            <p>5 productos más vendidos en el presente año</p>
+            <canvas id="5pmv"></canvas>
+        </div>
+    </div>
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 ">
+        <div>
+            <p>5 productos menos vendidos en el presente año</p>
+            <canvas id="5pmv2"></canvas>
+        </div>
+    </div>
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 ">
+        <div>
+            <p>5 productos más vendidos en los últimos 5 meses</p>
+            <canvas id="5pmv3"></canvas>
+        </div>
+    </div>
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-6 ">
+        <div>
+            <p>En pastel las categorias más vendidas</p>
+            <canvas id="marcasmv2"></canvas>
+        </div>
+    </div>
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-6 ">
+        <div>
+            <p>En pastel las categorias marcas más vendidas</p>
+            <canvas id="marcasmv3"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4 mb-4 mb-sm-0 ">
+        <div class="card border-secondary mb-3 shadow-lg rounded" style="max-width: 18rem;">
+            <div class="card-header text-center">Monto total vendido</div>
+            <div class="card-body text-secondary">
+              <p class="card-text text-center text-bg-primary"><span>S/</span> 1560</p>
+            </div>
+        </div>  
+    </div>
+    <div class="col-sm-4 mb-4 mb-sm-0 ">
+        <div class="card border-secondary mb-3 shadow-lg rounded" style="max-width: 18rem;">
+            <div class="card-header text-center">Total de productos vendidos</div>
+            <div class="card-body text-secondary">
+              <p class="card-text text-center text-bg-primary"><span>S/</span> 1560</p>
+            </div>
+        </div>  
+    </div>
+    <div class="col-sm-4 mb-4 mb-sm-0 ">
+        <div class="card border-secondary mb-3 shadow-lg" rounded style="max-width: 18rem;">
+            <div class="card-header text-center">Producto más vendido</div>
+            <div class="card-body text-secondary">
+              <p class="card-text text-center text-bg-primary"> Casaca jeans </p>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<script>
+    var ctx = document.getElementById('5pmv').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar', // Tipo de gráfico
+        data: {
+            labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E'], // Etiquetas del eje X
+            datasets: [{
+                label: 'Ventas',
+                data: [150, 120, 100, 80, 60], // Datos de ventas
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo de las barras
+                borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
+                borderWidth: 1 // Ancho del borde
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // Comenzar el eje Y en 0
+                }
+            }
+        }
+    });
+    var ctx = document.getElementById('5pmv2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar', // Tipo de gráfico
+        data: {
+            labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E'], // Etiquetas del eje X
+            datasets: [{
+                label: 'Ventas',
+                data: [150, 120, 100, 80, 60], // Datos de ventas
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo de las barras
+                borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
+                borderWidth: 1 // Ancho del borde
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // Comenzar el eje Y en 0
+                }
+            }
+        }
+    });
+    var ctx = document.getElementById('5pmv3').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar', // Tipo de gráfico
+        data: {
+            labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E'], // Etiquetas del eje X
+            datasets: [{
+                label: 'Ventas',
+                data: [150, 120, 100, 80, 60], // Datos de ventas
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo de las barras
+                borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
+                borderWidth: 1 // Ancho del borde
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // Comenzar el eje Y en 0
+                }
+            }
+        }
+    });
+    //
+    var ctx = document.getElementById('marcasmv2').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie', // Tipo de gráfico circular (pastel)
+                data: {
+                    labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E'], // Etiquetas del gráfico
+                    datasets: [{
+                        label: 'Ventas',
+                        data: [150, 120, 100, 80, 60], // Datos de ventas
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)', // Color para Producto A
+                            'rgba(54, 162, 235, 0.6)', // Color para Producto B
+                            'rgba(255, 206, 86, 0.6)', // Color para Producto C
+                            'rgba(75, 192, 192, 0.6)', // Color para Producto D
+                            'rgba(153, 102, 255, 0.6)' // Color para Producto E
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)', // Borde para Producto A
+                            'rgba(54, 162, 235, 1)', // Borde para Producto B
+                            'rgba(255, 206, 86, 1)', // Borde para Producto C
+                            'rgba(75, 192, 192, 1)', // Borde para Producto D
+                            'rgba(153, 102, 255, 1)' // Borde para Producto E
+                        ],
+                        borderWidth: 1 // Ancho del borde
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top', // Posición de la leyenda
+                        }
+                    }
+                }
+            });
+        //
+        var ctx = document.getElementById('marcasmv3').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie', // Tipo de gráfico circular (pastel)
+                data: {
+                    labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E'], // Etiquetas del gráfico
+                    datasets: [{
+                        label: 'Ventas',
+                        data: [150, 120, 100, 80, 60], // Datos de ventas
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)', // Color para Producto A
+                            'rgba(54, 162, 235, 0.6)', // Color para Producto B
+                            'rgba(255, 206, 86, 0.6)', // Color para Producto C
+                            'rgba(75, 192, 192, 0.6)', // Color para Producto D
+                            'rgba(153, 102, 255, 0.6)' // Color para Producto E
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)', // Borde para Producto A
+                            'rgba(54, 162, 235, 1)', // Borde para Producto B
+                            'rgba(255, 206, 86, 1)', // Borde para Producto C
+                            'rgba(75, 192, 192, 1)', // Borde para Producto D
+                            'rgba(153, 102, 255, 1)' // Borde para Producto E
+                        ],
+                        borderWidth: 1 // Ancho del borde
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top', // Posición de la leyenda
+                        }
+                    }
+                }
+            });
+
+
+</script>
+
+{% endblock %}

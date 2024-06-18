@@ -217,6 +217,10 @@ def tipo_producto():
 def registrar_tipoproducto():
     return render_template('registrar_tipoproducto.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard/dashboard.html')
+
 @app.route('/insertar_tipoproducto', methods=['POST'])
 def insertar_tipo_proucto():
     tipo = request.form['tipo']

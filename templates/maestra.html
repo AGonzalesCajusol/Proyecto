@@ -15,9 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
     <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: "Roboto", sans-serif;
@@ -289,6 +287,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="{{ url_for('index') }}"><i class="bi bi-globe"></i> Inicio</a>
+        <a href="{{ url_for('dashboard') }}"><i class="bi bi-tags"></i> Dashboard</a>
         <a href="{{ url_for('marca') }}"><i class="bi bi-tags"></i> Marca</a>
         <a href="{{ url_for('tipo_producto') }}"><i class="bi bi-box-seam"></i> Tipo Producto</a>
         <a href="{{ url_for('categoria') }}"><i class="bi bi-grid-3x3-gap"></i> Categoria</a>
