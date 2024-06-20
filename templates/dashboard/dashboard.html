@@ -3,77 +3,161 @@
 {% block titulo %} Categorías {% endblock %}
 
 {% block tabla %}
-<div class="row mb-3">
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-2 ">
-        <label for="year-select" class="my-2 me-3 form-label">Año:</label>
-        <select class="form-select  text-center" name="year" id="year-select">
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-        </select>
+<style>
+    .card1{
+        max-width: 18rem; 
+        border-bottom: 12px solid rgba(108, 163, 177, 0.65);
+        border-top: transparent;
+        border-left: transparent;
+        border-right: transparent;
+        background: rgb(108,163,177);
+        background: linear-gradient(0deg, rgba(108,163,177,0.65) 14%, rgba(255,252,252,1) 94%);
+    }
+    .card4{
+        max-width: 18rem; 
+        border-bottom: 12px solid rgba(108,119,177,0.65);
+        border-top: transparent;
+        border-left: transparent;
+        border-right: transparent;
+        background: rgb(108,119,177);
+        background: linear-gradient(0deg, rgba(108,119,177,0.65) 14%, rgba(255,252,252,1) 94%);
+        
+    }
+    .card5{
+        max-width: 18rem; 
+        border-bottom: 12px solid rgba(168,51,55,0.65) ;
+        border-top: transparent;
+        border-left: transparent;
+        border-right: transparent;
+        background: rgb(168,51,55);
+        background: linear-gradient(0deg, rgba(168,51,55,0.65) 14%, rgba(255,252,252,1) 94%);
+    }
+    .card2{
+        max-width: 18rem; 
+        border-bottom: 5px solid rgba(0, 0, 0, 0.65);
+        border-top: transparent;
+        border-left: transparent;
+        border-right: transparent;
+        
+    }
+    .card3{
+        max-width: 18rem; 
+        border-top: 12px solid rgba(87, 75, 75, 0.65);
+        border-bottom: transparent;
+        border-left: transparent;
+        border-right: transparent;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        
+    }
+</style>
+<div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-5">
+    <label for="year-select" class="my-2 me-3 form-label">Año:</label>
+    <select class="form-select  text-cente active" name="year" id="year-select">
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+    </select>
+    <label for="year-select " class="my-2 me-3 ms-4 form-label">Mes:</label>
+    <select class="form-select  text-cente active" name="year" id="year-select">
+        <option  value="vacio">------vacio------</option>
+        <option value="Enero">Enero</option>
+        <option value="Febrero">Febrero</option>
+        <option value="Marzo">Marzo</option>
+        <option value="Abril">Abril</option>
+        <option value="Mayo">Mayo</option>
+        <option value="Junio">Junio</option>
+        <option value="Julio">Julio</option>
+        <option value="Agosto">Agosto</option>
+        <option value="Septiembre">Septiembre</option>
+        <option value="octubre">octubre</option>
+        <option value="Noviembre">Noviembre</option>
+        <option value="Diciembre">Diciembre</option>
+    </select>
+    <button class="btn btn-dark d-flex ms-3"><i class="bi bi-funnel"></i> Filtrar</button>
+</div>
+<hr class="border border-black ">
+<div class="row mb-3 ms-5 mt-4">
+    <div class="row mb-4">
+        <div class="col-sm-4 ">
+            <div class="card card1 shadow" >
+                <div class="card-header text-center card3">Monto total vendido</div>
+                <div class="card-body text-secondary d-flex align-items-center">       
+                    <div class="col-7">
+                        <p class="card-text text-center text-dark  card2"><span>S/</span> 1560</p>
+                    </div>
+                    <div class="col-5  d-flex justify-content-center text-black" style="font-size: 50px;">
+                        <i class="bi bi-cash " ></i>
+                    </div>
+                </div>     
+            </div>  
+        </div>
+        <div class="col-sm-4 ">
+            <div class="card card4 shadow" >
+                <div class="card-header text-center card3 ">Cantidad de productos vendidos</div>
+                <div class="card-body text-secondary d-flex align-items-center">
+                    <div class="col-7">
+                        <p class="card-text text-center text-dark card2"> 125 cant</p>
+                    </div>
+                    <div class="col-5 d-flex justify-content-center text-black " style="font-size: 50px;">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>     
+            </div>  
+        </div>
+        <div class="col-sm-4 ">
+            <div class="card card5 shadow" >
+                <div class="card-header text-center card3">Producto más vendido</div>
+                <div class="card-body text-secondary d-flex align-items-center">
+                    <div class="col-7">
+                        <p class="card-text text-center text-dark card2"> Casaca jeans </p>
+                    </div>
+                    <div class="col-5 d-flex justify-content-center text-black" style="font-size: 50px;">
+                        <i class="bi bi-bag-fill"></i>                 
+                    </div>
+                </div>     
+            </div>  
+        </div>
+
     </div>
+
 </div>
 
-<div class="row mb-3">
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 ">
+
+<div class="row mb-4 mt-4">
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 shadow ">
         <div>
             <p>5 productos más vendidos en el presente año</p>
             <canvas id="5pmv"></canvas>
         </div>
     </div>
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 ">
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4  shadow " >
         <div>
             <p>5 productos menos vendidos en el presente año</p>
             <canvas id="5pmv2"></canvas>
         </div>
     </div>
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 ">
+    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4  shadow ">
         <div>
             <p>5 productos más vendidos en los últimos 5 meses</p>
             <canvas id="5pmv3"></canvas>
         </div>
     </div>
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-6 ">
+    <div class="form-group d-flex col-sm-6   mb-2 mb-sm-0  col-md-4  col-lg-6 mt-5  shadow  ">
         <div>
             <p>En pastel las categorias más vendidas</p>
             <canvas id="marcasmv2"></canvas>
         </div>
     </div>
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-6 ">
+    <div class="form-group d-flex col-sm-6   mb-2 mb-sm-0  col-md-4  col-lg-6  mt-5 shadow">
         <div>
-            <p>En pastel las categorias marcas más vendidas</p>
+            <p>En pastel las  marcas más vendidas</p>
             <canvas id="marcasmv3"></canvas>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-sm-4 mb-4 mb-sm-0 ">
-        <div class="card border-secondary mb-3 shadow-lg rounded" style="max-width: 18rem;">
-            <div class="card-header text-center">Monto total vendido</div>
-            <div class="card-body text-secondary">
-              <p class="card-text text-center text-bg-primary"><span>S/</span> 1560</p>
-            </div>
-        </div>  
-    </div>
-    <div class="col-sm-4 mb-4 mb-sm-0 ">
-        <div class="card border-secondary mb-3 shadow-lg rounded" style="max-width: 18rem;">
-            <div class="card-header text-center">Total de productos vendidos</div>
-            <div class="card-body text-secondary">
-              <p class="card-text text-center text-bg-primary"><span>S/</span> 1560</p>
-            </div>
-        </div>  
-    </div>
-    <div class="col-sm-4 mb-4 mb-sm-0 ">
-        <div class="card border-secondary mb-3 shadow-lg" rounded style="max-width: 18rem;">
-            <div class="card-header text-center">Producto más vendido</div>
-            <div class="card-body text-secondary">
-              <p class="card-text text-center text-bg-primary"> Casaca jeans </p>
-            </div>
-        </div>  
-    </div>
-</div>
 
 <script>
     var ctx = document.getElementById('5pmv').getContext('2d');
