@@ -50,6 +50,7 @@
         font-size: 16px;
         
     }
+
 </style>
 <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-5">
     <label for="year-select" class="my-2 me-3 form-label">Año:</label>
@@ -80,7 +81,7 @@
 <hr class="border border-black ">
 <div class="row mb-3 ms-5 mt-4">
     <div class="row mb-4">
-        <div class="col-sm-4 ">
+        <div class="col-sm-4 "  >
             <div class="card card1 shadow" >
                 <div class="card-header text-center card3">Monto total vendido</div>
                 <div class="card-body text-secondary d-flex align-items-center">       
@@ -126,25 +127,25 @@
 
 
 <div class="row mb-4 mt-4">
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4 shadow ">
-        <div>
-            <p>5 productos más vendidos en el presente año</p>
+    <div class="form-group d-flex flex-column col-sm-4 mb-2 mb-sm-0 col-md-4 col-lg-6 shadow mt-4 ">
+        <div  class="d-flex flex-column h-100 mt-3">
+            <p class="mb-3 text-center ">5 productos más vendidos en el presente año</p>
             <canvas id="5pmv"></canvas>
         </div>
     </div>
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4  shadow " >
-        <div>
-            <p>5 productos menos vendidos en el presente año</p>
+    <div class="form-group d-flex flex-column col-sm-4 mb-2 mb-sm-0 col-md-4 col-lg-6 shadow mt-4" style="height: 400px;">
+        <div  class="d-flex flex-column h-100 mt-3">
+            <p class="mb-3 text-center ">5 productos menos vendidos en el presente año</p>
             <canvas id="5pmv2"></canvas>
         </div>
     </div>
-    <div class="form-group d-flex col-sm-4   mb-2 mb-sm-0  col-md-4  col-lg-4  shadow ">
-        <div>
-            <p>5 productos más vendidos en los últimos 5 meses</p>
-            <canvas id="5pmv3"></canvas>
+    <div class="form-group d-flex flex-column col-sm-4 mb-2 mb-sm-0 col-md-4 col-lg-6 shadow" style="height: 400px;">
+        <div class="d-flex flex-column h-100">
+            <p class="mb-3 text-center">5 productos más vendidos en los últimos 5 meses</p>
+            <canvas id="5pmv3" ></canvas>
         </div>
     </div>
-    <div class="form-group d-flex col-sm-6   mb-2 mb-sm-0  col-md-4  col-lg-6 mt-5  shadow  ">
+    <div class="form-group d-flex col-sm-6   mb-2 mb-sm-0  col-md-4  col-lg-4 mt-5  shadow  ">
         <div>
             <p>En pastel las categorias más vendidas</p>
             <canvas id="marcasmv2"></canvas>
@@ -160,27 +161,6 @@
 
 
 <script>
-    var ctx = document.getElementById('5pmv').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar', // Tipo de gráfico
-        data: {
-            labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E'], // Etiquetas del eje X
-            datasets: [{
-                label: 'Ventas',
-                data: [150, 120, 100, 80, 60], // Datos de ventas
-                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo de las barras
-                borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
-                borderWidth: 1 // Ancho del borde
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true // Comenzar el eje Y en 0
-                }
-            }
-        }
-    });
     var ctx = document.getElementById('5pmv2').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar', // Tipo de gráfico
@@ -202,6 +182,44 @@
             }
         }
     });
+
+    var datos = ""
+    fetch('/s5pmv')
+    .then(response => response.json()) // Parsear la respuesta como JSON
+    .then(data => {
+        datos = JSON.stringify(data, null, 2);
+        datos = JSON.parse(datos);
+        var ctx = document.getElementById('5pmv').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico
+            data: {
+                labels: datos.nombres,
+                datasets: [{
+                    data: datos.valores, // Datos de ventas
+                    backgroundColor: ['rgb(54, 162, 235)','rgb(222,142,235)'], // Color de fondo de las barras
+                    borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
+                    borderWidth: 1 // Ancho del borde
+                }]
+            },
+            options: {
+                scales: {
+                },
+                plugins: {
+                    legend: {
+                        display: false // Ocultar la leyenda completa
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Hubo un problema con la solicitud fetch:', error);
+        // Manejar el error apropiadamente
+        alert('Hubo un error al obtener los datos.');
+    });
+
+
+    
     var ctx = document.getElementById('5pmv3').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar', // Tipo de gráfico

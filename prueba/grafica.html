@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <canvas id="grafica" width="400px" height="300px">
+
+    </canvas>
+</body>
+<script>
+    //obtenermos el canvas
+    var canvas =  document.getElementById('grafica').getContext('2d');
+    //inicializamos la gráfica
+    var char = new Chart(canvas,{
+        type: "bar", //hay varios tipos pasteles, lineales
+        data:{
+            labels:  ["vino","tequila", "cerveza","Ron"], //texto de cada barra
+            datasets : [
+                {
+                    label: "Mi grafica de los 5 productos más vendidos",
+                    backgroundColor: ["rgb(0,12,3)","rgb(0,122,3)","rgb(12,1222,212)","rgb(12,122,3)"],
+                    data: [12,39,5,30]
+                },
+                {
+                    label: "Mi grafica de los 5 productos más vendidos",
+                    backgroundColor: ["rgb(0,12,3)","rgb(0,122,3)","rgb(12,1222,212)","rgb(12,122,3)"],
+                    data: [12,39,5,30]
+                }
+            ] //valores
+        }
+    })
+</script>
+</html>

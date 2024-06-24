@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,Response 
 from clases import clase_categoria as clscat
-from controladores import controlador_categoria,controlador_tipo_usuario,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_transaccion,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
+from controladores import controlador_categoria,controlador_dashboard,controlador_tipo_usuario,controlador_detallepresentacion,controlador_envio,controlador_genero,controlador_grupoedad,controlador_marca,controlador_transaccion,controlador_presentacion,controlador_producto,controlador_tipoproducto,controlador_usuario, controlador_distrito, controlador_departamento, controlador_provincia
 import os, json
 
 
@@ -208,6 +208,8 @@ def actualizar_marca():
 
 #---------tipo producto--------------
 
+
+
 @app.route('/tipo_producto')
 def tipo_producto():
     tipos_productos = controlador_tipoproducto.obtener_tipoproducto()
@@ -220,6 +222,21 @@ def registrar_tipoproducto():
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard/dashboard.html')
+
+@app.route('/s5pmv')
+def s5pmv():
+    productos = controlador_dashboard.cinco_productos_mas_vendidos()
+    nombres = list()
+    valores = list()
+    for pr in productos:
+        nombres.append(pr[0])
+        valores.append(pr[1])
+    
+    s5pmv= {
+        "nombres": nombres,
+        "valores" : valores
+    }
+    return jsonify(s5pmv)
 
 @app.route('/insertar_tipoproducto', methods=['POST'])
 def insertar_tipo_proucto():
