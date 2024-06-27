@@ -157,6 +157,14 @@
             <canvas id="marcasmv3"></canvas>
         </div>
     </div>
+    <div class="form-group d-flex col-sm-6   mb-2 mb-sm-0  col-md-4  col-lg-6  mt-5 shadow">
+        <div>
+            <p>My ultimate</p>
+            <canvas id="ultimate" width="400" height="400" class="bg-dark"></canvas>
+        </div>
+    </div>
+
+
 </div>
 
 
@@ -312,6 +320,65 @@
                 }
             });
 
+            let url  = '/getprconmas'
+            fetch(url)
+            .then(response => response.json() )
+            .then(datos => mostrar_datos(datos)) 
+            .catch (error => console.log(error))
+         
+            function mostrar_datos(datos){
+                //iteraremos sobre ese array osea datos, y por cada valor en el que estamos iterando queremos que haga algo
+                //en el json datos  por cada valor, mostraremos un alert
+                var name = [];
+                var valores = [];
+                datos.forEach(valor => {
+                    name.push(valor.nombre),
+                    valores.push(valor.precio)
+                }
+                );
+               var ctx = document.getElementById('ultimate').getContext('2d');
+                var myPieChart = new Chart(ctx, {
+                type: 'pie', // Tipo de gráfico circular (pastel)
+                data: {
+                    labels: name,
+                    datasets: [{
+                        label: 'Ventas',
+                        color: 'white',
+                        data:valores,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)', // Color para Producto A
+                            'rgba(54, 162, 235, 0.6)', // Color para Producto B
+                            'rgba(255, 206, 86, 0.6)', // Color para Producto C
+                            'rgba(75, 192, 192, 0.6)', // Color para Producto D
+                            'rgba(153, 102, 255, 0.6)' // Color para Producto E
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)', // Borde para Producto A
+                            'rgba(54, 162, 235, 1)', // Borde para Producto B
+                            'rgba(255, 206, 86, 1)', // Borde para Producto C
+                            'rgba(75, 192, 192, 1)', // Borde para Producto D
+                            'rgba(153, 102, 255, 1)' // Borde para Producto E
+                        ],
+                        borderWidth: 1 // Ancho del borde
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top', // Posición de la leyenda
+                        }
+                    }
+                }
+            });
+            }
+
+
+   //  fetch nos permite acceder a los datos
+   //cuando retonra son promesas aun no podemos trabjarlos
+   // es solo una promesa ahí es donde viene el then que sería luego
+   // .then (response => response.json()) --> ese dato lo convierte en funcion anomnima y lo hace dato para poder leerlo retona por la flechita
+//.catch( error => console.log(error))
 
 </script>
 

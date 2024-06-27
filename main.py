@@ -223,6 +223,20 @@ def registrar_tipoproducto():
 def dashboard():
     return render_template('dashboard/dashboard.html')
 
+
+@app.route('/getprconmas')
+def getprconmas():
+    datos = controlador_dashboard.get_prconmasprecio()
+    da = []
+    for data in datos:
+        objData = {
+            "precio": data[0],
+            "nombre": data[1]
+        }
+        da.append(objData)
+    return jsonify(da)
+
+
 @app.route('/s5pmv')
 def s5pmv():
     productos = controlador_dashboard.cinco_productos_mas_vendidos()
