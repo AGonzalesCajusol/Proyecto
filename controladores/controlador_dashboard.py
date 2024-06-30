@@ -35,3 +35,12 @@ def cinco_productos_mas_costosos():
     conexion.close()
     return productos
 
+def sash():
+    conexion = obtener_conexion()
+    productos = []
+    with conexion.cursor() as cursor:
+        cursor.execute('''select * from departamento;;''')
+        productos = cursor.fetchall()
+    conexion.close()
+    return productos
+

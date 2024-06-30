@@ -372,7 +372,18 @@
                 }
             });
             }
-
+        fetch('/mostrar')
+            .then(valor => valor.json())
+            .then(valor => {
+                var valores  = []
+                var depa = []
+                valor.forEach(items => {
+                    valores.push(items.id);
+                    depa.push(items.departamento);
+                })
+                alert(valores + " " + depa)
+            })
+            .except(valor => alert("ocurrio un error de consulta"))
 
    //  fetch nos permite acceder a los datos
    //cuando retonra son promesas aun no podemos trabjarlos

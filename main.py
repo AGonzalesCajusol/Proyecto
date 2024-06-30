@@ -738,6 +738,19 @@ def insertar_provincia_route():
     insertar_provincia(provincia, id_departamento)
     return redirect(url_for('registrarprovincia'))
 
+@app.route('/mostrar')
+def mostrar():
+    valores = controlador_dashboard.sash()
+    lista_vl = []
+
+    for valor in valores :
+        obj = {
+            "id" :  valor[0],
+            "departamento" : valor[1]
+        }
+        lista_vl.append(obj)
+    return jsonify(lista_vl)
+
 #-------anggelo
 
 
